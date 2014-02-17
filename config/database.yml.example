@@ -1,0 +1,27 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: ofx_dev
+  pool: 5
+  username: ofx_user
+  password: ########
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: ofx_test
+  pool: 5
+  username: ofx_user
+  password: ########
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  
+production:
+  adapter: <mysql2/sqlite/postgresql>
+  encoding: utf8
+  database: TBD
+  pool: 5
+  username: TBD
+  password: TBD

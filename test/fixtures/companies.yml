@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  description: 
+  url: 
+  user: 
+  address: 
+  joined: 
+  logo: 
+
+two:
+  name: 
+  description: 
+  url: 
+  user: 
+  address: 
+  joined: 
+  logo: 

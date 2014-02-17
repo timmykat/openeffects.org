@@ -1,0 +1,14 @@
+%h1 Users
+
+= link_to "All Users", :action => "index"
+
+- if current_user.has_role? :admin
+  = link_to "Users awaiting approval", :action => "index", :approved => "false"
+
+%table
+    - @users.each do |user|
+      if user.approved or current_user.has_role? :admin
+        %tr
+            %td= user.name
+            %td= user.approved
+            %td= link_to "Edit", edit_user_path(user)
