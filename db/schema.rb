@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218120303) do
+ActiveRecord::Schema.define(version: 20140218123755) do
 
   create_table "api_docs", force: true do |t|
     t.string   "version"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140218120303) do
     t.string   "name",              default: "", null: false
     t.text     "description"
     t.string   "url"
-    t.integer  "user_id"
+    t.integer  "contact_id"
     t.text     "address"
     t.date     "joined"
     t.string   "logo_file_name"
