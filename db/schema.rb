@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218123755) do
+ActiveRecord::Schema.define(version: 20140218134507) do
 
   create_table "api_docs", force: true do |t|
     t.string   "version"
@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 20140218123755) do
     t.datetime "pdf_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "published"
   end
 
   add_index "contents", ["identifier"], name: "index_contents_on_identifier", using: :btree
+  add_index "contents", ["published"], name: "index_contents_on_published", using: :btree
   add_index "contents", ["title"], name: "index_contents_on_title", using: :btree
 
   create_table "minutes", force: true do |t|
@@ -66,10 +68,12 @@ ActiveRecord::Schema.define(version: 20140218123755) do
     t.text     "minutes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "published"
   end
 
   add_index "minutes", ["date"], name: "index_minutes_on_date", using: :btree
   add_index "minutes", ["meeting"], name: "index_minutes_on_meeting", using: :btree
+  add_index "minutes", ["published"], name: "index_minutes_on_published", using: :btree
 
   create_table "news_items", force: true do |t|
     t.string   "headline",   default: "",    null: false
