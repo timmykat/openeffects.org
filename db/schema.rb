@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217170400) do
+ActiveRecord::Schema.define(version: 20140218120303) do
 
   create_table "api_docs", force: true do |t|
     t.string   "version"
@@ -111,9 +111,11 @@ ActiveRecord::Schema.define(version: 20140217170400) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved"
+    t.string   "company"
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved", using: :btree
+  add_index "users", ["company"], name: "index_users_on_company", using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
