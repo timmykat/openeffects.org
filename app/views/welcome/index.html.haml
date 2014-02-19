@@ -1,6 +1,49 @@
 .jumbotron
+  .logo.pull-right
+    = image_tag('ofx_logo.png')
   %h1 
     Welcome to
     %br The Open Effects Association
-  %p The Open Effects Association provides a technical standard for connecting visual effects plug-ins to editing and compositing hosts that implement the OFX standard.
- 
+  = #{@welcome_content}
+
+.container
+  .row
+    .col-md-4
+      %h2 Member Companies
+      %p - member list -    
+    .col-md-4
+      %h2 Glossary
+      %p - glossary content -    
+    
+    .col-md-4
+      %h2 News    
+      %p - news items -    
+  .row#standard
+    %h2 Why a Standard?
+    %p - why a standard - 
+
+  .row#implementers
+    %h2 For Implementers
+    .col-md-6
+      %p - information for implementers -
+    .col-md-6
+      %p - links for implementers -
+  
+  .row#organization
+    %h2 The Organization
+
+  .row
+    %h3 Meeting Minutes
+    .col-md-4
+      %h4 General Meetings
+      %p - list of AGM minutes -
+    .col-md-4
+      %h4 Directors' Meetings
+      %p - list of DM minutes -
+    .col-md-4
+      %h4 Other Stuff?
+        
+    
+    
+      
+      

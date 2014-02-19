@@ -3,12 +3,18 @@ class User < ActiveRecord::Base
   # Role functionality from the role_model gem
   include RoleModel
   roles_attribute :roles_mask
+
+  # Do not change the order below! If more roles are added, ALWAYS APPEND them.
+  roles :admin, :director
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable
          
+  validates :email, :presence => true
+  validates :password, :presence => true
+  
   has_attached_file :avatar, :styles => { :mobile => "50x50", :desktop => "200x200" }, :default_url => "images/:style/default_avatar.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   
