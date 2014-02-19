@@ -1,9 +1,13 @@
 %h2 Resend confirmation instructions
-= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f|
   = f.error_notification
   = f.full_error :confirmation_token
-  .form-inputs
-    = f.input :email, :required => true, :autofocus => true
-  .form-actions
-    = f.button :submit, "Resend confirmation instructions"
-= render "devise/shared/links"
+  .form-group
+    =f.label :email, :class => "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :email, :required => true, :autofocus => true, :class => "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit "Resend confirmation instructions", :class => "btn btn-large btn-primary"
+  .col-sm-offset-2.col-sm-10
+    = render "devise/shared/links"

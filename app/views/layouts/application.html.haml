@@ -20,31 +20,36 @@
           .navbar-collapse.collapse
             %ul.nav.navbar-nav
               %li.active
-                %a{ :href => "#" } Home
+                %a{ :href => "/" } Home
               %li
-                %a{ :href => "#stuff" } Stuff
-            .sign-in.pull-right
+                %a{ :href => "/api_doc/index.html", :target => "_blank", :title => "Open the API reference" } API
+              - if current_user and current_user.has_role? :admin
+                %li
+                  %a{ :href => "/admin/dashboard" } Dashboard
+            .user-status.pull-right
               - if current_user
-                Member: #{current_user.name}
+                = form_tag('/sign_out', method: 'get', role: "form", class: "form-inline") do
+                  Member: #{current_user.name}
+                  %button{ :type => 'submit', :class => "btn btn-large btn-primary" } Sign out
+                
               - else
-                = form_tag('/users/sign_in', role: "form", class: "form-inline") do
+                = form_tag('/sign_in', method: 'post', role: "form", class: "form-inline") do
                   .form-group
                     = label_tag :email
-                    = text_field_tag :email, 'Email', :class => "form-control"
+                    = text_field_tag "user[email]", nil, :class => "form-control", :placeholder => 'Email'
                   .form-group
                     = label_tag :password
-                    = password_field_tag :password, nil, :class => "form-control"
+                    = password_field_tag "user[password]", nil, :class => "form-control"
                     
                   %button{ :type => 'submit', :class => "btn btn-large btn-primary" } Sign in
                   
-      .container
+      .container{ :role => "main" }    
         -if flash[:notice]
           .alert.alert-info
             = flash.notice
         -if flash[:alert]
           .alert.alert-danger
             = flash.alert
-      .container{ :role => "main" }    
         = yield
       .push
       

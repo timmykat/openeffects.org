@@ -1,0 +1,18 @@
+%h2 Administrative Dashboard
+.row
+  .col-sm-12.col-md-6
+    = render :partial => "_minutes" 
+  .col-sm-12.col-md-6
+    = render :partial => "_news"
+.row  
+  .col-sm-12.col-md-6
+    = render :partial => "_members_to_accept"
+  .col-sm-12.col-md-6
+    %h3 Full Member List
+    = link_to 'All users', users_path
+.row
+  .col-sm-12.col-md-6
+    = render :partial => "_member_companies"
+  .col-sm-12.col-md-6
+    = render :partial => "_miscellaneous_content"
+  
