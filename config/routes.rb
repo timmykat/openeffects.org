@@ -1,5 +1,11 @@
 Ofx::Application.routes.draw do
   devise_for :users
+  
+  devise_scope :user do
+    post "sign_in", to: "devise/sessions#create"
+    get "sign_out", to: "devise/sessions#destroy"
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -11,6 +17,9 @@ Ofx::Application.routes.draw do
   resources :contents
   resources :minutes
   resources :news_items
+  
+  # Administrative dashboard
+  get 'admin/dashboard', to: 'admin#dashboard'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

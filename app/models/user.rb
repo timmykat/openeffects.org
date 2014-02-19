@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :mobile => "50x50", :desktop => "200x200" }, :default_url => "images/:style/default_avatar.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   
-  after_create :send_admin_email
+#  after_create :send_admin_email
 
   # Handle user administration (approval by admin)
   def active_for_authentication?

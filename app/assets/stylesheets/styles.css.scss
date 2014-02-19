@@ -1,10 +1,16 @@
 html, body {
   height: 100%;
 }
+body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
 footer {
-  color: #666;
+  background-color: #333;
+  color: white;
   padding: 17px 0 18px;
-  border-top: 1px solid #99F
+  border-top: 1px solid #99F;
+  text-align: center;
 }
 .wrapper {
   min-height: 100%;
@@ -18,7 +24,7 @@ footer {
 .wrapper > .container {
   padding-top: 20px;
 }
-.sign-in {
+.user-status {
   color: white;
   margin-top: 8px;
   input {

@@ -7,5 +7,7 @@ class ApplicationController < ActionController::Base
   private
     def require_admin
       unless current_user and current_user.has_role? :admin
+        flash[:error] = "You must be an admin to access this."
+      end
     end
 end

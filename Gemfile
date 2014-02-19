@@ -55,4 +55,4 @@ gem 'forem'
 gem 'paperclip'
 
 # Design and layout
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.1.1'
