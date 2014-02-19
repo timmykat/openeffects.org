@@ -1,0 +1,27 @@
+html, body {
+  height: 100%;
+}
+footer {
+  color: #666;
+  padding: 17px 0 18px;
+  border-top: 1px solid #99F
+}
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -63px;
+}
+.push {
+  height: 63px;
+}
+.wrapper > .container {
+  padding-top: 20px;
+}
+.sign-in {
+  color: white;
+  margin-top: 8px;
+  input {
+    width: 5%;
+  }
+}
