@@ -44,9 +44,11 @@ end
 gem 'devise'      # authentication
 gem 'role_model'  # user roles
 
-# Editing alternatives - ckeditor (WYSIWYG) and epic (Markdown)
+# WYSWIG editor - ckeditor
 gem 'ckeditor'
-gem 'epic-editor-rails'
+
+# Sanitize HTML output
+gem 'sanitize'
 
 # User forum
 gem 'forem'
