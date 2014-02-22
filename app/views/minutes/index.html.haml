@@ -1,2 +1,31 @@
-%h1 Minutes#index
-%p Find me in app/views/minutes/index.html.haml
+%h1 Minutes
+- if @minutes.blank?
+  %p There are no minutes
+- else
+  %table.table
+    %thead
+      %tr
+        %th 
+        %th Meeting
+        %th Date
+        %th Location
+        - if current_user and current_user.has_role? :admin
+          %th{ :colspan => 3 }
+    %tbody
+      - @minutes.each do |minute|
+        %tr
+          %td
+            - if minute.published?
+              %button.published.btn.btn-xs.btn-success Unpublish
+            - else
+              %button.unpublished.btn.btn-xs.btn-primary Publish
+          %td= minute.meeting
+          %td= minute.date.format('%d-%b-%Y')
+          %td= minute.pdf.nil? ? '(none)' : image_tag 'pdf_icon'
+          - if current_minute.has_role? :admin
+            %td= link_to 'Show', minute
+            %td= link_to 'Edit', edit_minute_path(minute)
+            %td= link_to 'Delete', minute, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+.btn.btn-default
+  = link_to 'New Minutes', new_minute_path, :type => 'button'

@@ -20,6 +20,8 @@ Ofx::Application.routes.draw do
   resources :users
   resources :companies
   resources :contents
+  get 'contents/page/:ident', to: "contents#page_display"
+  
   resources :minutes
   resources :news_items
   

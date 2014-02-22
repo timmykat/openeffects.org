@@ -1,0 +1,34 @@
+= form_for @content, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  - if @content.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@content.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @content.errors.full_messages.each do |msg|
+          %li= msg
+  - if @content and @content.published?
+    - klass = "bg-success"
+  - elsif @content and !@content.published?
+    - klass = "bg-danger"
+    
+  %div{ :class => "form-group #{klass} checkbox" }
+    Published?
+    = f.check_box :published, :value => @content.published
+  .form_group
+    = f.label :identifier
+    = f.text_field :identifier, :value => @content.identifier, :class => "form-control"
+  
+  .form_group
+    = f.label :title
+    = f.text_field :title, :value => @content.title, :class => "form-control"
+    
+  .form_group
+    = f.label :content
+    = f.cktext_area :content, :value => @content.content, :class => "form-control"
+    
+  .form-group
+    = f.label :pdf
+    = f.file_field :pdf
+    = image_tag 'pdf_icon'
+
+  .form-group
+    = f.submit 'Save'      

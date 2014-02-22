@@ -22,7 +22,9 @@
               %li.active
                 %a{ :href => "/" } Home
               %li
-                %a{ :href => "/api_doc/index.html", :target => "_blank", :title => "Open the API reference" } API
+                %a{ :href => "/api_doc/index.html", :target => "_blank", :title => "Open the API reference" } 
+                  API
+                  %span.glyphicon.glyphicon-new-window
               - if current_user and current_user.has_role? :admin
                 %li
                   %a{ :href => "/admin/dashboard" } Dashboard

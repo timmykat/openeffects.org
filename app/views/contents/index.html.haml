@@ -1,2 +1,31 @@
-%h1 Contents#index
-%p Find me in app/views/contents/index.html.haml
+%h1 Content
+- if @contents.blank?
+  %p There are no content items.
+- else
+  %table.table
+    %thead
+      %tr
+        %th 
+        %th Identifier
+        %th Title
+        %th PDF
+        - if current_user and current_user.has_role? :admin
+          %th{ :colspan => 3 }
+    %tbody
+      - @contents.each do |content|
+        %tr
+          %td
+            - if content.published?
+              %button.published.btn.btn-xs.btn-success Unpublish
+            - else
+              %button.unpublished.btn.btn-xs.btn-primary Publish
+          %td= content.identifier
+          %td= content.title
+          %td= content.pdf.nil? ? '(none)' : image_tag 'pdf_icon'
+          - if current_content.has_role? :admin
+            %td= link_to 'Show', content
+            %td= link_to 'Edit', edit_content_path(content)
+            %td= link_to 'Delete', content, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+.btn.btn-default
+  = link_to 'New Content', new_content_path, :type => 'button'

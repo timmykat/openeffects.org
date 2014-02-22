@@ -1,0 +1,33 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Meeting Minutes
+  .panel-body
+    - if minutes.blank?
+      %p No minutes yet
+    - else
+      %table.table-condensed
+        %thead
+          %tr
+            %th Date
+            %th Meeting
+            %th Location
+            %th Member Attendees
+            %th Observing Attendees
+            %th Minutes
+            %th{ :colspan => 3 } Actions
+        %tbody
+          - minutes.each do |minute|
+            %tr
+              %td= minute.date
+              %td= minute.meeting
+              %td= minute.location
+              %td= minute.members
+              %td= minute.observing
+              %td= minute.minutes
+              %td= link_to 'Show', minute
+              %td= link_to 'Edit', edit_minute_path(minute)
+              %td= link_to 'Delete', minute, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        
+    %br
+      = link_to 'New minutes', new_minute_path
+          

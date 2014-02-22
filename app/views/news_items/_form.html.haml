@@ -1,0 +1,39 @@
+= form_for @news_item, :html => { :multipart => true, :role => "form", :class => "form-horizontal" } do |f|
+  - if @news_item.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@news_item.errors.count, "error")} prohibited this news_item from being saved:"
+      %ul
+        - @news_item.errors.full_messages.ech do |msg|
+          %li= msg
+  - if @news_item and @news_item.published?
+    - klass = "bg-success"
+  - elsif @news_item and !@news_item.published?
+    - klass = "bg-danger"
+    
+  %div{ :class => "form-group #{klass} checkbox" }
+    Published?
+    = f.check_box :published, :value => @news_item.published
+  .form-group
+    = f.label :headline
+    = f.text_field :headline, :class => "form-control"
+  
+  - if @news_item and !@news_item.date.blank?
+    - value = @news_item.date
+  - else
+    - value = Time.now.strftime('%d-%b-%Y')
+  
+  .row  
+    .col-sm-4
+      .form-group
+        = f.label :date
+        .input-group.date
+          = f.text_field :date, :value => value, :class => "form-control"
+          %span.input-group-addon
+            %i.glyphicon.glyphicon-th
+    
+  .form-group
+    = f.label :summary
+    = f.cktext_area :summary, :value => @news_item, :class => "form-control"
+        
+  .form-group
+    = f.submit 'Save'      

@@ -18,15 +18,19 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     
     if @company.save
-      redirect_to @company, notice: '#{@company.name} was successfully saved.'
+      redirect_to @company, notice: "#{@company.name} was successfully saved."
     else
       render action: 'new'
     end
   end
 
+  def edit
+    @company = Company.find(params[:id])
+  end
+
   def update
     if @company.update(company_params)
-      redirect_to @company, notice: '#{@company.name} was successfully updated.'
+      redirect_to @company, notice: "#{@company.name} was successfully updated."
     else
       render action: 'new'
     end
@@ -46,6 +50,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_params
-      params[:company]
+      params[:company].permit(:name, :description, :url, :contact_id, :address, :joined, :logo)
     end
 end

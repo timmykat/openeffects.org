@@ -1,0 +1,8 @@
+%h2 News
+- if @news_items.blank?
+  %p There are no news items at this time.
+- else    
+  %ul.list-group
+    - @news_items.each do |item|
+      %li.list-group-item
+        = link_to item.headline, news_item_path(item)

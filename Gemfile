@@ -34,7 +34,7 @@ gem 'capistrano', group: :development
 
 # Development tools
 group :development do
-  gem 'pry'
+  gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
   gem 'better_errors'

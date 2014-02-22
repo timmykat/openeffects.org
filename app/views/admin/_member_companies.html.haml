@@ -1,0 +1,32 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Member Companies
+  .panel-body
+    - if companies.blank?
+      %p No member companies yet
+    - else
+      %table.table-condensed
+        %thead
+          %tr
+            %th
+            %th Name
+            %th URL
+            %th Contact
+            %th Join Date
+            %th Logo
+            %th{ :colspan => 3 } Actions
+        %tbody
+          - companies.each do |company|
+            %tr
+              %td= company.logo.blank? ? '(no logo)' : image_tag(company.logo.url(:listing))
+              %td= company.name
+              %td= link_to company.url, company.url
+              %td= company.contact.blank? ? '(none)' : company.contact.name
+              %td= company.joined.blank? ? '' : company.joined.strftime('%d-%b-%Y')
+              %td= link_to 'Show', company
+              %td= link_to 'Edit', edit_company_path(company)
+              %td= link_to 'Delete', company, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        
+    %br
+      = link_to 'New member company', new_company_path
+          

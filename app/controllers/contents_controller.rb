@@ -18,7 +18,7 @@ class ContentsController < ApplicationController
     @content = Content.new(content_params)
     
     if @content.save
-      redirect_to @content, notice: '#{@content.identifier} was successfully saved.'
+      redirect_to @content, notice: "#{@content.identifier} was successfully saved."
     else
       render action: 'new'
     end
@@ -26,7 +26,7 @@ class ContentsController < ApplicationController
 
   def update
     if @content.update(content_params)
-      redirect_to @content, notice: '#{@content.identifier} was successfully updated.'
+      redirect_to @content, notice: "#{@content.identifier} was successfully updated."
     else
       render action: 'new'
     end
@@ -35,7 +35,11 @@ class ContentsController < ApplicationController
   def destroy
     identifier = @content.identifier
     @content.destroy
-    redirect_to contents_url, notice: '#{name} was successfully deleted.'
+    redirect_to contents_url, notice: '#{identifier} was successfully deleted.'
+  end
+  
+  def page_display
+    @content = Content.where(identifier: params[:ident]).pluck(:published, :title, :content)
   end
   
   private
@@ -46,6 +50,7 @@ class ContentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_params
-      params[:content]
+      params[:content].permit(:identifier, :title, :content, :image, :pdf, :published)
     end
+
 end

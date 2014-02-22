@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Edit news item
+  .panel-body
+    .row
+      .col-lg-offset-1.col-lg-10
+        = render 'form'
+
+.btn-group
+  = link_to 'Show', @news_item, :type => 'button', :class => 'btn btn-default'
+  = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, news_items_path, :type => 'button', :class => 'btn btn-default'

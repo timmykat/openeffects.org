@@ -1,0 +1,30 @@
+.panel.panel-default
+  .panel-heading
+    - if @content.published
+      - klass = "text-success"
+    - else
+      - klass = "text-danger"
+    %h3.panel-title
+      = @content.identifier
+      %div{:class => "pull-right #{klass}"}
+        = @content.published? ? 'Published' : 'UNPUBLISHED'
+  .panel-body
+    %p
+      %b Title:
+      = @content.title
+    %label Content
+    %p= @content.content.html_safe
+    %p
+      %b PDF file:
+      - if @content.pdf.blank?
+        (none)
+      - else
+        = link_to image_tag(@content.logo.url(:display)), @content.pdf
+
+.btn-group        
+  = link_to 'Back to content list', contents_path, :type => 'button', :class => 'btn btn-default'
+  - if current_user and current_user.has_role? :admin
+    = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+    = link_to 'Edit', edit_content_path(@content), :type => 'button', :class => 'btn btn-primary'
+
+  

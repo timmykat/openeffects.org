@@ -18,24 +18,28 @@ class NewsItemsController < ApplicationController
     @news_item = NewsItem.new(news_item_params)
     
     if @news_item.save
-      redirect_to @news_item, notice: '#{@news_item.identifier} was successfully saved.'
+      redirect_to @news_item, notice: "#{@news_item.headline} was successfully saved."
     else
       render action: 'new'
     end
   end
+  
+  def edit
+    @news_item = NewsItem.find(params[:id])
+  end
 
   def update
     if @news_item.update(news_item_params)
-      redirect_to @news_item, notice: '#{@news_item.identifier} was successfully updated.'
+      redirect_to @news_item, notice: "#{@news_item.headline} was successfully updated."
     else
       render action: 'new'
     end
   end
 
   def destroy
-    identifier = @news_item.identifier
+    headline = @news_item.headline
     @news_item.destroy
-    redirect_to news_items_url, notice: '#{name} was successfully deleted.'
+    redirect_to news_items_url, notice: '#{headline} was successfully deleted.'
   end
   
   private
@@ -46,6 +50,6 @@ class NewsItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def news_item_params
-      params[:news_item]
+      params[:news_item].permit(:headline, :date, :summary, :published)
     end
 end

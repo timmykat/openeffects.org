@@ -1,0 +1,32 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title= @company.name
+  .panel-body
+    %p
+      %b Contact:
+      = @company.contact.name or '(none assigned)'
+    %label Description
+    %p= @company.description.html_safe
+    %p
+      %b URL:
+      = link_to @company.url, @company.url
+    %p
+      %b Address:
+      = @company.address
+    %p
+      %b Date joined:
+      = @company.joined
+    %p
+      %b Company logo:
+      - if @company.logo.blank?
+        (none)
+      - else
+        = image_tag(@company.logo.url(:display))
+
+.btn-group        
+  = link_to 'Back to company list', companies_path, :type => 'button', :class => 'btn btn-default'
+  - if current_user and current_user.has_role? :admin
+    = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+    = link_to 'Edit', edit_company_path(@company), :type => 'button', :class => 'btn btn-primary'
+
+  

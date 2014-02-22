@@ -1,0 +1,53 @@
+= form_for @minute, :html => { :multipart => true, :class => "form-horizontal",  :role => "form" }  do |f|
+  - if @minute.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@minute.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @minute.errors.full_messages.ech do |msg|
+          %li= msg
+
+  - if @minute and @minute.published?
+    - klass = "bg-success"
+  - elsif @minute and !@minute.published?
+    - klass = "bg-danger"
+    
+  %div{ :class => "form-group #{klass} checkbox" }
+    Published?
+    = f.check_box :published, :value => @minute.published
+    
+  - if @minute and !@minute.date.blank?
+    - value = @minute.date
+  - else
+    - value = Time.now.strftime('%d-%b-%Y')
+  
+  .row  
+    .col-sm-4
+      .form-group
+        = f.label :date
+        .input-group.date
+          = f.text_field :date, :value => value, :class => "form-control"
+          %span.input-group-addon
+            %i.glyphicon.glyphicon-th
+
+  .form-group
+    = f.label :meeting
+    = f.collection_select :meeting, get_meeting_types, :id, :text, {:value => @minute.meeting}, {:class => "form-control"}
+  
+  .form-group
+    = f.label :location
+    = f.text_field :location, :value => @minute.location, :class => "form-control"
+    
+  .form-group
+    = f.label "Members Attending"
+    = f.cktext_area :members, :value => @minute.members, :class => "form-control"
+    
+  .form-group
+    = f.label "Observers Attending"
+    = f.cktext_area :observing, :value => @minute.observing, :class => "form-control"
+
+  .form-group
+    = f.label "Meeting Minutes"
+    = f.cktext_area :minutes, :value => @minute.minutes, :class => "form-control"
+
+  .form-group
+    = f.submit 'Save'      

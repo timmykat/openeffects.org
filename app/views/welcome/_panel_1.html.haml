@@ -1,0 +1,7 @@
+%h2 Member Companies
+%ul.list-group
+- @companies[:obj].each do |company|
+  %li.list-group-item
+    - if @companies[:use_logos]
+      = image_tag(company.logo(:listing))
+    = link_to company.name, ''

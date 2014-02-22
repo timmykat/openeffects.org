@@ -15,8 +15,11 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   validates :password, :presence => true
   
-  has_attached_file :avatar, :styles => { :mobile => "50x50", :desktop => "200x200" }, :default_url => "images/:style/default_avatar.png"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  has_attached_file :avatar, :styles => { :listing => "50x50", :display => "200x200" }, :default_url => "images/:style/default_avatar.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage/
+  validates_attachment_file_name :avatar, :matches => [ /png\Z/, /jpe?g\Z/, /gif\Z/ ]
+  
+  has_one :company, :foreign_key => :contact_id
   
 #  after_create :send_admin_email
 

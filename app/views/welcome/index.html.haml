@@ -9,25 +9,23 @@
 .container
   .row
     .col-md-4
-      %h2 Member Companies
-      %p - member list -    
+      = render :partial => 'panel_1'
     .col-md-4
-      %h2 Glossary
-      %p - glossary content -    
-    
+      = render :partial => 'panel_2'
     .col-md-4
-      %h2 News    
-      %p - news items -    
+      = render :partial => 'panel_3'
+
   .row#standard
-    %h2 Why a Standard?
-    %p - why a standard - 
+    .col-sm-offset-2.col-sm-8
+      = render :partial => 'standard' 
 
   .row#implementers
-    %h2 For Implementers
-    .col-md-6
-      %p - information for implementers -
-    .col-md-6
-      %p - links for implementers -
+    .col-sm-offset-2.col-sm-8
+      %h2 For Implementers
+      .col-md-6
+        = render 'info_for_implementers'
+      .col-md-6
+        = render 'links_for_implementers'
   
   .row#organization
     %h2 The Organization

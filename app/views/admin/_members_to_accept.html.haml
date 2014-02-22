@@ -1,0 +1,23 @@
+%div{ :class => members_waiting.blank? ? "panel panel-default" : "panel panel-warning" }
+  .panel-heading
+    %h3.panel-title 
+      Members Awaiting Approval
+  .panel-body
+    %table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Email
+          %th Company
+          %th Accept
+      %tbody
+        - members_waiting.each do |user|
+          %tr
+            %td= user.name
+            %td= user.email
+            %td= user.company_or_org
+            %td
+              - if user.approved?
+                %button.approved.btn.btn-xs.btn-success Approved
+              - else
+                %button.accept.btn.btn-xs.btn-primary Accept

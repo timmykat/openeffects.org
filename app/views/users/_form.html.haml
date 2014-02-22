@@ -1,23 +1,35 @@
-= form_for @user, :html => { :multipart => true }, :role => "form", :class => "form-horizontal" do |f|
-  if @user.errors.any?
+= form_for @user, :html => { :multipart => true, :role => "form", :class => "form-horizontal" } do |f|
+  - if @user.errors.any?
     .alert.alert-danger
       %h2 "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
       %ul
         - @user.errors.full_messages.ech do |msg|
-        %li= msg
-  .form_group
-    f.label :email
-    f.text_field :email, :class => "form-control"
-  
-  .form_group
-    f.label :password
-    f.password_field, :class => "form-control"
-    
-  .form_group
-    f.label :name
-    f.text_field, :class => "form-control"
-    
-  .form_group
-    f.label :avatar
-    f.file :avatar
-      
+          %li= msg
+  .form-group
+    = f.label :email
+    = f.text_field :email, :value => @user.email, :class => "form-control"
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, :class => "form-control"
+    .hint.text-muted
+      Leave blank to leave unchanged
+
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, :class => "form-control"
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, :value => @user.name, :class => "form-control"
+
+  .form-group
+    = f.label :avatar
+    - if @user.avatar.blank?
+      (no avatar)
+    - else
+      = image_tag @user.avatar.url(:display)
+    = f.file_field :avatar
+
+  .form-group
+    = f.submit 'Save', :class => 'btn btn-primary'     

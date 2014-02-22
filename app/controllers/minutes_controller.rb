@@ -1,32 +1,36 @@
 class MinutesController < ApplicationController
 
   before_action :set_minutes, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /Minutes
   def index
-    @minutes = Minutes.all
+    @minutes = Minute.all
   end
   
   def show
   end
 
   def new
-    @minutes = Minutes.new
+    @minute = Minute.new
   end
 
   def create
-    @minutes = Minutes.new(minutes_params)
+    @minute = Minute.new(minutes_params)
     
     if @minutes.save
-      redirect_to @minutes, notice: '#{@minutes.identifier} was successfully saved.'
+      redirect_to @minutes, notice: "#{@minutes.identifier} was successfully saved."
     else
       render action: 'new'
     end
   end
 
+  def edit
+    @minute = Minute.find(params[:id])
+  end
+
   def update
-    if @minutes.update(minutes_params)
-      redirect_to @minutes, notice: '#{@minutes.identifier} was successfully updated.'
+    if @minute.update(minutes_params)
+      redirect_to @minute, notice: "#{@minute.identifier} was successfully updated."
     else
       render action: 'new'
     end
@@ -41,11 +45,11 @@ class MinutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_minutes
-      @minutes = Minutes.find(params[:id])
+      @minutes = Minute.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def minutes_params
-      params[:minutes]
+      params[:minutes].permit(:meeting, :date, :location, :members, :observing, :minutes, :published)
     end
 end

@@ -1,18 +1,20 @@
 %h2 Administrative Dashboard
-.row
-  .col-sm-12.col-md-6
-    = render :partial => "_minutes" 
-  .col-sm-12.col-md-6
-    = render :partial => "_news"
-.row  
-  .col-sm-12.col-md-6
-    = render :partial => "_members_to_accept"
-  .col-sm-12.col-md-6
-    %h3 Full Member List
-    = link_to 'All users', users_path
-.row
-  .col-sm-12.col-md-6
-    = render :partial => "_member_companies"
-  .col-sm-12.col-md-6
-    = render :partial => "_miscellaneous_content"
-  
+.admin.btn-group
+  = link_to 'News Items', '#news', :type => 'button', :class => 'btn btn-default'
+  = link_to 'Minutes', '#minutes', :type => 'button', :class => 'btn btn-default'
+  = link_to 'Misc. Content', '#content', :type => 'button', :class => 'btn btn-default'
+  = link_to 'Member Companies', '#companies', :type => 'button', :class => 'btn btn-default'
+  = link_to 'All Users <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, users_path, :type => 'button', :class => 'btn btn-default'
+
+- if !@members_waiting.blank?
+  .row#pending-users
+    = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
+.row#news
+  = render :partial => "news", locals: { news_items: @news_items }
+.row#minutes
+  = render :partial => "minutes", locals: { minutes: @minutes }
+.row#content
+  = render :partial => "miscellaneous_content", locals: { contents: @contents }
+.row#companies
+  = render :partial => "member_companies", locals: { companies: @companies }
+

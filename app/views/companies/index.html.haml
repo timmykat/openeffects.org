@@ -1,2 +1,27 @@
-%h1 Companies#index
-%p Find me in app/views/companies/index.html.haml
+%h1 Companies
+- if @companies.blank?
+  %p There are no companies.
+- else
+  %table.table
+    %thead
+      %tr
+        %th
+        %th Name
+        %th URL
+        %th Contact
+        - if current_user and current_user.has_role? :admin
+          %th{ :colspan => 3 }
+    %tbody
+      - @companies.each do |company|
+        %tr
+          %td= company.logo.blank? ? '(no logo)' : image_tag(company.logo.url(:listing))
+          %td= company.name
+          %td= link_to company.url, company.url, :target => '_blank' 
+          %td= company.contact.blank? ? '(none)' : company.contact.name
+          - if current_user and current_user.has_role? :admin
+            %td= link_to 'Show', company
+            %td= link_to 'Edit', edit_company_path(company)
+            %td= link_to 'Delete', company, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+.btn.btn-default
+  = link_to 'New Company', new_company_path, :type => 'button'

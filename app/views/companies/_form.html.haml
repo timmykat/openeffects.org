@@ -1,0 +1,40 @@
+= form_for @company, :html => { :multipart => true, :role => "form", :class => "form-horizontal" } do |f|
+  - if @company.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@company.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @company.errors.full_messages.ech do |msg|
+          %li= msg
+  .form-group
+    = f.label :name
+    = f.text_field :name, :value => @company.name, :class => "form-control"
+  
+  .form-group
+    = f.label :url
+    = f.url_field :url, :value => @company.url, :class => "form-control"
+    
+  .form-group
+    = f.label :address
+    = f.text_field :address, :value => @company.address, :class => "form-control"
+
+  .row
+    .col-lg-4
+      .form-group
+        = f.label :contact
+        %br
+        = f.collection_select :contact_id, get_admin_users, :id, :name,{ :include_blank => '--Select one--' }, {:class => "form-control"}
+    
+  .form-group
+    = f.label :logo
+    - if @company.logo.blank?
+      (no logo)
+    - else
+      = image_tag @company.logo.url(:display)
+    = f.file_field :logo
+
+  .form-group
+    = f.label :description
+    = f.cktext_area :description, :value => @company.description, :class => "form-control"
+
+  .form-group
+    = f.submit 'Save', :class => 'btn btn-primary'     
