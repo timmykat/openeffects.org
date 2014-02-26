@@ -204,7 +204,6 @@ DEPENDENCIES
   pry-stack_explorer
   rails (= 4.0.1)
   rails_12factor
-  rails_serve_static_assets
   role_model
   sanitize
   sass-rails (~> 4.0.0)

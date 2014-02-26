@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-# Use this ruby version  
-ruby '1.9.3'
-
 # User rails 4
 gem 'rails', '4.0.1'
 
@@ -47,7 +44,6 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'thin'
-  gem 'rails_serve_static_assets'
 end
 
 # User
@@ -68,3 +64,7 @@ gem 'paperclip'
 
 # Design and layout
 gem 'bootstrap-sass', '~> 3.1.1'
+
+# Use this ruby version  
+ruby '1.9.3'
+
