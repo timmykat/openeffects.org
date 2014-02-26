@@ -40,6 +40,12 @@ group :development do
   gem 'better_errors'
 end
 
+# Stuff for heroku
+group :production do
+  gem 'rails_12factor'
+  ruby '1.9.3'
+end
+
 # User
 gem 'devise'      # authentication
 gem 'role_model'  # user roles
@@ -51,7 +57,7 @@ gem 'ckeditor'
 gem 'sanitize'
 
 # User forum
-gem 'forem'
+# gem 'forem'
 
 # Use paperclip for file uploads
 gem 'paperclip'
