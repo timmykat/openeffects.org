@@ -11,19 +11,13 @@
             %th Date
             %th Meeting
             %th Location
-            %th Member Attendees
-            %th Observing Attendees
-            %th Minutes
             %th{ :colspan => 3 } Actions
         %tbody
           - minutes.each do |minute|
             %tr
               %td= minute.date
-              %td= minute.meeting
+              %td= textify(minute.meeting)
               %td= minute.location
-              %td= minute.members
-              %td= minute.observing
-              %td= minute.minutes
               %td= link_to 'Show', minute
               %td= link_to 'Edit', edit_minute_path(minute)
               %td= link_to 'Delete', minute, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -1,33 +1,34 @@
-%h1 All Users
-- if @users.blank?
-  %p There are no users!
-- else
-  %table.table
-    %thead
-      %tr
-        %th 
-        %th Name
-        %th Email
-        %th Company
-        %th Avatar
-        - if current_user and current_user.has_role? :admin
-          %th{ :colspan => 3 }
-    %tbody
-      - @users.each do |user|
+.container
+  %h1 All Users
+  - if @users.blank?
+    %p There are no users!
+  - else
+    %table.table
+      %thead
         %tr
-          %td
-            - if user.approved?
-              %button.approved.btn.btn-xs.btn-success Approved
-            - else
-              %button.accept.btn.btn-xs.btn-primary Accept
-          %td= user.name
-          %td= user.email
-          %td= user.company_or_org
-          %td= user.avatar.blank? ? '(none)' : image_tag(user.avatar.url(:listing))
+          %th 
+          %th Name
+          %th Email
+          %th Company
+          %th Avatar
           - if current_user and current_user.has_role? :admin
-            %td= link_to 'Show', user
-            %td= link_to 'Edit', edit_user_path(user)
-            %td= link_to 'Delete', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %th{ :colspan => 3 }
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td
+              - if user.approved?
+                %button.approved.btn.btn-xs.btn-success Approved
+              - else
+                %button.accept.btn.btn-xs.btn-primary Accept
+            %td= user.name
+            %td= user.email
+            %td= user.company_or_org
+            %td= user.avatar.blank? ? '(none)' : image_tag(user.avatar.url(:listing))
+            - if current_user and current_user.has_role? :admin
+              %td= link_to 'Show', user
+              %td= link_to 'Edit', edit_user_path(user)
+              %td= link_to 'Delete', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-.btn.btn-default
-  = link_to 'New User', new_user_path, :type => 'button'
+  .btn.btn-default
+    = link_to 'New User', new_user_path, :type => 'button'
