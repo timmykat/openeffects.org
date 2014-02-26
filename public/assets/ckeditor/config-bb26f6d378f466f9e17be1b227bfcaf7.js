@@ -1,1 +1,0 @@
-CKEDITOR.config.stylesSet="bootstrap_styles:/booststrap_styles.js",CKEDITOR.config.allowedContent=!0;
