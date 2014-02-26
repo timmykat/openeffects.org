@@ -1,7 +1,7 @@
 Ofx::Application.routes.draw do
 
   # Add route namespace for CKeditor
-  mount Ckeditor::Engine => '/ckeditor'
+  #  mount Ckeditor::Engine => '/ckeditor'
 
   # Add Devise for user authorization
   devise_for :users

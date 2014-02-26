@@ -1,0 +1,18 @@
+cleanup_on_startup: false
+cleanup: false
+convert_urls: false,
+nowrap: true
+remove_linebreaks: false
+theme_advanced_toolbar_location: top
+theme_advanced_toolbar_align: left
+theme_advanced_statusbar_location: bottom
+theme_advanced_buttons1_add:
+  - tablecontrols
+  - code
+  - pastetext
+  - pasteword
+  - code
+plugins:
+  - table
+  - paste
+  - code

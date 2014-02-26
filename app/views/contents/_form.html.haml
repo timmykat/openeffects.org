@@ -23,7 +23,7 @@
     
   .form_group
     = f.label :content
-    = f.cktext_area :content, :value => @content.content, :class => "form-control"
+    = f.text_area :content, :value => @content.content, :class => "tinymce form-control"
     
   .form-group
     = f.label :pdf
@@ -40,4 +40,6 @@
       = @content.image.name
 
   .form-group
-    = f.submit 'Save'      
+    = f.submit 'Save'
+    
+= tinymce       

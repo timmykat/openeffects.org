@@ -33,7 +33,9 @@
     
   .form-group
     = f.label :summary
-    = f.cktext_area :summary, :value => @news_item, :class => "form-control"
+    = f.text_area :summary, :value => @news_item, :class => "tinymce form-control"
         
   .form-group
-    = f.submit 'Save'      
+    = f.submit 'Save'
+    
+= tinymce    

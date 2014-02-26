@@ -39,15 +39,17 @@
     
   .form-group
     = f.label "Members Attending"
-    = f.cktext_area :members, :value => @minute.members, :class => "form-control"
+    = f.text_area :members, :value => @minute.members, :class => "tinymce form-control"
     
   .form-group
     = f.label "Observers Attending"
-    = f.cktext_area :observing, :value => @minute.observing, :class => "form-control"
+    = f.text_area :observing, :value => @minute.observing, :class => "tinymce form-control"
 
   .form-group
     = f.label "Meeting Minutes"
-    = f.cktext_area :minutes, :value => @minute.minutes, :class => "form-control"
+    = f.text_area :minutes, :value => @minute.minutes, :class => "tinymce form-control"
 
   .form-group
-    = f.submit 'Save'      
+    = f.submit 'Save' 
+    
+= tinymce       
