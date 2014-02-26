@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Use this ruby version  
+ruby '1.9.3'
+
+# User rails 4
 gem 'rails', '4.0.1'
 
 # Use mysql as the database for Active Record
@@ -43,7 +46,8 @@ end
 # Stuff for heroku
 group :production do
   gem 'rails_12factor'
-  ruby '1.9.3'
+  gem 'thin'
+  gem 'rails_serve_static_assets'
 end
 
 # User
