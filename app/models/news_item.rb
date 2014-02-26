@@ -7,7 +7,7 @@ class NewsItem < ActiveRecord::Base
   before_validation :sanitize_html
 
   def self.build_panel(num = 3)
-    NewsItem.all.limit(num).to_a
+    NewsItem.where(published: true).limit(num).to_a
   end
 
   private

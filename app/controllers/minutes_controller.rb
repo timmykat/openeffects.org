@@ -2,6 +2,13 @@ class MinutesController < ApplicationController
 
   before_action :set_minutes, only: [:show, :edit, :update, :destroy]
   
+  def toggle_published
+    m = Minute.find(params[:id])
+    m.toggle(:published)
+    m.save
+    render :text => m.published? ? 'published' : ''
+  end
+  
   # GET /Minutes
   def index
     @minutes = Minute.all
@@ -17,8 +24,8 @@ class MinutesController < ApplicationController
   def create
     @minute = Minute.new(minutes_params)
     
-    if @minutes.save
-      redirect_to @minutes, notice: "#{@minutes.identifier} was successfully saved."
+    if @minute.save
+      redirect_to @minute, notice: "#{@minute.meeting} for #{@minute.date}  was successfully saved."
     else
       render action: 'new'
     end
@@ -30,26 +37,26 @@ class MinutesController < ApplicationController
 
   def update
     if @minute.update(minutes_params)
-      redirect_to @minute, notice: "#{@minute.identifier} was successfully updated."
+      redirect_to @minute, notice: "#{@minute.meeting} for #{@minute.date} was successfully updated."
     else
       render action: 'new'
     end
   end
 
   def destroy
-    identifier = @minutes.identifier
-    @minutes.destroy
-    redirect_to minutes_url, notice: '#{name} was successfully deleted.'
+    name = "#{@minute.meeting.upcase} meeting for #{@minute.date.strftime('%Y')}"
+    @minute.destroy
+    redirect_to minutes_url, notice: "#{name} was successfully deleted."
   end
   
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_minutes
-      @minutes = Minute.find(params[:id])
+      @minute = Minute.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def minutes_params
-      params[:minutes].permit(:meeting, :date, :location, :members, :observing, :minutes, :published)
+      params[:minute].permit(:meeting, :date, :location, :members, :observing, :minutes, :published)
     end
 end

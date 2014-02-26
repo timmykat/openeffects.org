@@ -1,3 +1,7 @@
+$primary-color: #A9DEEB;
+$secondary-color: #79c7eb;
+$tertiary-color: #003b6d;
+
 html, body {
   height: 100%;
 }
@@ -40,4 +44,49 @@ footer {
 }
 .admin.btn-group {
   padding-bottom: 10px;
+}
+.logo {
+  position: absolute;
+  right: 13.5%;
+  top: 144px;
+  z-index: 1000;
+}
+.welcome {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border-bottom: solid 1px #666;
+  &#jumbotron {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-image: image-url('bg_lensflare.jpg');
+    .jumbotron {
+      opacity: 0.6;
+      background-color: #fff;
+      h1 {
+        color: #c3c;
+        text-shadow: 2px 2px 3px #003;
+      }
+    }
+  }
+  &#panels {
+    background-repeat: none;
+    background-size: cover;
+  }
+  &#standard {
+    background-color: $primary-color;
+  }
+  &#organization {
+    background-color: $secondary-color;
+  }
+}
+.btn {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+.no-borders {
+  border: none;
+}
+dd {
+  margin-bottom: 15px;
 }

@@ -23,6 +23,8 @@ Ofx::Application.routes.draw do
   get 'contents/page/:ident', to: "contents#page_display"
   
   resources :minutes
+  get '/minutes/ajax/toggle_published', to: 'minutes#toggle_published'
+  
   resources :news_items
   
   # Administrative dashboard

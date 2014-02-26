@@ -13,7 +13,7 @@ class Content < ActiveRecord::Base
   before_validation :sanitize_html
 
   def self.build_panel(key)
-    Content.where(identifier: key).first
+    Content.where(identifier: key, published: true).first
   end
 
   private

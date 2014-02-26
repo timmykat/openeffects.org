@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   validates :url, :format => { with: /\Ahttps?:\/\// }
   before_validation :sanitize_html
 
-  has_attached_file :logo, :styles => { :listing => "50x50", :display => "200x200" }, :default_url => "images/:style/default_company.png"
+  has_attached_file :logo, :styles => { :listing => "100x100", :display => "200x200" }, :default_url => "images/:style/default_company.png"
   validates_attachment_content_type :logo, :content_type => /\Aimage/
   validates_attachment_file_name :logo, :matches => [ /png\Z/, /jpe?g\Z/, /gif\Z/ ]
 

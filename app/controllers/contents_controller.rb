@@ -39,7 +39,7 @@ class ContentsController < ApplicationController
   end
   
   def page_display
-    @content = Content.where(identifier: params[:ident]).pluck(:published, :title, :content)
+    @content = Content.where(identifier: params[:ident]).first
   end
   
   private
