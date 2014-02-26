@@ -28,7 +28,16 @@
   .form-group
     = f.label :pdf
     = f.file_field :pdf
-    = image_tag 'pdf_icon'
+    - if !@content.pdf.blank?
+      = image_tag 'pdf_icon.png'
+      = @content.pdf.name
+
+  .form-group
+    = f.label :image
+    = f.file_field :image
+    - if !@content.image.blank?
+      = image_tag @content.image.url(:display)
+      = @content.image.name
 
   .form-group
     = f.submit 'Save'      

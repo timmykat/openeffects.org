@@ -1,7 +1,7 @@
 %h2 Member Companies
-%ul.list-group
+%ul.list-group.no-borders
 - @companies[:obj].each do |company|
-  %li.list-group-item
+  %li.list-group-item.no-borders
     - if @companies[:use_logos]
-      = image_tag(company.logo(:listing))
-    = link_to company.name, ''
+      = link_to image_tag(company.logo(:listing)), company_path(company)
+    = link_to company.name, company_path(company)

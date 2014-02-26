@@ -3,7 +3,7 @@
     .alert.alert-danger
       %h2 "#{pluralize(@minute.errors.count, "error")} prohibited this user from being saved:"
       %ul
-        - @minute.errors.full_messages.ech do |msg|
+        - @minute.errors.full_messages.each do |msg|
           %li= msg
 
   - if @minute and @minute.published?
@@ -31,7 +31,7 @@
 
   .form-group
     = f.label :meeting
-    = f.collection_select :meeting, get_meeting_types, :id, :text, {:value => @minute.meeting}, {:class => "form-control"}
+    = f.select :meeting, options_for_select(get_meeting_types, @minute.meeting), :class => "form-control"
   
   .form-group
     = f.label :location

@@ -1,20 +1,21 @@
-%h2 Administrative Dashboard
-.admin.btn-group
-  = link_to 'News Items', '#news', :type => 'button', :class => 'btn btn-default'
-  = link_to 'Minutes', '#minutes', :type => 'button', :class => 'btn btn-default'
-  = link_to 'Misc. Content', '#content', :type => 'button', :class => 'btn btn-default'
-  = link_to 'Member Companies', '#companies', :type => 'button', :class => 'btn btn-default'
-  = link_to 'All Users <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, users_path, :type => 'button', :class => 'btn btn-default'
+.container
+  %h2 Administrative Dashboard
+  .admin.btn-group
+    = link_to 'News Items', '#news', :type => 'button', :class => 'btn btn-default'
+    = link_to 'Minutes', '#minutes', :type => 'button', :class => 'btn btn-default'
+    = link_to 'Misc. Content', '#content', :type => 'button', :class => 'btn btn-default'
+    = link_to 'Member Companies', '#companies', :type => 'button', :class => 'btn btn-default'
+    = link_to 'All Users <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, users_path, :type => 'button', :class => 'btn btn-default'
 
-- if !@members_waiting.blank?
-  .row#pending-users
-    = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
-.row#news
-  = render :partial => "news", locals: { news_items: @news_items }
-.row#minutes
-  = render :partial => "minutes", locals: { minutes: @minutes }
-.row#content
-  = render :partial => "miscellaneous_content", locals: { contents: @contents }
-.row#companies
-  = render :partial => "member_companies", locals: { companies: @companies }
+  - if !@members_waiting.blank?
+    .row#pending-users
+      = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
+  .row#news
+    = render :partial => "news", locals: { news_items: @news_items }
+  .row#minutes
+    = render :partial => "minutes", locals: { minutes: @minutes }
+  .row#content
+    = render :partial => "miscellaneous_content", locals: { contents: @contents }
+  .row#companies
+    = render :partial => "member_companies", locals: { companies: @companies }
 

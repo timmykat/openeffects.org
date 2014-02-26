@@ -20,14 +20,20 @@
           .navbar-collapse.collapse
             %ul.nav.navbar-nav
               %li.active
-                %a{ :href => "/" } Home
+                %a{ :href => "/" }= image_tag('OFX_small.png')
+              %li
+                %a{:href => '#standard'} Why A Standard?
+              %li
+                %a{:href => '#implementers'} For Implementers
+              %li
+                %a{:href => '#organization'} The Organization
+              - if current_user and current_user.has_role? :admin
+                %li
+                  %a{ :href => "/admin/dashboard" } Dashboard
               %li
                 %a{ :href => "/api_doc/index.html", :target => "_blank", :title => "Open the API reference" } 
                   API
                   %span.glyphicon.glyphicon-new-window
-              - if current_user and current_user.has_role? :admin
-                %li
-                  %a{ :href => "/admin/dashboard" } Dashboard
             .user-status.pull-right
               - if current_user
                 = form_tag('/sign_out', method: 'get', role: "form", class: "form-inline") do
@@ -52,7 +58,7 @@
         -if flash[:alert]
           .alert.alert-danger
             = flash.alert
-        = yield
+      = yield
       .push
       
     %footer

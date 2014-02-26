@@ -1,9 +1,10 @@
-.col-md-offset-1.col-md-10
-  - if @content.published
+.container
+  .col-md-offset-1.col-md-10
+    - if @content.published?
       %h2= @content.title
-      = @content.content
-  - else
-    %h2 Oops!
-    %p Sorry, this isn't ready for prime time, yet.
+      = raw(@content.content)
+    - else
+      %h2 Oops!
+      %p Sorry, this isn't ready for prime time, yet.
 
   

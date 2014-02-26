@@ -1,11 +1,12 @@
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title Edit company
-  .panel-body
-    .row
-      .col-lg-offset-1.col-lg-10
-        = render 'form'
+.container
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Edit company
+    .panel-body
+      .row
+        .col-lg-offset-1.col-lg-10
+          = render 'form'
 
-.btn-group
-  = link_to 'Show', @company, :type => 'button', :class => 'btn btn-default'
-  = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, companies_path, :type => 'button', :class => 'btn btn-default'
+  .btn-group
+    = link_to 'Show', @company, :type => 'button', :class => 'btn btn-default'
+    = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, companies_path, :type => 'button', :class => 'btn btn-default'

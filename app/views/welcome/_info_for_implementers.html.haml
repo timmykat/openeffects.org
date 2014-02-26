@@ -2,4 +2,7 @@
   .panel-heading
     %h3.panel-title Info
   .panel-body
-    = raw(@info_for_implementers)
+    - if !@info_for_implementers.nil?
+      = raw(@info_for_implementers.content)
+    - else
+      %p.text-danger Please create content with a key of 'info_for_implementers'

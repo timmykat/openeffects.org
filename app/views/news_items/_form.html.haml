@@ -3,7 +3,7 @@
     .alert.alert-danger
       %h2 "#{pluralize(@news_item.errors.count, "error")} prohibited this news_item from being saved:"
       %ul
-        - @news_item.errors.full_messages.ech do |msg|
+        - @news_item.errors.full_messages.each do |msg|
           %li= msg
   - if @news_item and @news_item.published?
     - klass = "bg-success"

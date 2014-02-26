@@ -3,7 +3,7 @@
     .alert.alert-danger
       %h2 "#{pluralize(@company.errors.count, "error")} prohibited this user from being saved:"
       %ul
-        - @company.errors.full_messages.ech do |msg|
+        - @company.errors.full_messages.each do |msg|
           %li= msg
   .form-group
     = f.label :name

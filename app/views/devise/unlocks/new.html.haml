@@ -1,13 +1,14 @@
-%h2 Resend unlock instructions
-= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f|
-  = f.error_notification
-  = f.full_error :unlock_token
-  .form-group
-    =f.label :email, :class => "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_field :email, :required => false, :autofocus => true, :class => "form-control"
-  .form-group
+.container
+  %h2 Resend unlock instructions
+  = form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f|
+    = f.error_notification
+    = f.full_error :unlock_token
+    .form-group
+      =f.label :email, :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :email, :required => false, :autofocus => true, :class => "form-control"
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit "Resend unlock instructions", :class => "btn btn-large btn-primary"
     .col-sm-offset-2.col-sm-10
-      = f.submit "Resend unlock instructions", :class => "btn btn-large btn-primary"
-  .col-sm-offset-2.col-sm-10
-    = render "devise/shared/links"
+      = render "devise/shared/links"

@@ -1,25 +1,26 @@
-%h2 Press Release
-.panel.panel-default
-  .panel-heading
-    - if @news_item.published
-      - klass = "text-success"
-    - else
-      - klass = "text-danger"
-    %h3.panel-title
-      = @news_item.headline
-      %div{:class => "pull-right #{klass}"}
-        = @news_item.published? ? 'Published' : 'UNPUBLISHED'
-  .panel-body
-    %p
-      %b Date:
-      = @news_item.date.strftime('%d-%b-%Y')
-    %label Summary
-    %p= raw(@news_item.summary)
+.container
+  %h2 Press Release
+  .panel.panel-default
+    .panel-heading
+      - if @news_item.published
+        - klass = "text-success"
+      - else
+        - klass = "text-danger"
+      %h3.panel-title
+        = @news_item.headline
+        %div{:class => "pull-right #{klass}"}
+          = @news_item.published? ? 'Published' : 'UNPUBLISHED'
+    .panel-body
+      %p
+        %b Date:
+        = @news_item.date.strftime('%d-%b-%Y')
+      %label Summary
+      %p= raw(@news_item.summary)
 
-.btn-group        
-  = link_to 'Back to news listing', news_items_path, :type => 'button', :class => 'btn btn-default'
-  - if current_user and current_user.has_role? :admin
-    = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-    = link_to 'Edit', edit_news_item_path(@news_item), :type => 'button', :class => 'btn btn-primary'
+  .btn-group        
+    = link_to 'Back to news listing', news_items_path, :type => 'button', :class => 'btn btn-default'
+    - if current_user and current_user.has_role? :admin
+      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+      = link_to 'Edit', edit_news_item_path(@news_item), :type => 'button', :class => 'btn btn-primary'
 
   

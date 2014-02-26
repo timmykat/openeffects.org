@@ -18,8 +18,8 @@
             %tr
               %td= content.identifier
               %td= content.title
-              %td= content.image ? image_tag(content.image(:list)) : '(none)'
-              %td= content.pdf ? (link_to image_tag('pdf_icon.png'), content.pdf.url) : '(none)'
+              %td= content.image.blank? ? '(none)' : image_tag(content.image(:list)) 
+              %td= content.pdf.blank? ? '(none)' : (link_to image_tag('pdf_icon.png'), content.pdf.url)
               %td= link_to 'Show', content
               %td= link_to 'Edit', edit_content_path(content)
               %td= link_to 'Delete', content, :method => :delete, :data => { :confirm => 'Are you sure?' }

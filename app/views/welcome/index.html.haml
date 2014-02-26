@@ -1,45 +1,54 @@
-.jumbotron
-  .logo.pull-right
-    = image_tag('ofx_logo.png')
-  %h1 
-    Welcome to
-    %br The Open Effects Association
-  = #{@welcome_content}
+.welcome#jumbotron
+  .container
+    .logo= image_tag('ofx_logo.png')
+    .jumbotron
+      %h1 
+        Welcome to
+        %br The Open Effects Association
+      = #{@welcome_content}
 
-.container
-  .row
-    .col-md-4
-      = render :partial => 'panel_1'
-    .col-md-4
-      = render :partial => 'panel_2'
-    .col-md-4
-      = render :partial => 'panel_3'
+#panels.welcome
+  .container
+    .row
+      .col-md-4
+        .panel
+          = render :partial => 'panel_1'
+      .col-md-4
+        .panel
+          = render :partial => 'panel_2'
+      .col-md-4
+        .panel
+          = render :partial => 'panel_3'
 
-  .row#standard
-    .col-sm-offset-2.col-sm-8
-      = render :partial => 'standard' 
+#standard.welcome
+  .container
+    .row
+      .col-sm-offset-2.col-sm-8
+        = render :partial => 'standard' 
 
-  .row#implementers
-    .col-sm-offset-2.col-sm-8
-      %h2 For Implementers
-      .col-md-6
-        = render 'info_for_implementers'
-      .col-md-6
-        = render 'links_for_implementers'
+#implementers.welcome
+  .container
+    .row
+      .col-sm-offset-2.col-sm-8
+        %h2 For Implementers
+        .col-md-6
+          = render 'info_for_implementers'
+        .col-md-6
+          = render 'links_for_implementers'
   
-  .row#organization
-    %h2 The Organization
+#organization.welcome
+  .container
+    .row
+      %h2 The Organization
 
-  .row
-    %h3 Meeting Minutes
-    .col-md-4
-      %h4 General Meetings
-      %p - list of AGM minutes -
-    .col-md-4
-      %h4 Directors' Meetings
-      %p - list of DM minutes -
-    .col-md-4
-      %h4 Other Stuff?
+    .row
+      %h3 Meeting Minutes
+      .col-md-4
+        = render 'agm_minutes'
+      .col-md-4
+        = render 'dir_minutes'
+      .col-md-4
+        %h4 Other Stuff?
         
     
     

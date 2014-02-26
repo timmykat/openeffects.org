@@ -13,6 +13,7 @@
       = @user.company_or_org
     %p
       %b Avatar:
+      %br
       - if @user.avatar.blank?
         (none)
       - else
