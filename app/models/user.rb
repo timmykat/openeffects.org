@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable
          
   validates :email, :presence => true
-  validates :password, :presence => true
   
   has_attached_file :avatar, :styles => { :listing => "50x50", :display => "200x200" }, :default_url => "images/:style/default_avatar.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage/
@@ -52,4 +51,10 @@ class User < ActiveRecord::Base
     end
     recoverable
   end
+
+  protected
+
+    def password_required?
+     !persisted? || !password.blank? || !password_confirmation.blank?
+    end
 end

@@ -2,7 +2,6 @@
 // All this logic will automatically be available in application.js.
 $(function() {
   $('.publishing button').click(function(e) {
-    console.log (e.currentTarget)
     targetId = $(e.currentTarget).attr('id')
     $.get('/minutes/ajax/toggle_published', { id: targetId.replace('pub-','') }, function(status) {
       if (status == 'published') {

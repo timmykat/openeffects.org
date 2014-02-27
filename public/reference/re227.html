@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>kOfxPluginPropParamPageOrder</title><link rel="stylesheet" type="text/css" href="ofxStyle.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.77.1" /><link rel="home" href="index.html" title="The OFX Image Effect Plug-in API, 1.3, Programming Reference." /><link rel="up" href="ch17.html" title="Chapter 17. Properties By Name" /><link rel="prev" href="re226.html" title="kOfxPluginPropFilePath" /><link rel="next" href="re228.html" title="kOfxPropAPIVersion" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center"><code class="literal">kOfxPluginPropParamPageOrder</code></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re226.html">Prev</a> </td><th width="60%" align="center">Chapter 17. Properties By Name</th><td width="20%" align="right"> <a accesskey="n" href="re228.html">Next</a></td></tr></table><hr /></div><div class="refentry"><a id="kOfxPluginPropParamPageOrder"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p><code class="literal">kOfxPluginPropParamPageOrder</code> —  Sets the parameter pages and order of pages.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="blockquote"><blockquote class="blockquote"><pre class="programlisting">
+#include "/ofxParam.h"
+#define kOfxPluginPropParamPageOrder "OfxPluginPropParamPageOrder"
+</pre></blockquote></div></div><div class="refsect2"><a id="idp140532840541120"></a><h3>Type</h3><p>
+<code class="literal">kOfxPluginPropParamPageOrder</code> is of type <span class="type">C string</span>, and is of variable dimension.
+</p></div><div class="refsect2"><a id="idp140532840543280"></a><h3>Property Set</h3><p> This is a property that belongs to the plugin parameter descriptor (read/write) and instance (read only).
+</p></div><div class="refsect2"><a id="idp140532840544432"></a><h3>Default</h3><p>
+The default value is "".
+</p></div><div class="refsect2"><a id="idp140532840545504"></a><h3>Valid Values</h3><p>
+the names of any page param in the plugin
+</p></div><div class="refsect2"><a id="idp140532840546592"></a><h3>Description</h3><p>
+Sets the parameter pages and order of pages.
+</p><p>
+This property sets the preferred order of parameter pages on a host. If this is never set, the preferred order is the order the parameters were declared in.
+</p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re226.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch17.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="re228.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><code class="literal">kOfxPluginPropFilePath</code> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> <code class="literal">kOfxPropAPIVersion</code></td></tr></table></div></body></html>

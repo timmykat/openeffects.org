@@ -3,27 +3,41 @@
   - if @users.blank?
     %p There are no users!
   - else
-    %table.table
+    %table.table#user
       %thead
         %tr
           %th 
           %th Name
           %th Email
           %th Company
+          %th{ :colspan => @roles.length, :style => 'text-align: center;' } Roles
           %th Avatar
           - if current_user and current_user.has_role? :admin
             %th{ :colspan => 3 }
+        %tr
+          %th{ :colspan => 4 }
+          - @roles.each do |r|
+            %th= r.to_s.titlecase
+          - if current_user and current_user.has_role? :admin
+            %th{ :colspan => 3 }
+          
       %tbody
         - @users.each do |user|
           %tr
             %td
               - if user.approved?
-                %button.approved.btn.btn-xs.btn-success Approved
+                %button.approved.btn.btn-xs.btn-success{ :id => "user-#{user.id}" } Unapprove
               - else
-                %button.accept.btn.btn-xs.btn-primary Accept
+                %button.btn.btn-xs.btn-warning{ :id => "user-#{user.id}" } Approve
             %td= user.name
             %td= user.email
             %td= user.company_or_org
+            - @roles.each do |r|
+              - if current_user and current_user.has_role?(:admin) and user.approved?
+                %td= check_box_tag "role-#{r}-#{user.id}", r, user.has_role?(r)
+              - else
+                %td= check_box_tag "role-#{r}-#{user.id}", r, user.has_role?(r), disabled: true
+            
             %td= user.avatar.blank? ? '(none)' : image_tag(user.avatar.url(:listing))
             - if current_user and current_user.has_role? :admin
               %td= link_to 'Show', user

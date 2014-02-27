@@ -7,5 +7,11 @@ class AdminController < ApplicationController
     @companies = ::Company.order(:name).to_a
     @contents = ::Content.order(:identifier).to_a
   end
+  
+  def get_api_docs
+    
+    
+    
+  end
     
 end

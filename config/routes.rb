@@ -18,6 +18,9 @@ Ofx::Application.routes.draw do
   root to: 'welcome#index'
   
   resources :users
+  get '/users/ajax/toggle_approved', to: 'users#toggle_approved'
+  get '/users/ajax/toggle_role', to: 'users#toggle_role'
+
   resources :companies
   resources :contents
   get 'contents/page/:ident', to: "contents#page_display"

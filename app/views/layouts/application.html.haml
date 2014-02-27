@@ -22,11 +22,11 @@
               %li.active
                 %a{ :href => "/" }= image_tag('OFX_small.png')
               %li
-                %a{:href => '#standard'} Why A Standard?
+                %a{:href => '/#standard'} Why A Standard?
               %li
-                %a{:href => '#implementers'} For Implementers
+                %a{:href => '/#implementers'} For Implementers
               %li
-                %a{:href => '#organization'} The Organization
+                %a{:href => '/#organization'} The Organization
               - if current_user and current_user.has_role? :admin
                 %li
                   %a{ :href => "/admin/dashboard" } Dashboard
