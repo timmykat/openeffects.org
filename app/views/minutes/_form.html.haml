@@ -39,15 +39,15 @@
     
   .form-group
     = f.label "Members Attending"
-    = f.text_area :members, :value => @minute.members, :class => "tinymce form-control"
+    = f.text_area :members, :value => @minute.members, :class => "tinymce form-control", :rows => 10
     
   .form-group
     = f.label "Observers Attending"
-    = f.text_area :observing, :value => @minute.observing, :class => "tinymce form-control"
+    = f.text_area :observing, :value => @minute.observing, :class => "tinymce form-control", :rows => 10
 
   .form-group
     = f.label "Meeting Minutes"
-    = f.text_area :minutes, :value => @minute.minutes, :class => "tinymce form-control"
+    = f.text_area :minutes, :value => @minute.minutes, :class => "tinymce form-control", :rows => 20
 
   .form-group
     = f.submit 'Save' 
