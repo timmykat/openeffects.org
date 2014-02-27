@@ -1,4 +1,5 @@
-$primary-color: #A9DEEB;
+$primary-color: #a9deeb;
+$primary-color-grad: #f3f3ff;
 $secondary-color: #79c7eb;
 $tertiary-color: #003b6d;
 
@@ -47,8 +48,8 @@ footer {
 }
 .logo {
   position: absolute;
-  right: 13.5%;
-  top: 144px;
+  right: 40px;
+  top: 67px;
   z-index: 1000;
 }
 .welcome {
@@ -59,14 +60,21 @@ footer {
     padding-top: 1%;
     padding-bottom: 1%;
     background-image: image-url('bg_lensflare.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     .jumbotron {
-      opacity: 0.6;
-      background-color: #fff;
+      position: relative;
+      background-color: rgba(255,255,255, 0.6);
       h1 {
         color: #c3c;
-        text-shadow: 2px 2px 3px #003;
+        text-shadow: 3px 3px 7px #006;
       }
     }
+  }
+  &#welcome {
+    background-color: #563D7C;
+    background-image: linear-gradient(to bottom, #563D7C 0px, #6F5499 100%);
+    color: white;
   }
   &#panels {
     background-repeat: none;
@@ -74,9 +82,11 @@ footer {
   }
   &#standard {
     background-color: $primary-color;
+    background-image: linear-gradient(to bottom, $primary-color 0px, $primary-color-grad 100%);
   }
   &#organization {
-    background-color: $secondary-color;
+    background-color: #eee;
+    background-image: linear-gradient(to bottom, #ccc 0px, #eee 100%);
   }
 }
 .btn {

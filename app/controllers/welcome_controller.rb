@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
+    @ofx_welcome = Content.build_panel('ofx_welcome')
     @companies = Company.build_panel
     @glossary = Content.build_panel('glossary')
     @news_items = NewsItem.build_panel

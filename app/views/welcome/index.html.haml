@@ -1,12 +1,18 @@
 .welcome#jumbotron
   .container
-    .logo= image_tag('ofx_logo.png')
     .jumbotron
+      .logo= image_tag('ofx_logo.png')
       %h1 
         Welcome to
         %br The Open Effects Association
       = #{@welcome_content}
 
+#welcome.welcome
+  .container
+    .row
+      .col-sm-offset-2.col-sm-8
+        = render :partial => 'welcome'
+      
 #panels.welcome
   .container
     .row
