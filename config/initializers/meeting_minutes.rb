@@ -1,1 +1,0 @@
-MEETING_TYPES = YAML::load(File.open("#{Rails.root}/config/meeting_types.yml"))
