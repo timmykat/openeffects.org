@@ -1,0 +1,61 @@
+class VersionsController < ApplicationController
+
+  before_action :set_version, only: [:edit, :update, :destroy]
+
+  def new
+    @version = Version.new
+  end
+
+  def edit
+    @version = Version.find(params[:id])
+  end
+
+  def create
+    @version = Version.new(version_params)
+    current_version = Version.where(current: true).first if !@version.current
+    
+    if @version.save
+    
+      # If we are setting this new version to current, the old current version shouldn't be
+      if !current_version.nil?
+        current_version.current = false
+        current_version.save
+      end
+      redirect_to admin_dashboard_path, notice: "#{@version.version} was successfully saved."
+    else
+      redirect_to admin_dashboard_path
+    end
+  end
+
+  def update
+    current_version = Version.where(current: true).first if !@version.current
+    if @version.update(version_params)
+      # If we are updating this version to current, the old current version shouldn't be
+      if !current_version.nil?
+        current_version.current = false
+        current_version.save
+      end
+      redirect_to versions_url, notice: "#{@version.version} was successfully updated."
+    else
+      redirect_to admin_dashboard_path
+    end
+  end
+
+  def destroy
+    version = @version.version
+    @version.destroy
+    redirect_to admin_dashboard_path, notice: '#{version} was successfully deleted.'
+  end
+  
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_version
+      @version = Version.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def version_params
+      params[:version].permit(:version, :status, :current)
+    end
+
+end

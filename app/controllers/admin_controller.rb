@@ -6,12 +6,7 @@ class AdminController < ApplicationController
     @members_waiting = ::User.where(approved: false).to_a
     @companies = ::Company.order(:name).to_a
     @contents = ::Content.order(:identifier).to_a
+    @versions = ::Version.order(:current, version: :desc).to_a
   end
   
-  def get_api_docs
-    
-    
-    
-  end
-    
 end

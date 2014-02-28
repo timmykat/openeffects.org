@@ -1,7 +1,7 @@
 class Minute < ActiveRecord::Base
   include Publishable
   
-  validates :meeting, :presence => true, :inclusion => MEETING_TYPES.keys
+  validates :meeting, :presence => true, :inclusion => Rails.configuration.ofx['meeting_type'].keys
   validates :date, :presence => true
   validates :members, :presence => true
   validates :minutes, :presence => true

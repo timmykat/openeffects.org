@@ -1,0 +1,45 @@
+.container
+  .panel.panel-default
+    .panel-heading
+      - case @standard_change.status
+        - when 'approved':
+          - klass = "text-success"
+          - status = 'Approved'
+        - when 'proposed':
+          - klass = "text-warning"
+          - status = 'Proposed'
+        - when 'withdrawn':
+          - klass = "text-danger"
+          - status = 'Withdrawn'
+      %h3.panel-title
+        = @standard_change.title
+        %br
+        %span{:class => "#{klass}"}= status
+    .panel-body
+      %p
+        %b Standard version:
+        = @standard_change.version
+
+      %p
+        %b Change type:
+        = @standard_change.type
+
+      - if @standard_change.status == 'approved'
+        %label Final status
+        = raw(@standard_change.status_details)
+  
+      %label Committee
+      %p= raw(@standard_change.committee)
+
+      %label Overview
+      = raw(@standard_change.overview)
+
+      %label Solution
+      = raw(@standard_change.solution)
+
+  .btn-group        
+    = link_to 'Back to content list', contents_path, :type => 'button', :class => 'btn btn-default'
+    - if current_user and current_user.has_role? :admin
+      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+      = link_to 'Edit', edit_standard_change_path(@standard_change), :type => 'button', :class => 'btn btn-primary'
+

@@ -1,5 +1,8 @@
 Ofx::Application.routes.draw do
 
+  resources :standard_changes
+  resources :versions, except: [:index]
+  
   # Add route namespace for CKeditor
   #  mount Ckeditor::Engine => '/ckeditor'
 

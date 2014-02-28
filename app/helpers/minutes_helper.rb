@@ -1,9 +1,9 @@
 module MinutesHelper
   def get_meeting_types
-    MEETING_TYPES.map { |k, v| [v, k] }
+    Rails.configuration.ofx['meeting_type'].map { |k, v| [v, k] }
   end
   
   def textify(key)
-    MEETING_TYPES[key]
+    Rails.configuration.ofx['meeting_type'][key]
   end
 end

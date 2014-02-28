@@ -1,0 +1,54 @@
+= form_for @standard_change, :html => { :class => "form-horizontal", :role => "form" } do |f|
+  - if @standard_change.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@standard_change.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @standard_change.errors.full_messages.each do |msg|
+          %li= msg
+
+  - if @standard_change
+    - case @standard_change.status
+      - when 'approved'
+        - klass = "bg-success"
+      - when 'proposed'
+        - klass = "bg-warning"
+      - when 'withdrawn'
+        - klass = "bg-danger"
+  
+  .form-group  
+    = f.label :version
+    = f.collection_select :version_id, Version.all, :id, :version, :class => "form-control"
+
+  .form-group
+    = f.label :status
+    = f.select :status, options_for_select(get_change_selection(:status), (@standard_change.type.nil? ? 'proposed' : @standard_change.type)), :class => "form-control"
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, :value => @standard_change.title, :class => "form-control" 
+
+  .form-group
+    = f.label :type
+    = f.select :type, options_for_select(get_change_selection(:type), @standard_change.type), :class => "form-control"
+    
+  .form-group
+    = f.label :committee
+    = f.text_area :committee, :value => @standard_change.committee, :class => "tinymce form-control", :rows => 7
+
+  .form-group
+    = f.label :overview
+    = f.text_area :overview, :value => @standard_change.overview, :class => "tinymce form-control", :rows => 7
+
+  .form-group
+    = f.label :solution
+    = f.text_area :solution, :value => @standard_change.solution, :class => "tinymce form-control", :rows => 15
+
+  .form-group
+    = f.label 'Final status'
+    .hint.text-muted (Please fill this in when the change is approved)
+    = f.text_area :status_details, :value => @standard_change.status_details, :class => "tinymce form-control", :rows => 7
+    
+  .form-group
+    = f.submit 'Save'
+    
+= tinymce       

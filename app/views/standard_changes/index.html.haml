@@ -1,0 +1,29 @@
+.container
+  %h1 Standard Changes
+  - if @standard_changes.blank?
+    %p There are currently no standard changes.
+  - else
+    %table.table
+      %tr
+        %th Version
+        %th Title
+        %th Type
+        %th Status
+        %th
+        %th
+        %th
+
+      - @standard_changes.each do |standard_change|
+        %tr
+          %td= standard_change.version
+          %td= standard_change.committee
+          %td= standard_change.title
+          %td= standard_change.type
+          %td= standard_change.status
+          %td= link_to 'Show', standard_change
+          %td= link_to 'Edit', edit_standard_change_path(standard_change)
+          %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+  .btn.btn-default
+    = link_to 'New Standard change', new_standard_change_path, :type => 'button'

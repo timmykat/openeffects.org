@@ -1,0 +1,31 @@
+= form_for @version, :html => { :class => "form-horizontal",  :role => "form" }  do |f|
+  - if @version.errors.any?
+    .alert.alert-danger
+      %h2 "#{pluralize(@version.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @version.errors.full_messages.each do |msg|
+          %li= msg
+
+  - if @version and @version.current?
+    - klass = "bg-success"
+  - else
+    - klass = "bg-default"
+    
+  %div{ :class => "form-group #{klass} checkbox" }
+    Current
+    = f.check_box :current, :value => @version.current
+    
+  .row  
+    .col-sm-4
+      .form-group
+        = f.label :version
+        = f.text_field :version, :value => @version.version, :class => "form-control", :size => 10
+  
+      .form-group
+        = f.label :status
+        = f.select :status, options_for_select(get_version_status_selection, @version.status), :class => "form-control"
+    
+  .form-group
+    = f.submit 'Save' 
+    
+= tinymce       

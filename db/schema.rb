@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220222208) do
+ActiveRecord::Schema.define(version: 20140227220307) do
 
   create_table "api_docs", force: true do |t|
     t.string   "version"
@@ -104,6 +104,21 @@ ActiveRecord::Schema.define(version: 20140220222208) do
   add_index "news_items", ["headline"], name: "index_news_items_on_headline", using: :btree
   add_index "news_items", ["published"], name: "index_news_items_on_published", using: :btree
 
+  create_table "standard_changes", force: true do |t|
+    t.integer  "version_id"
+    t.text     "committee"
+    t.string   "title"
+    t.string   "type"
+    t.string   "status"
+    t.text     "status_details"
+    t.text     "overview"
+    t.text     "solution"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "standard_changes", ["version_id"], name: "index_standard_changes_on_version_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "name",                   default: "", null: false
     t.string   "avatar_file_name"
@@ -140,5 +155,13 @@ ActiveRecord::Schema.define(version: 20140220222208) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "versions", force: true do |t|
+    t.string   "version"
+    t.string   "status"
+    t.boolean  "current"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

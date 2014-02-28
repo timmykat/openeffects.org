@@ -1,0 +1,14 @@
+meeting_type:
+  agm: Association General Meeting
+  dirm: Directors' Meeting
+version_status:
+  approved: Approved
+  pending: Pending
+standard_change_type:
+  major: Major
+  minor: Minor
+  other: Other
+standard_change_status:
+  approved: Approved
+  proposed: Proposed
+  withdrawn: Withdrawn

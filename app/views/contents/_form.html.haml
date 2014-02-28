@@ -13,15 +13,15 @@
   %div{ :class => "form-group #{klass} checkbox" }
     Published?
     = f.check_box :published, :value => @content.published
-  .form_group
+  .form-group
     = f.label :identifier
     = f.text_field :identifier, :value => @content.identifier, :class => "form-control"
   
-  .form_group
+  .form-group
     = f.label :title
     = f.text_field :title, :value => @content.title, :class => "form-control"
     
-  .form_group
+  .form-group
     = f.label :content
     = f.text_area :content, :value => @content.content, :class => "tinymce form-control", :rows => 20
     

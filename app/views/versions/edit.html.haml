@@ -1,0 +1,11 @@
+.container
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Edit version
+    .panel-body
+      .row
+        .col-lg-offset-1.col-lg-10
+          = render 'form'
+
+  .btn-group
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Dashboard'), "#{admin_dashboard_path}#versions", :type => 'button', :class => 'btn btn-default'

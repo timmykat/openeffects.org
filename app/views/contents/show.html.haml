@@ -14,7 +14,7 @@
         %b Title:
         = @content.title
       %label Content
-      %p= @content.content.html_safe
+      %p= raw(@content.content)
       %p
         %b PDF file:
         - if @content.pdf.blank?

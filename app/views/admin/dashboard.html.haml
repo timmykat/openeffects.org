@@ -1,11 +1,13 @@
 .container
   %h2 Administrative Dashboard
+  = link_to('Current proposed standard change', standard_change(@proposed_standard), :type => 'button', :class => 'btn btn-default') unless @proposed_standard.nil?
   .admin.btn-group
     = link_to 'News Items', '#news', :type => 'button', :class => 'btn btn-default'
     = link_to 'Minutes', '#minutes', :type => 'button', :class => 'btn btn-default'
     = link_to 'Misc. Content', '#content', :type => 'button', :class => 'btn btn-default'
     = link_to 'Member Companies', '#companies', :type => 'button', :class => 'btn btn-default'
     = link_to 'All Users <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, users_path, :type => 'button', :class => 'btn btn-default'
+    = link_to 'Standard Changes <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, standard_changes_path, :type => 'button', :class => 'btn btn-default'
 
   - if !@members_waiting.blank?
     .row#pending-users
@@ -18,4 +20,6 @@
     = render :partial => "miscellaneous_content", locals: { contents: @contents }
   .row#companies
     = render :partial => "member_companies", locals: { companies: @companies }
+  .row#versions
+    = render :partial => "versions", locals: { versions: @versions }
 
