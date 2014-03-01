@@ -15,8 +15,7 @@
 
       - @standard_changes.each do |standard_change|
         %tr
-          %td= standard_change.version
-          %td= standard_change.committee
+          %td= standard_change.version.version
           %td= standard_change.title
           %td= standard_change.type
           %td= standard_change.status

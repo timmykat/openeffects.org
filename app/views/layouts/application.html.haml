@@ -38,7 +38,7 @@
               - if current_user
                 = form_tag('/sign_out', method: 'get', role: "form", class: "form-inline") do
                   Member: #{current_user.name}
-                  %button{ :type => 'submit', :class => "btn btn-large btn-primary" } Sign out
+                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
                 
               - else
                 = form_tag('/sign_in', method: 'post', role: "form", class: "form-inline") do
@@ -49,7 +49,7 @@
                     = label_tag :password
                     = password_field_tag "user[password]", nil, :class => "form-control"
                     
-                  %button{ :type => 'submit', :class => "btn btn-large btn-primary" } Sign in
+                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign in
                   
       .container{ :role => "main" }    
         -if flash[:notice]

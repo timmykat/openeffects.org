@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   validates_attachment_file_name :avatar, :matches => [ /png\Z/, /jpe?g\Z/, /gif\Z/ ]
   
   has_one :company, :foreign_key => :contact_id
+  has_many :comments
   
 #  after_create :send_admin_email
 

@@ -57,6 +57,9 @@ gem 'sanitize'
 # Use paperclip for file uploads
 gem 'paperclip'
 
+# Need commenting for draft standard changes
+gem 'acts_as_commentable'
+
 # Design and layout
 gem 'bootstrap-sass', '~> 3.1.1'
 

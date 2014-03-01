@@ -1,41 +1,53 @@
-cleanup_on_startup: false
-cleanup: false
-convert_urls: false,
-remove_linebreaks: false
-theme_advanced_toolbar_location: top
-theme_advanced_toolbar_align: left
-theme_advanced_statusbar_location: bottom
-theme_advanced_buttons1_add:
-  - link
-  - tablecontrols
-  - paste
-plugins:
-  - link
-  - table
-  - paste
-style_formats:
-  -  
-    title: 'BS list group'
-    selector: 'ul,ol'
-    classes: 'list-group'
-  -
-    title: 'BS list group item'
-    selector: 'li'
-    classes: 'list-group-item'
-  -  
-    title: 'BS borderless list group'
-    selector: 'ul,ol'
-    classes: 'list-group no-border'
-  -
-    title: 'BS borderless list group item'
-    selector: 'li'
-    classes: 'list-group-item no-border'
-  -
-    title: 'Code'
-    block: 'pre'
-    styles:
-      'font-family' : 'Courier, monospace'
-      'margin' : '10px'
-      'background-color' : '#f3f3d8'
-      'border' : '1px solid #006600'
-      'padding' : '20px'
+default:
+  cleanup_on_startup: false
+  cleanup: false
+  convert_urls: false,
+  remove_linebreaks: false
+  theme_advanced_toolbar_location: top
+  theme_advanced_toolbar_align: left
+  theme_advanced_statusbar_location: bottom
+  theme_advanced_buttons1_add:
+    - link
+    - tablecontrols
+    - paste
+  plugins:
+    - link
+    - table
+    - paste
+  style_formats:
+    -  
+      title: 'BS list group'
+      selector: 'ul,ol'
+      classes: 'list-group'
+    -
+      title: 'BS list group item'
+      selector: 'li'
+      classes: 'list-group-item'
+    -  
+      title: 'BS borderless list group'
+      selector: 'ul,ol'
+      classes: 'list-group no-border'
+    -
+      title: 'BS borderless list group item'
+      selector: 'li'
+      classes: 'list-group-item no-border'
+    -
+      title: 'Code'
+      block: 'pre'
+      styles:
+        'font-family' : 'Courier, monospace'
+        'margin' : '10px'
+        'background-color' : '#f3f3d8'
+        'border' : '1px solid #006600'
+        'padding' : '20px'
+simple:
+  cleanup_on_startup: false
+  cleanup: false
+  convert_urls: false,
+  remove_linebreaks: false
+  menubar: false
+  toolbar: undo redo | bold italic | cut copy paste | link | bullist numlist | alignleft aligncenter alignright | emoticons
+  plugins:
+    - link
+    - emoticons
+    - lists

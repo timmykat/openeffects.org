@@ -1,0 +1,16 @@
+.well.well-sm
+  = form_for @new_comment do |f|
+  
+    = f.hidden_field :commentable_id
+    = f.hidden_field :commentable_type
+    = f.hidden_field :user_id, :value => current_user.id
+     
+    .form-group
+      = f.label "Post a comment"
+      = f.text_area :comment, :class => "tinymce form-control", :rows => 5
+    
+    .form-group
+      = f.submit 'Post', :class => 'btn btn-md btn-primary'
+
+= tinymce :simple
+

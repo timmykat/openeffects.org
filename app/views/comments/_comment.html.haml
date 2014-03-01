@@ -1,0 +1,5 @@
+.well.well-sm
+  .comment
+    = raw(comment.comment)
+  .author.text-muted
+    = "#{comment.user.name} | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"

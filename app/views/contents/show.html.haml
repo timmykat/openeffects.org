@@ -26,6 +26,6 @@
     = link_to 'Back to content list', contents_path, :type => 'button', :class => 'btn btn-default'
     - if current_user and current_user.has_role? :admin
       = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_content_path(@content), :type => 'button', :class => 'btn btn-primary'
+      = link_to 'Edit', edit_content_path(@content), :type => 'button', :class => 'btn btn-warning'
 
   

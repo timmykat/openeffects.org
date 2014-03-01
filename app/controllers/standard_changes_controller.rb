@@ -8,6 +8,9 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes/1
   def show
+    @standard_change = StandardChange.find(params[:id])
+    @new_comment = @standard_change.comments.new
+    @comments = @standard_change.comments.recent
   end
 
   # GET /standard_changes/new

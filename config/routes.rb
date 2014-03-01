@@ -3,6 +3,9 @@ Ofx::Application.routes.draw do
   resources :standard_changes
   resources :versions, except: [:index]
   
+  # Add routes for handling comments (no editing, showing will be handled in standard_changers
+  resources :comments, :only => [:create, :destroy]
+  
   # Add route namespace for CKeditor
   #  mount Ckeditor::Engine => '/ckeditor'
 

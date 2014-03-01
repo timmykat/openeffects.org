@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-body
+    %h4.text-primary Discussion
+    - if !@comments.blank?
+      - @comments.each do |comment|
+        = render :partial => 'comments/comment', locals: { :comment => comment }
+
+    - if current_user    
+      = render 'comments/form'
