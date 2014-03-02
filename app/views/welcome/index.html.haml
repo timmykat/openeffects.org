@@ -7,7 +7,7 @@
         %br The Open Effects Association
       = #{@welcome_content}
 
-#welcome.welcome
+#welcome.welcome.bg-info
   .container
     .row
       .col-sm-offset-2.col-sm-8
@@ -17,14 +17,11 @@
   .container
     .row
       .col-md-4
-        .panel
-          = render :partial => 'panel_1'
+        = render :partial => 'panel_1'
       .col-md-4
-        .panel
-          = render :partial => 'panel_2'
+        = render :partial => 'panel_2'
       .col-md-4
-        .panel
-          = render :partial => 'panel_3'
+        = render :partial => 'panel_3'
 
 #standard.welcome
   .container
@@ -48,13 +45,17 @@
       %h2 The Organization
 
     .row
-      %h3 Meeting Minutes
       .col-md-4
-        = render 'agm_minutes'
-      .col-md-4
-        = render 'dir_minutes'
-      .col-md-4
-        %h4 Other Stuff?
+        %h3 Standards Discussion
+        = render 'standards_discussion'
+      .col-md-8
+        %h3 Meeting Minutes
+        .row
+        .col-md-6
+          = render 'agm_minutes'
+        .col-md-6
+          = render 'dir_minutes'
+      
         
     
     

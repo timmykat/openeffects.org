@@ -27,6 +27,6 @@ Ofx::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   
-  # Default URL
+  # Default URL for the mailer
   config.action_mailer.default_url_options = { :host => 'ofx' }
 end

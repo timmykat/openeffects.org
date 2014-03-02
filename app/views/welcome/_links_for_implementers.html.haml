@@ -3,3 +3,7 @@
     %h3.panel-title Links
   .panel-body
     = raw(@links_for_implementers.content)
+
+    - if !user_signed_in?
+      %p
+        = link_to 'Sign up to become a member', new_user_registration_path, :class => 'btn btn-sm btn-warning'

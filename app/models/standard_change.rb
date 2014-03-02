@@ -14,4 +14,10 @@ class StandardChange < ActiveRecord::Base
   # we need to specify that there is no inheritance column
   
   self.inheritance_column = nil
+
+  def self.build_panel(change_status)
+    StandardChange.where(status: 'proposed').all
+  end
+
+
 end

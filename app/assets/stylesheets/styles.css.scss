@@ -1,5 +1,5 @@
 $primary-color: #a9deeb;
-$primary-color-grad: #f3f3ff;
+$primary-color-grad: #cef;
 $secondary-color: #79c7eb;
 $tertiary-color: #003b6d;
 
@@ -31,10 +31,7 @@ footer {
 }
 .user-status {
   color: white;
-  margin-top: 8px;
-  input {
-    width: 5%;
-  }
+  margin-top: 12px;
 }
 .checkbox {
   padding-top: 5px;
@@ -49,7 +46,7 @@ footer {
 .logo {
   position: absolute;
   right: 40px;
-  top: 67px;
+  top: 40px;
   z-index: 1000;
 }
 .welcome {
@@ -66,15 +63,12 @@ footer {
       position: relative;
       background-color: rgba(255,255,255, 0.6);
       h1 {
-        color: #c3c;
-        text-shadow: 3px 3px 7px #006;
+        color: #339;
+        text-shadow: 3px 3px 3px #bbb;
+        font-weight: bold;
+        font-size: 40px;
       }
     }
-  }
-  &#welcome {
-    background-color: #563D7C;
-    background-image: linear-gradient(to bottom, #563D7C 0px, #6F5499 100%);
-    color: white;
   }
   &#panels {
     background-repeat: none;
@@ -82,11 +76,11 @@ footer {
   }
   &#standard {
     background-color: $primary-color;
-    background-image: linear-gradient(to bottom, $primary-color 0px, $primary-color-grad 100%);
+    background-image: linear-gradient(to bottom, $primary-color-grad 0px, $primary-color 100%);
   }
   &#organization {
     background-color: #eee;
-    background-image: linear-gradient(to bottom, #ccc 0px, #eee 100%);
+    background-image: linear-gradient(to bottom, #eee 0px, #ddd 100%);
   }
 }
 .btn {
@@ -96,6 +90,14 @@ footer {
 }
 .no-borders {
   border: none;
+  box-shadow: none;
+}
+ul.no-bullets {
+  list-style-type: none;
+}
+ul.no-bullets, ul.no-bullets li {
+  margin-left: 0;
+  padding-left: 0;
 }
 dd {
   margin-bottom: 15px;

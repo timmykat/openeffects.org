@@ -9,5 +9,6 @@ class WelcomeController < ApplicationController
     @links_for_implementers = Content.build_panel('links_for_implementers')
     @agm_minutes = Minute.build_panel('agm')
     @dir_minutes = Minute.build_panel('dirm')
+    @proposed_standard_changes = StandardChange.build_panel('proposed')
   end
 end

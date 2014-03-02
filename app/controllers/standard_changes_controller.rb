@@ -3,7 +3,7 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes
   def index
-    @standard_changes = StandardChange.all
+    @standard_changes = StandardChange.group(:version_id)
   end
 
   # GET /standard_changes/1

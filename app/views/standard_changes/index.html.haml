@@ -14,7 +14,14 @@
         %th
 
       - @standard_changes.each do |standard_change|
-        %tr
+        - case standard_change.status
+          - when 'approved'
+            - klass = 'success'
+          - when 'proposed'
+            - klass = 'warning'
+          - when 'proposed'
+            - klass = 'danger'
+        %tr{ class: klass }
           %td= standard_change.version.version
           %td= standard_change.title
           %td= standard_change.type
@@ -23,6 +30,7 @@
           %td= link_to 'Edit', edit_standard_change_path(standard_change)
           %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-  %br
-  .btn.btn-default
-    = link_to 'New Standard change', new_standard_change_path, :type => 'button'
+  - if current_user and current_user.has_role? :admin
+    %br
+    .btn.btn-default
+      = link_to 'New Standard change', new_standard_change_path, :type => 'button'

@@ -1,7 +1,7 @@
 = form_for @standard_change, :html => { :class => "form-horizontal", :role => "form" } do |f|
   - if @standard_change.errors.any?
     .alert.alert-danger
-      %h2 "#{pluralize(@standard_change.errors.count, "error")} prohibited this user from being saved:"
+      %h2 #{pluralize(@standard_change.errors.count, "error")} prohibited this change from being saved:
       %ul
         - @standard_change.errors.full_messages.each do |msg|
           %li= msg

@@ -22,7 +22,7 @@
       .form-group
         = f.label :contact
         %br
-        = f.collection_select :contact_id, get_admin_users, :id, :name,{ :include_blank => '--Select one--' }, {:class => "form-control"}
+        = f.collection_select :contact_id, User.get_admin_users, :id, :name,{ :include_blank => '--Select one--' }, {:class => "form-control"}
     
   .form-group
     = f.label :logo

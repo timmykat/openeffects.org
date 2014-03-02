@@ -9,13 +9,18 @@ Ofx::Application.routes.draw do
   # Add route namespace for CKeditor
   #  mount Ckeditor::Engine => '/ckeditor'
 
-  # Add Devise for user authorization
-  devise_for :users
+  # Add Devise for user authorization, create the other user routes normally
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+  resources :users, except: [:new, :create]
   
-  devise_scope :user do
-    post "sign_in", to: "devise/sessions#create"
-    get "sign_out", to: "devise/sessions#destroy"
-  end
+  #AJAX user routes 
+  get '/users/ajax/toggle_approved', to: 'users#toggle_approved'
+  get '/users/ajax/toggle_role', to: 'users#toggle_role'
+  
+#   devise_scope :user do
+#     post "sign_in", to: "sessions#create"
+#     get "sign_out", to: "sessions#destroy"
+#   end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -23,9 +28,6 @@ Ofx::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root to: 'welcome#index'
   
-  resources :users
-  get '/users/ajax/toggle_approved', to: 'users#toggle_approved'
-  get '/users/ajax/toggle_role', to: 'users#toggle_role'
 
   resources :companies
   resources :contents

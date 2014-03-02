@@ -18,12 +18,14 @@ class Content < ActiveRecord::Base
 
   private
     def sanitize_html
-      self.content = Sanitize.clean(self.content, Sanitize::Config::RELAXED.merge({
+       self.content = Sanitize.clean(self.content, Sanitize::Config::RELAXED.merge({
         :attributes => 
           {
             :all => ['class'],
-            'a' => ['title', 'target', 'href']
+            'a' => ['title', 'target', 'href', 'type']
           }
         }))
     end
 end
+
+

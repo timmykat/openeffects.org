@@ -2,7 +2,7 @@
 - if @news_items.blank?
   %p There are no news items at this time.
 - else    
-  %ul.list-group.no-borders
+  %ul.no-bullets
     - @news_items.each do |item|
-      %li.list-group-item.no-borders
+      %li
         = link_to item.headline, news_item_path(item)

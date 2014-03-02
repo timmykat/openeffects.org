@@ -5,12 +5,11 @@ class User < ActiveRecord::Base
   roles_attribute :roles_mask
 
   # Do not change the order below! If more roles are added, ALWAYS APPEND them.
-  roles :admin, :director
+  roles :admin, :director, :user_admin
   
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :lockable
+  # :lockable, :confirmable, :timeoutable, and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
          
   validates :email, :presence => true
   
@@ -21,7 +20,7 @@ class User < ActiveRecord::Base
   has_one :company, :foreign_key => :contact_id
   has_many :comments
   
-#  after_create :send_admin_email
+  after_create :send_admin_email
 
   # Handle user administration (approval by admin)
   def active_for_authentication?
@@ -39,7 +38,7 @@ class User < ActiveRecord::Base
   
   # Send notification to the admin
   def send_admin_email
-    AdminMailer.new_user_waiting_for_approval(self).deliver
+    AdminMailer.new_user_waiting_for_approval.deliver
   end
   
   # Reset password instructions
@@ -51,6 +50,23 @@ class User < ActiveRecord::Base
       recoverable.send_reset_password_instructions
     end
     recoverable
+  end
+  
+  # Find all users with a given role
+  def self.method_missing(method_sym, *args, &block)
+    if method_sym.to_s =~ /^get_([a-z_]+)_users$/
+      User.where("roles_mask & ?", User.mask_for($1.to_sym)).to_a
+    else
+      super
+    end
+  end
+
+  def self.respond_to?(method_sym, include_private = false)
+    if method_sym.to_s =~ /^get_([a-z_]+)_users$/
+      true
+    else
+      super
+    end
   end
 
   protected
