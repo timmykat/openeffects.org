@@ -31,7 +31,6 @@
           = f.label :password_confirmation
           = f.password_field :password_confirmation, :required => true, :class => "form-control"
 
-
         .form-group
           = f.label :avatar
           - if resource.avatar.blank?
@@ -39,6 +38,9 @@
           - else
             = image_tag resource.avatar.url(:display)
           = f.file_field :avatar
+          
+        .form-group
+          = recaptcha_tags :display => { :theme => 'clean' }
 
         .form-group
           = f.submit 'Sign up', :class => 'btn btn-success'     

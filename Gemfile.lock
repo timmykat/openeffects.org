@@ -132,6 +132,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.1)
+    recaptcha (0.3.6)
     role_model (0.8.1)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
@@ -189,6 +190,7 @@ DEPENDENCIES
   pry-stack_explorer
   rails (= 4.0.1)
   rails_12factor
+  recaptcha
   role_model
   sanitize
   sass-rails (~> 4.0.0)

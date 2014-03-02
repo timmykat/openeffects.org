@@ -60,6 +60,9 @@ gem 'paperclip'
 # Need commenting for draft standard changes
 gem 'acts_as_commentable'
 
+# reCaptcha to hold down the spam
+gem 'recaptcha', :require => 'recaptcha/rails'
+
 # Design and layout
 gem 'bootstrap-sass', '~> 3.1.1'
 

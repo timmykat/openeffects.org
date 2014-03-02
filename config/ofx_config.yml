@@ -12,3 +12,6 @@ standard_change_status:
   approved: Approved
   proposed: Proposed
   withdrawn: Withdrawn
+recaptcha:
+  public_key: 6LedYO8SAAAAAPho35-jU-DHbGAPeNJVZpcsYAgi 
+  private_key: 6LedYO8SAAAAAJOIj8RKirQWUOc5LF_F8jnYeei- 
