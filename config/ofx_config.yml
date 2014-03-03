@@ -1,3 +1,12 @@
+sanitizer:
+  !ruby/sym attributes:
+    !ruby/sym all:
+      - class
+    a:
+      - title
+      - target
+      - href
+      - type
 meeting_type:
   agm: Association General Meeting
   dirm: Directors' Meeting

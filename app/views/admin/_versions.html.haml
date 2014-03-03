@@ -21,7 +21,7 @@
                   %span.glyphicon.glyphicon-hand-right
               %td
                 %b= v.version
-              %td= Rails.configuration.ofx['version_status'][v.status]
+              %td= Rails.configuration.ofx[:version_status][v.status]
               - if current_user.has_role? :admin
                 %td= link_to 'Edit', edit_version_path(v)
                 %td= link_to 'Delete', v, :method => :delete, :data => { :confirm => 'Are you sure?' }

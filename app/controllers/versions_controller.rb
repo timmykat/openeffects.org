@@ -11,13 +11,11 @@ class VersionsController < ApplicationController
   end
 
   def create
+    current_version = Version.where(current: true)
     @version = Version.new(version_params)
-    current_version = Version.where(current: true).first if !@version.current
-    
-    if @version.save
-    
+    if @version.save    
       # If we are setting this new version to current, the old current version shouldn't be
-      if !current_version.nil?
+      if @version.current?
         current_version.current = false
         current_version.save
       end
@@ -28,10 +26,10 @@ class VersionsController < ApplicationController
   end
 
   def update
-    current_version = Version.where(current: true).first if !@version.current
+    current_version = Version.where(current: true)
     if @version.update(version_params)
       # If we are updating this version to current, the old current version shouldn't be
-      if !current_version.nil?
+      if @version.current?
         current_version.current = false
         current_version.save
       end
