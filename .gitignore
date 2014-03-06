@@ -17,3 +17,6 @@
 
 # Ignore sass cache
 .sass-cache
+
+#Ignore migration data files
+/tmp/*.xml

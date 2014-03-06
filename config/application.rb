@@ -22,6 +22,10 @@ module Ofx
     
     config.generators do |g|
       g.test_framework :test_unit, :fixture_replacement => :factory_girl
-    end  
+    end
+
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    
   end
 end

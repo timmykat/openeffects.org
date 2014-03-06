@@ -1,3 +1,9 @@
+migration:
+  !ruby/sym base_url: http://openeffects.org
+  !ruby/sym index:
+              minutes:          /dokuwiki/doku.php?id=company:minutes
+              standards:        /dokuwiki/doku.php?id=standards:draft:ofx_image_processing_api_2
+  
 sanitizer:
   !ruby/sym attributes:
     !ruby/sym all:
