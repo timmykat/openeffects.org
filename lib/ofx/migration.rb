@@ -195,36 +195,42 @@ module Ofx
     end
     
     def process_standard_change
-      change_node = @to_doc.last_element_child.add_child("<change></change>")
+      change_node = @to_doc.last_element_child.add_child("<change></change>").first
       
       # Build the node
       node_list = @src_sub_docs.last.css('body > *')
-      until node.name == 'hr'
-        change_node << "<title>#{node.content.strip}</title>" if node.name == 'h1'
+      node = node_list.first
+      h2_seen = false
+      until node.nil? or node.name == 'hr'
         
-        <<<<<<<< STOPPED HERE  >>>>>>>>>>>>
-        
-        
-      # Loop over the headings
-      src_doc.css('h2').each do |h2|
-        case h2.attributes['id'].value
-          when 'status'
-            node = @to_doc.root.last_element_child.add_child('<final_status></final_status>')       
-          when 'overview'
-            node = @to_doc.root.last_element_child.add_child('<overview></overview>')       
-          when /(solution|implementation)/
-            node = @to_doc.root.last_element_child.add_child('<solution></solution>')       
-          when 'comments', 'caveats', 'discussion'
-            node = @to_doc.root.last_element_child.add_child('<comments></comments>')       
-          else
-            node = @to_doc.root.last_element_child.add_child('<unclassified></unclassified>')       
-        end    
-        t = h2.next
-        until t.name == 'h2' or t.nil? or (t.comment? and t.content.strip == 'wikipage stop')
-          node.last_element_child << t if /[a-z]/.match(t.content)
-          t = t.next
+        if node.name == 'h1'
+          title = node.content.strip
+          puts "Processing: #{title}"
+          change_node << "<title>#{title}</title>"
         end
+
+        if node.name == 'h2'
+          h2_seen = true
+          section = node.attributes['id'].value
+          if section == 'status'
+            change_node << '<final_status></final_status>'
+          elsif section == 'overview'
+            change_node << '<overview></overview>'
+          elsif /(solution|implementation)/.match(section)
+            change_node << '<solution></solution>'
+          elsif %w(comments caveats discussion).include? section
+            change_node << '<comments></comments>'
+          else
+            change_node << '<discussion></discussion>'
+            change_node.last_element_child << '<discussion_heading>#{node.content.strip}</discussion_heading>'
+          end
+          node = node_list.shift
+        end
+        node.content = node.content.strip if node.name == 'p'
+        change_node.last_element_child << node if h2_seen
+        node = node_list.shift
       end
+      change_node
     end
   end  
 end
