@@ -17,7 +17,7 @@ namespace :ofx do
       m.pull
       puts "\n-- XML document for the #{t} migration complete --\n\n"
     end   
-    puts '\n-- Retrieval of data complete --\n'    
+    puts "\n-- Retrieval of data complete --\n"    
   end
 
   desc "pushes migrated XML data into the #{Rails.env} database (params: minutes, standards, or all)"

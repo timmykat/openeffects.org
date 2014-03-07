@@ -15,8 +15,6 @@ module Ofx
     
     include Ofx
     
-    # XML stylesheet
-    
     def self.new(*args, &block)
       obj = allocate
       obj.send(:initialize, *args, &block)
@@ -39,7 +37,10 @@ module Ofx
       @to_doc.root['type'] = @type
       
       send("pull_#{@type}".to_sym)
-      File.open("#{Rails.root}/tmp/migration_#{@type}.xml", 'w') { |f| f.write(@to_doc.to_formatted) }
+
+      xsl = Nokogiri::XSLT(File.read("#{File.dirname(__FILE__)}/assets/pretty_print.xsl"))
+  
+      File.open("#{Rails.root}/tmp/migration_#{@type}.xml", 'w') { |f| f.write(xsl.apply_to(@to_doc).to_s) }
     end
     
     # - Minutes migration methods ------------------------------
@@ -128,71 +129,82 @@ module Ofx
     # - Standards migration methods ------------------------------
     def pull_standards
       version = ''
-      type = ''
+      status = 'approved'
+      type = 'minor'
       
       # Need to set standard_node because it's otherwise it's local within the case statement
-      standard_node = ''
-      node = @src_doc.at_css('h2')
-      while
+      node_list = @src_doc.css('body > *')
+      node = node_list.shift
+      h2_seen = false
+      until node.name == 'hr'
         if node.name == 'h2'
-          section = node.attributes['id'].value      
-          puts node.attributes['id'].value 
-          case section      
-            # The committee starts off each new version
-            when /committee/
-              @to_doc.root.add_child('<standard></standard>')
-              standard_node = @to_doc.root.last_element_child
-              /(?<version_from_page>\d\.\d)/ =~ node.content
-              version = version_from_page
-              standard_node['version'] =  version
-              standard_node << "<committee></committee>"
-              puts "V #{version} committee"
+          h2_seen = true
+          section = node.attributes['id'].value
+           if /major.*v2/.match(section)
+            version = '2.0'
+            @to_doc.root << ('<standard></standard>')
+            standard_node = @to_doc.root.last_element_child
+            standard_node['version'] =  version
+            status = 'proposed'
+            type = 'major'
+            node = node_list.shift
+            puts "V #{version}"
 
-            # The following all correspond to sections that present a list of links to changes
-            when /change.*(?<status>approved|withdrawn|proposed)/
-              status ||= 'approved'
-              type = 'major'
-              puts "V #{version} change"
+          elsif /committee/.match(section)    
+            # The committee starts off each new version except 2.0
+            @to_doc.root << ('<standard></standard>')
+            standard_node = @to_doc.root.last_element_child
+            /(?<version_from_page>\d\.\d)/ =~ node.content
+            version = version_from_page
+            standard_node['version'] =  version
+            committee_node = standard_node.add_child('<committee></committee>').first
+            node = node_list.shift
+            committee_node.children = node
+            node = node_list.shift
+            puts "V #{version} committee"
 
-            when /(?<type>major|minor).*disc/
-              status = 'proposed'
-              #type is set from the regex above
-              standard_node << "<status>#{status}</status>" << "<type>#{type}</type>"
-              puts "V #{version} discussion"
+          elsif /(?<change_type>major|minor).*disc/ =~ section
+            status = 'proposed'
+            type = change_type
+            node = node_list.shift
+            puts "V #{version} discussion"
 
-            when /major.*v2/
-              version = '2.0'
-              @to_doc.root.add_child('<standard></standard>')
-              standard_node = @to_doc.root.last_element_child
-              standard_node['version'] =  version
-              status = 'proposed'
-              type = 'major'
-              puts "V #{version}"
+          # The following all correspond to sections that present a list of links to changes
+          elsif /change/.match(section)
+            /(?<status>approved|withdrawn|proposed)/ =~ section
+            status ||= 'approved'
+            type = 'minor'
+            puts "V #{version} change"
           end
         end
-        node = node.next
-        until (node.name == 'h2' or (node.comment? and node.content.strip == 'wikipage stop'))
-          puts "Node name: #{node.name}"
-          if node.css('li a') and !node.css('li a').blank?
+        if h2_seen
+          if node.name == 'ul' and !node.css('li a').blank?
             node.css('li a').each do |link|
               @src_sub_docs << Nokogiri::XML(open("#{@base_url}#{link.attributes['href'].value}"), &:noblanks).clean_docuwiki
-              process_standard_change(status, type)
+              standard_node.add_child(process_standard_change)
+              # standard_node.add_child("<change>#{link.content}</change>")
+              standard_node.last_element_child['status'] = status
+              standard_node.last_element_child['type'] = type
             end
-          elsif node.name != 'p'
-            standard_node.last_element_child << node if /[a-z]/.match(node.content)
+          else
+            standard_node << node if ! %w(h2 h3 p).include? node.name
           end
-          node = node.next
         end
+        node = node_list.shift 
       end    
     end
     
-    def process_standard_change(status, type)
-      src_doc = @src_sub_docs.last
-      @to_doc.last_element_child << "<change status=\"#{status}\" type=\"#{type}\"></change>"
-      title = src_doc.at_css('h1').content.strip
-      puts "Processing: #{title}"
-      @to_doc.root.last_element_child << "<title>#{title}</title>"
-
+    def process_standard_change
+      change_node = @to_doc.last_element_child.add_child("<change></change>")
+      
+      # Build the node
+      node_list = @src_sub_docs.last.css('body > *')
+      until node.name == 'hr'
+        change_node << "<title>#{node.content.strip}</title>" if node.name == 'h1'
+        
+        <<<<<<<< STOPPED HERE  >>>>>>>>>>>>
+        
+        
       # Loop over the headings
       src_doc.css('h2').each do |h2|
         case h2.attributes['id'].value
@@ -217,15 +229,7 @@ module Ofx
   end  
 end
 
-class Nokogiri::XML::Document
-
-  # XML stylesheet
-  @@xsl = Nokogiri::XSLT(File.open("#{File.dirname(__FILE__)}/assets/pretty_print.xsl"))
-  
-  def to_formatted
-    @@xsl.apply_to(self)
-  end
-    
+class Nokogiri::XML::Document    
   def clean_docuwiki
   
     # Remove header, aside, and table of contents
