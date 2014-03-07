@@ -3,6 +3,7 @@ class StandardChange < ActiveRecord::Base
   include ::HtmlSanitizer
 
   belongs_to :version
+  belongs_to :sponsor, class_name: "User"
   
   acts_as_commentable
   

@@ -53,7 +53,7 @@ class VersionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def version_params
-      params[:version].permit(:version, :status, :current)
+      params[:version].permit(:version, :status, :current, :committee)
     end
 
 end

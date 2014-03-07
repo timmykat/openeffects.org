@@ -29,6 +29,7 @@ module Ofx
       @index_url = "#{@base_url}#{Rails.configuration.ofx[:migration][:index][type]}"
     end
     
+# -- PULL methods for retrieving information from the old site
     def pull
       @src_doc = Nokogiri::XML(open(@index_url), &:noblanks).clean_docuwiki
       @src_sub_docs = []
@@ -81,11 +82,10 @@ module Ofx
           # Attendees have 2 sections: members and observers
           when 'attendees'
             section.next_element.css('h3').each do |h3|
-              case h3.attributes['id'].value
-                when /members/i
-                  minute_node << "<members>#{h3.next}</members>"
-                when /observing/i
-                  minute_node << "<observing>#{h3.next}</observing>"
+              if /members/.match(h3.attributes['id'].value)
+                minute_node << "<members>\n#{h3.next}\n</members>"
+              elsif /observing/.match(h3.attributes['id'].value)
+                minute_node << "<observing>\n#{h3.next}\n</observing>"
               end
             end
           when 'minutes'        
@@ -232,6 +232,74 @@ module Ofx
       end
       change_node
     end
+
+# -- PUSH methods for retrieving information from the old site
+    def push(clean = false)
+    
+      # Initialize
+      if clean
+        case @type
+          when 'minutes'
+            Minute.destroy_all
+          when 'standards'
+            StandardChange.destroy_all
+        end
+      end
+      @xml = Nokogiri::XML(open("#{Rails.root}/tmp/migration_#{@type}.xml", &:noblanks)) 
+      @xml.root.children.each do |node|
+        send("build_#{@type}".to_sym, node)
+      end
+    end
+    
+    
+    def build_minutes(node)
+      if node.name == 'minute'
+        m = Minute.new
+        m.meeting = node.attributes['type'].value
+        m.published = true
+        node.children.each do |data|
+          m.location  = data.inner_text if data.name == 'location'
+          m.members   = data.inner_html if data.name == 'members'
+          m.observing = data.inner_html if data.name == 'observing'
+          m.minutes   = data.inner_html if data.name == 'minutes'
+        end
+        if !m.save
+          puts m.errors
+        end
+      end      
+    end
+    
+    def build_standards(node)
+      if node.name == 'standard'
+        v = Version.new
+        version = node.attributes['version'].value
+        v.version = version
+        v.status = version.to_f <= 1.3 ? 'approved' : 'pending'
+        v.current = version == '1.3'
+        s = StandardChange.new
+        node.children.each do |data|
+          v.committee       = data.inner_html if data.name == 'committee'
+          s.status          = data.attributes['status'].value
+          s.type            = data.attributes['type'].value
+          s.status_details  = data.inner_html if data.name == 'final_status'
+          s.overview        = data.inner_html if data.name == 'overview'
+          s.solution        = data.inner_html if data.name == 'solution'
+          v.discussion      = data.inner_html if data.name == 'discussion'
+          comments          = data.inner_html if data.name == 'comments'
+        end
+        if !v.save
+          put "VERSION problem:"
+          puts v.errors
+        else
+          s.version = v
+          s.comment = comments
+          if !s.save
+            puts "STANDARD problem:"
+            puts s.errors
+          end
+        end
+      end      
+    end       
   end  
 end
 
