@@ -3,8 +3,8 @@
   %head
     %title= "#{request.env['REQUEST_PATH'].nil? ? '' : request.env['REQUEST_PATH'].gsub('/', ' ').titlecase + ' | '} The Open Effects Association"
     = favicon_link_tag "ofx_favicon.ico"
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
     = csrf_meta_tags
     %meta{ :http_equiv => "X-UA-Compatible", :content => "IE=edge" }
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }
@@ -28,7 +28,7 @@
                       = image_tag('OFX_small.png')
                     %li
                       = link_to 'Welcome', root_path
-                    - if (params[:controller] == 'welcome')                          
+                    - if (params[:controller] == 'welcome' and (current_user.nil? or !current_user.has_role? :admin))                          
                       %li
                         = link_to raw('Why a Standard? ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#standard'
                       %li
@@ -40,20 +40,20 @@
                         = link_to 'Dashboard', admin_dashboard_path
                     %li
                       = link_to 'API Reference', reference_api_docs_path
-              .navbar-right
-                - if user_signed_in?
-                  %p.navbar-text Member: #{current_user.name}
-                  = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form form-inline") do
-                    %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
-                
-                - else
-                  = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form form-inline") do
-                    .form-group
-                      = text_field_tag "user[email]", nil, :class => "form-control input-xs", :placeholder => 'Email'
-                    .form-group
-                      = password_field_tag "user[password]", nil, :class => "form-control input-xs", :placeholder => 'Password'
-                    
-                    %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign in
+              - if user_signed_in?
+                = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form navbar-right form-inline") do
+                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
+                %p.navbar-text.navbar-right
+                  Member: #{current_user.name}
+              
+              - else
+                = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form navbar-right form-inline") do
+                  .form-group
+                    = text_field_tag "user[email]", nil, :class => "form-control input-xs", :placeholder => 'Email'
+                  .form-group
+                    = password_field_tag "user[password]", nil, :class => "form-control input-xs", :placeholder => 'Password'
+                  
+                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign in
                  
       .container{ :role => "main" }    
         -if flash[:notice]
