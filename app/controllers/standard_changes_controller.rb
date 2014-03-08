@@ -1,9 +1,9 @@
 class StandardChangesController < ApplicationController
   before_action :set_standard_change, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /standard_changes
   def index
-    @standard_changes = StandardChange.group(:version_id)
+    @standard_changes = StandardChange.recent_first
   end
 
   # GET /standard_changes/1
@@ -56,6 +56,6 @@ class StandardChangesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def standard_change_params
-      params.require(:standard_change).permit(:version_id, :committee, :title, :type, :status, :status_details, :overview, :solution)
+      params.require(:standard_change).permit(:version_id, :committee, :title, :type, :status, :status_details, :overview, :solution, :discussion)
     end
 end

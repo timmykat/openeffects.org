@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-  include HtmlSanitizer
+  include Ofx::HtmlSanitizer
 
   belongs_to :contact, class_name: "User"
   has_attached_file :logo, :styles => { :listing => "100x100", :display => "200x200" }, :default_url => "images/:style/default_company.png"

@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
-  include ::HtmlSanitizer
+  include Ofx::HtmlSanitizer
 
   belongs_to :commentable, :polymorphic => true
 

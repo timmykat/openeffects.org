@@ -3,32 +3,43 @@
   - if @standard_changes.blank?
     %p There are currently no standard changes.
   - else
+    .col-md-2
+      .form-group
+        = select_tag('status', options_for_select([["Any status", "all"]] + get_change_selection('status')), class: 'status form-control input-small')
+    .col-md-2
+      .form-group
+        = select_tag('version', options_for_select([["All versions", "all"]] + get_version_options), class: 'version form-control input-small')
     %table.table
       %tr
         %th Version
         %th Title
         %th Type
         %th Status
-        %th
-        %th
-        %th
+        - if current_user and current_user.has_role? :admin
+          %th
+          %th
+          %th
 
-      - @standard_changes.each do |standard_change|
+      - @standard_changes.each_with_index do |standard_change, i|
+        - klass = "v#{standard_change.version.version.gsub('.','')} #{standard_change.status}"
         - case standard_change.status
           - when 'approved'
-            - klass = 'success'
+            - klass += ' success'
           - when 'proposed'
-            - klass = 'warning'
-          - when 'proposed'
-            - klass = 'danger'
+            - klass += ' info'
+          - when 'withdrawn', 'deprecated'
+            - klass += ' danger'
+        - if i > 0 and @standard_changes[i-1].version.version != standard_change.version.version
+          - klass += ' new-version-row'
         %tr{ class: klass }
-          %td= standard_change.version.version
+          %td{:class => standard_change.version.current? ? 'current' : ''}= standard_change.version.version
           %td= standard_change.title
           %td= standard_change.type
           %td= standard_change.status
-          %td= link_to 'Show', standard_change
-          %td= link_to 'Edit', edit_standard_change_path(standard_change)
-          %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - if current_user and current_user.has_role? :admin
+            %td= link_to 'Show', standard_change
+            %td= link_to 'Edit', edit_standard_change_path(standard_change)
+            %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   - if current_user and current_user.has_role? :admin
     %br

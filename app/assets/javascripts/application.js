@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
 //= require tinymce-jquery
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/.

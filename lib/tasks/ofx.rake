@@ -20,17 +20,17 @@ namespace :ofx do
     puts "\n-- Retrieval of data complete --\n"    
   end
 
-  desc "pushes migrated XML data into the #{Rails.env} database (params: minutes, standards, or all)"
-  task :push, [:type] => :environment do |task, args|  
+  desc "pushes migrated XML data into the #{Rails.env} database (params: minutes, standards, or all | nuke or anything els)"
+  task :push, [:type] => :environment do |task, args|
     unless %w(minutes standards all).include?(args.type)
       puts "You must supply a parameter of 'minutes', 'standards', or 'all'"
     end
     
     loaded = []
     
-    puts "WARNING: this will clear the <MINUTES> and <STANDARD_CHANGES> tables in the <#{Rails.env.upcase}> database."
+    puts "WARNING: the table(s) in the <#{Rails.env.upcase}> database will be EMPTIED."
     puts "Proceed? (Y to continue)"
-    answer = gets.chomp
+    answer = STDIN.gets.chomp
     exit unless answer == 'Y'
     
     # Check the migration files
@@ -42,7 +42,7 @@ namespace :ofx do
         when (!File.exists?(file_path))
           puts "ERROR: The #{t} file does not exist"
           exit
-        when (!File.size(file_path) > 0)
+        when (!(File.size(file_path) > 0))
           puts "ERROR: There is nothing in the #{t} file"
           exit
         when (!Nokogiri::XML(file_path).is_a?(Nokogiri::XML::Document))
@@ -52,6 +52,8 @@ namespace :ofx do
       puts "The #{t} XML file was last updated at #{File.ctime(file_path).strftime('%l:%M%P on %a %b%e')}"
       puts "Is this the correct file? (Y to continue)"
       puts "Proceed? (Y to continue)"
+      answer = STDIN.gets.chomp
+
       if answer == 'Y'
         m = Ofx::Migration.new(t)
         m.push

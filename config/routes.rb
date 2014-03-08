@@ -38,6 +38,9 @@ Ofx::Application.routes.draw do
   
   resources :news_items
   
+  # API docs (pulls into an iframe)
+  get 'reference/api_docs', to: 'api_docs#api_docs_iframe'
+  
   # Administrative dashboard
   get 'admin/dashboard', to: 'admin#dashboard'
 

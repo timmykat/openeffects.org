@@ -1,4 +1,4 @@
-.welcome#jumbotron
+.welcome#welcome
   .container
     .jumbotron
       .logo= image_tag('ofx_logo.png')
@@ -7,7 +7,7 @@
         %br The Open Effects Association
       = #{@welcome_content}
 
-#welcome.welcome.bg-info
+.welcome.bg-info
   .container
     .row
       .col-sm-offset-2.col-sm-8
@@ -47,6 +47,7 @@
     .row
       .col-md-4
         %h3 Standards Discussion
+        %h4 Recent Activity
         = render 'standards_discussion'
       .col-md-8
         %h3 Meeting Minutes

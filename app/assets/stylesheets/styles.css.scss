@@ -11,6 +11,7 @@ body { padding-top: 40px; }
     body { padding-top: 0px; }
 }
 footer {
+  margin-top: 20px;
   background-color: #333;
   color: white;
   padding: 17px 0 18px;
@@ -53,8 +54,8 @@ footer {
   padding-top: 5%;
   padding-bottom: 5%;
   border-bottom: solid 1px #666;
-  &#jumbotron {
-    padding-top: 1%;
+  &#welcome {
+    padding-top: 5%;
     padding-bottom: 1%;
     background-image: image-url('bg_lensflare.jpg');
     background-repeat: no-repeat;
@@ -101,4 +102,14 @@ ul.no-bullets, ul.no-bullets li {
 }
 dd {
   margin-bottom: 15px;
+}
+.new-version-row {
+  border-top: solid 2px #333;
+}
+.current {
+  font-weight: bold;
+}
+li.nav-logo {
+  display: inline-block;
+  padding: 4px 10px 4px;
 }

@@ -2,4 +2,4 @@
   .comment
     = raw(comment.comment)
   .author.text-muted
-    = "#{comment.user.name} | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"
+    = "#{comment.user ? comment.user.name : 'unattributed' } | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"

@@ -1,6 +1,6 @@
 class NewsItem < ActiveRecord::Base
 
-  include ::HtmlSanitizer
+  include Ofx::HtmlSanitizer
   
   before_validation :sanitize_textareas
   validates :headline, :presence => true, :length => { maximum: 100, message: "Your headline can be no more than 100 characters." }

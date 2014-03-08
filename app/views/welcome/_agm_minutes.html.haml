@@ -6,5 +6,7 @@
     - @agm_minutes.each do |m|
       %li.list-group-item.no-borders
         = link_to "Minutes for #{m.date.strftime('%Y')}", minute_path(m)
-    %li.list-group-item.no-borders
-      =link_to "All meetings...", minutes_path
+    %li.list-group-item
+      =link_to "All meetings", minutes_path
+      %span.glyphicon.glyphicon-circle-arrow-right
+

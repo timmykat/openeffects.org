@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307131732) do
+ActiveRecord::Schema.define(version: 20140308050852) do
 
   create_table "api_docs", force: true do |t|
     t.string   "version"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20140307131732) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sponsor_id"
+    t.text     "discussion"
   end
 
   add_index "standard_changes", ["sponsor_id"], name: "index_standard_changes_on_sponsor_id", using: :btree

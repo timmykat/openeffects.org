@@ -56,11 +56,11 @@ module Ofx
     
     def process_minute    
       # Set up the _to_ doc which holds the migrated information
-      @to_doc.root.add_child('<minute></minute>')
+      @to_doc.root << '<minute></minute>'
       minute_node = @to_doc.root.last_element_child
       /^(?<meeting_type>[a-z]+)_(?<year>[a-z0-9]+)_[a-z]+$/ =~ @src_sub_docs.last.at_css('h1').attributes['id'].value
       meeting_type = /dir/.match(meeting_type) ?  'dirm' : 'agm'
-      minute_node << "<year>#{year}</year>" << "<meeting_type>}</meeting_type>" 
+      minute_node['year'] = year if meeting_type == 'agm'
       send("build_#{meeting_type}".to_sym, minute_node)
     end
 
@@ -69,33 +69,52 @@ module Ofx
       
       # Each h2 starts off a new section, which corresponds to a column in the minutes table
       # Loop over them
-      doc = @src_sub_docs.last
-      doc.css('h2').each do |section|
-        case section.attributes['id'].value
-          when 'date'
-            /^(?<day>\d{1,2})\w+ (?<month>[a-zA-Z]+),?\s*(?<year>\d{4})/ =~ section.next_element.content.strip 
-            puts "#{doc.at_css('h1').content} | #{day}-#{month[0..2]}-#{year}"
-            minute_node << "<date>#{day}-#{month[0..2]}-#{year}</date>"
-          when 'location'
-            minute_node << "<location>#{section.next.content.strip}</location>"
-            
+      node_list = @src_sub_docs.last.css('body > *')
+      node = node_list.shift
+      h2_seen = false
+      until node.nil? or node.name == 'hr'
+        puts"#{node.content} | #{minute_node.attributes['year'].value}" if node.name == 'h1'
+        if node.name == 'h2'
+          h2_seen = true
+          section = node.attributes['id'].value
+          if section == 'date'
+            date_node = minute_node.add_child('<date></date>').first
+            node = node_list.shift
+            /^(?<day>\d{1,2})\w+ (?<month>[a-zA-Z]+),?\s*(?<year>\d{4})/ =~ node.content.strip
+            date_node.content = "#{day}-#{month[0..2]}-#{year}"
+
+          elsif section == 'location'
+            location_node = minute_node.add_child('<location></location>').first
+            node = node_list.shift
+            location_node.content =  node.inner_text.strip.gsub("\n",' ')
+
           # Attendees have 2 sections: members and observers
-          when 'attendees'
-            section.next_element.css('h3').each do |h3|
-              if /members/.match(h3.attributes['id'].value)
-                minute_node << "<members>\n#{h3.next}\n</members>"
-              elsif /observing/.match(h3.attributes['id'].value)
-                minute_node << "<observing>\n#{h3.next}\n</observing>"
+          elsif section == 'attendees'
+            node = node_list.shift
+            if node.name == 'h3'
+              subsection = node.attributes['id'].value
+              if /(members|present)/.match(subsection)
+                members_node = minute_node.add_child('<members></members>').first
+                node = node_list.shift
+                members_node << node if node.name == 'ul'
+              end
+              node = node_list.shift
+            end
+            if node.name == 'h3'
+              subsection = node.attributes['id'].value
+              if /observing/.match(subsection)
+                observing_node = minute_node.add_child('<observing></observing>').first
+                node = node_list.shift
+                observing_node << node if node.name == 'ul'
               end
             end
-          when 'minutes'        
+          elsif section == 'minutes'        
             minute_node.add_child("<minutes></minutes>")
-            node = section.next
-            until node.nil? or (node.comment? and node.content.strip == 'wikipage stop')
-              minute_node.last_element_child << node if /[a-z]/.match(node.content)
-              node = node.next
-            end
+            node = node_list.shift
+            minute_node.last_element_child << node
+          end
         end
+        node = node_list.shift
       end
     end
     
@@ -148,7 +167,7 @@ module Ofx
             status = 'proposed'
             type = 'major'
             node = node_list.shift
-            puts "V #{version}"
+            puts "#{version} #{status} #{section}"
 
           elsif /committee/.match(section)    
             # The committee starts off each new version except 2.0
@@ -160,31 +179,26 @@ module Ofx
             committee_node = standard_node.add_child('<committee></committee>').first
             node = node_list.shift
             committee_node.children = node
-            node = node_list.shift
-            puts "V #{version} committee"
 
           elsif /(?<change_type>major|minor).*disc/ =~ section
             status = 'proposed'
             type = change_type
             node = node_list.shift
-            puts "V #{version} discussion"
+            puts "#{version} #{status} #{section}"
 
           # The following all correspond to sections that present a list of links to changes
           elsif /change/.match(section)
-            /(?<status>approved|withdrawn|proposed)/ =~ section
-            status ||= 'approved'
+            /(?<change_status>approved|withdrawn|proposed)/ =~ section
+            status = change_status.nil? ? status : change_status
             type = 'minor'
-            puts "V #{version} change"
+            puts "#{version} #{status} #{section}"
           end
         end
         if h2_seen
           if node.name == 'ul' and !node.css('li a').blank?
             node.css('li a').each do |link|
-              @src_sub_docs << Nokogiri::XML(open("#{@base_url}#{link.attributes['href'].value}"), &:noblanks).clean_docuwiki
-              standard_node.add_child(process_standard_change)
-              # standard_node.add_child("<change>#{link.content}</change>")
-              standard_node.last_element_child['status'] = status
-              standard_node.last_element_child['type'] = type
+              @src_sub_docs << Nokogiri::XML(open("#{@base_url}#{link.attributes['href'].value}"), &:noblanks).clean_docuwiki              
+              standard_node.add_child(process_standard_change(status, type, !(/deprecate/i.match(link.inner_text).nil?)))
             end
           else
             standard_node << node if ! %w(h2 h3 p).include? node.name
@@ -194,8 +208,10 @@ module Ofx
       end    
     end
     
-    def process_standard_change
+    def process_standard_change(status, type, deprecated)
       change_node = @to_doc.last_element_child.add_child("<change></change>").first
+      change_node['status'] = deprecated ? 'deprecated' : status
+      change_node['type'] = type
       
       # Build the node
       node_list = @src_sub_docs.last.css('body > *')
@@ -205,7 +221,7 @@ module Ofx
         
         if node.name == 'h1'
           title = node.content.strip
-          puts "Processing: #{title}"
+          puts "#{change_node['status']} | #{change_node['type']} | #{title}"
           change_node << "<title>#{title}</title>"
         end
 
@@ -234,18 +250,17 @@ module Ofx
     end
 
 # -- PUSH methods for retrieving information from the old site
-    def push(clean = false)
+    def push
     
       # Initialize
-      if clean
-        case @type
-          when 'minutes'
-            Minute.destroy_all
-          when 'standards'
-            StandardChange.destroy_all
-        end
+      case @type
+        when 'minutes'
+          Minute.destroy_all
+        when 'standards'
+          Version.destroy_all
+          StandardChange.destroy_all
       end
-      @xml = Nokogiri::XML(open("#{Rails.root}/tmp/migration_#{@type}.xml", &:noblanks)) 
+      @xml = Nokogiri::XML(open("#{Rails.root}/tmp/migration_#{@type}.xml"), &:noblanks) 
       @xml.root.children.each do |node|
         send("build_#{@type}".to_sym, node)
       end
@@ -258,13 +273,15 @@ module Ofx
         m.meeting = node.attributes['type'].value
         m.published = true
         node.children.each do |data|
+          m.date  = data.inner_text if data.name == 'date'
           m.location  = data.inner_text if data.name == 'location'
           m.members   = data.inner_html if data.name == 'members'
           m.observing = data.inner_html if data.name == 'observing'
           m.minutes   = data.inner_html if data.name == 'minutes'
         end
-        if !m.save
-          puts m.errors
+        unless m.save
+          puts "Error(s) saving minutes: #{m.meeting} #{m.date}"
+          m.errors.full_messages.each { |msg| puts msg }
         end
       end      
     end
@@ -276,26 +293,34 @@ module Ofx
         v.version = version
         v.status = version.to_f <= 1.3 ? 'approved' : 'pending'
         v.current = version == '1.3'
-        s = StandardChange.new
+        comments = ''
         node.children.each do |data|
-          v.committee       = data.inner_html if data.name == 'committee'
-          s.status          = data.attributes['status'].value
-          s.type            = data.attributes['type'].value
-          s.status_details  = data.inner_html if data.name == 'final_status'
-          s.overview        = data.inner_html if data.name == 'overview'
-          s.solution        = data.inner_html if data.name == 'solution'
-          v.discussion      = data.inner_html if data.name == 'discussion'
-          comments          = data.inner_html if data.name == 'comments'
-        end
-        if !v.save
-          put "VERSION problem:"
-          puts v.errors
-        else
-          s.version = v
-          s.comment = comments
-          if !s.save
-            puts "STANDARD problem:"
-            puts s.errors
+          if data.name == 'committee'
+            v.committee       = data.inner_html if data.name == 'committee'
+            unless v.save
+              puts "Error(s) saving version #{v.version}:"
+              v.errors.full_messages.each { |msg| puts msg }
+            end
+          elsif data.name == 'change'
+            sc = StandardChange.new
+            sc.version          = v
+            sc.status           = data.attributes['status'].value
+            sc.type             = data.attributes['type'].value
+            data.children.each do |change_data|
+              sc.title            = change_data.inner_text if change_data.name == 'title'
+              sc.status_details   = change_data.inner_html if change_data.name == 'final_status'
+              sc.overview         = change_data.inner_html if change_data.name == 'overview'
+              sc.solution         = change_data.inner_html if change_data.name == 'solution'
+              sc.discussion       = change_data.inner_html if change_data.name == 'discussion'
+              comments            = change_data.inner_html if change_data.name == 'comments'
+            end
+            unless sc.save
+              puts "Error(s) saving standards change (#{sc.title}):"
+              sc.errors.full_messages.each { |msg| puts msg }
+            else
+              puts "<#{sc.title}> saved"
+              sc.comments.create(:comment => comments)
+            end
           end
         end
       end      

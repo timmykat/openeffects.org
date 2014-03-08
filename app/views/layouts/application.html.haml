@@ -1,13 +1,15 @@
 !!!
 %html
   %head
-    %title The Open Effects Association
+    %title= "#{request.env['REQUEST_PATH'].nil? ? '' : request.env['REQUEST_PATH'].gsub('/', ' ').titlecase + ' | '} The Open Effects Association"
+    = favicon_link_tag "ofx_favicon.ico"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     %meta{ :http_equiv => "X-UA-Compatible", :content => "IE=edge" }
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }
-  %body{ :role => "document" }
+    %script{ :src => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" }
+  %body{ :role => "document", 'data-spy' => 'scroll', 'data-target' => '.navbar-top', :class => "c_#{params[:controller]} a_#{params[:action]}"}
     .wrapper
       .navbar.navbar-inverse.navbar-fixed-top{ :role => "navigation" }
         .container
@@ -20,22 +22,27 @@
           .navbar-collapse.collapse
             .row
               .col-6-md
-                %ul.nav.navbar-nav
-                  %li.active
-                    %a{ :href => "/" }= image_tag('OFX_small.png')
-                  %li
-                    %a{:href => '/#standard'} Why A Standard?
-                  %li
-                    %a{:href => '/#implementers'} For Implementers
-                  %li
-                    %a{:href => '/#organization'} The Organization
-                  - if current_user and current_user.has_role? :admin
+                .navbar-top
+                  %ul.nav.navbar-nav
+                    %li.nav-logo
+                      = image_tag('OFX_small.png')
                     %li
-                      %a{ :href => "/admin/dashboard" } Dashboard
-                  %li
-                    %a{ :href => "/reference/index.html", :target => "_blank", :title => "Open the API reference" } 
-                      API Reference
-                      %span.glyphicon.glyphicon-new-window
+                      = link_to 'Welcome', root_path
+                    - if (params[:controller] == 'welcome')                          
+                      %li
+                        = link_to 'Why a Standard?', '#standard'
+                        %span.glyphicon.glyphicon-arrow-down
+                      %li
+                        = link_to 'For Implementers', '#implementers'
+                        %span.glyphicon.glyphicon-arrow-down
+                      %li
+                        = link_to 'Organization', '#organization'
+                        %span.glyphicon.glyphicon-arrow-down
+                    - if current_user and current_user.has_role? :admin
+                      %li
+                        = link_to 'Dashboard', admin_dashboard_path
+                    %li
+                      = link_to 'API Reference', reference_api_docs_path
               .col-6-md.user-status.pull-right
                 - if user_signed_in?
                   = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "form-inline") do

@@ -1,6 +1,6 @@
 class Minute < ActiveRecord::Base
 
-  include ::HtmlSanitizer
+  include Ofx::HtmlSanitizer
   
   before_validation :sanitize_textareas
   validates :meeting, :presence => true, :inclusion => Rails.configuration.ofx[:meeting_type].keys
