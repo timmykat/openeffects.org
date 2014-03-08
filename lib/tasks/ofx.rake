@@ -1,6 +1,4 @@
 require 'ofx/migration'
-require 'pry'
-require 'pry-debugger'
 
 namespace :ofx do
   desc "migrates all the data from openeffects.org to the database for the environment"
