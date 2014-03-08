@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308050852) do
-
-  create_table "api_docs", force: true do |t|
-    t.string   "version"
-    t.date     "date"
-    t.text     "content"
-    t.boolean  "published"
-    t.boolean  "current"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140308214257) do
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false

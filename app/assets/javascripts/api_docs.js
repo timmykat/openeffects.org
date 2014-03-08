@@ -8,7 +8,4 @@ $(window).load(function () {
     }
   } 
   setIframeHeight(document.getElementById('api-docs'));
-  $('iframe#api-docs').load(function() {
-    setIframeHeight(document.getElementById('api-docs'));
-  });
 });

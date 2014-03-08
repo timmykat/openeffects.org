@@ -21,7 +21,7 @@
               %span.icon-bar
           .navbar-collapse.collapse
             .row
-              .col-6-md
+              .navbar-left
                 .navbar-top
                   %ul.nav.navbar-nav
                     %li.nav-logo
@@ -30,27 +30,24 @@
                       = link_to 'Welcome', root_path
                     - if (params[:controller] == 'welcome')                          
                       %li
-                        = link_to 'Why a Standard?', '#standard'
-                        %span.glyphicon.glyphicon-arrow-down
+                        = link_to raw('Why a Standard? ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#standard'
                       %li
-                        = link_to 'For Implementers', '#implementers'
-                        %span.glyphicon.glyphicon-arrow-down
+                        = link_to raw('For Implementers ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#implementers'
                       %li
-                        = link_to 'Organization', '#organization'
-                        %span.glyphicon.glyphicon-arrow-down
+                        = link_to raw('Organization ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#organization'
                     - if current_user and current_user.has_role? :admin
                       %li
                         = link_to 'Dashboard', admin_dashboard_path
                     %li
                       = link_to 'API Reference', reference_api_docs_path
-              .col-6-md.user-status.pull-right
+              .navbar-right
                 - if user_signed_in?
-                  = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "form-inline") do
-                    Member: #{current_user.name}
+                  %p.navbar-text Member: #{current_user.name}
+                  = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form form-inline") do
                     %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
                 
                 - else
-                  = form_tag(new_user_session_path, method: 'post', role: "form", class: "form-inline") do
+                  = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form form-inline") do
                     .form-group
                       = text_field_tag "user[email]", nil, :class => "form-control input-xs", :placeholder => 'Email'
                     .form-group
