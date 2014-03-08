@@ -1,6 +1,22 @@
 require 'ofx/migration'
 
 namespace :ofx do
+  desc "test task"
+  task :do_all do
+    binding.pry
+    Rake::Task['ofx:task1[foo]'].invoke
+    Rake::Task['ofx:task2[bar]'].invoke
+  end
+  
+  desc "test task 1"
+  task :task1, [:param1] => :environment do
+    puts "task 1: #{args.param1}"
+  end
+  desc "test task 2"
+  task :task2, [:param2] => :environment do
+    puts "task 2: #{args.param2}"
+  end
+
   desc "migrates all the data from openeffects.org to the database for the environment"
   task :migrate => ["ofx:pull[all]", "ofx:push[all]"]
 
