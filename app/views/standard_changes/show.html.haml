@@ -28,7 +28,7 @@
             %label Final status
             = raw(@standard_change.status_details)
   
-          %label Committee
+          %label Subcommittee
           %p= raw(@standard_change.committee)
 
           %label Overview
@@ -42,7 +42,7 @@
 
       .btn-group        
         = link_to 'Back to list of changes', standard_changes_path, :type => 'button', :class => 'btn btn-default'
-        - if current_user and current_user.has_role? :admin
+        - if user_signed_in? and current_user.has_role? :admin
           = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
           = link_to 'Edit', edit_standard_change_path(@standard_change), :type => 'button', :class => 'btn btn-warning'
 

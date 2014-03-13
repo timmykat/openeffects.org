@@ -40,14 +40,3 @@ default:
         'background-color' : '#f3f3d8'
         'border' : '1px solid #006600'
         'padding' : '20px'
-simple:
-  cleanup_on_startup: false
-  cleanup: false
-  convert_urls: false,
-  remove_linebreaks: false
-  menubar: false
-  toolbar: undo redo | bold italic | cut copy paste | link | bullist numlist | alignleft aligncenter alignright | emoticons
-  plugins:
-    - link
-    - emoticons
-    - lists

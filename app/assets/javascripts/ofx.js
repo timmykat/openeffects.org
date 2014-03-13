@@ -1,5 +1,14 @@
 $(function() {
   
+  // Dropdown on hover rather than on click for nav
+  $('.c_welcome .dropdown').hover(
+    function() {
+      $('.dropdown-menu', this).slideDown();
+    },
+    function() {
+      $('.dropdown-menu', this).slideUp();
+  });
+  
   // Implement datepicker across date fields
   $('.input-group.date').datepicker({
     format: 'dd-M-yyyy'
@@ -27,10 +36,10 @@ $(function() {
     }); 
   
     if (tinymce.settings) {
+      tinymce.settings.extended_valid_elements = 'span';
       tinymce.settings.setup = function(ed) { 
         ed.on('init', function(ed) {
           this.getDoc().body.style.fontSize = '0.9em';
-          this.getDoc().body.style.fontFamily = 'Courier, monospace';
          $editor = $(ed.target.contentAreaContainer).parent().parent().parent();
           $editor.append('<br><p class="pull-right"><a href="#" class="btn btn-xs btn-info toggle-mce ' + ed.target.id + '"><span>HTML</span></a></p>')
          }); 

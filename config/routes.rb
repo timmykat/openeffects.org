@@ -1,5 +1,7 @@
 Ofx::Application.routes.draw do
 
+  resources :home_heros
+
   resources :standard_changes
   resources :versions, except: [:index]
   

@@ -1,6 +1,9 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $(function() {
+  $('.c_standard_changes tr').hide()
+  klass = $('select').val()
+  $('.c_standard_changes tr.' + klass).show()
   $('select').on('change', function(e) {
     console.log('Got it');
     if ($(this).val() == 'all') {

@@ -42,21 +42,15 @@
 #organization.welcome
   .container
     .row
-      %h2 The Organization
+      %h2 Association Business
 
     .row
       .col-md-4
-        %h3 Standards Discussion
-        %h4 Recent Activity
         = render 'standards_discussion'
-      .col-md-8
-        %h3 Meeting Minutes
-        .row
-        .col-md-6
-          = render 'agm_minutes'
-        .col-md-6
-          = render 'dir_minutes'
-      
+      .col-md-4
+        = render 'agm_minutes'
+      .col-md-4
+        = render 'dir_minutes'
         
     
     

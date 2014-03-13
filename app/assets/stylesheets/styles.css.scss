@@ -1,7 +1,15 @@
-$primary-color: #a9deeb;
-$primary-color-grad: #cef;
-$secondary-color: #79c7eb;
-$tertiary-color: #003b6d;
+// Monchromatic color scheme from Kuler, based on logo
+$color-1: #a8deed; // Logo color
+$color-2: #4e676d; // Dark blue a little green
+$color-3: #62d1f0; // More saturated logo color
+$color-4: #30626d; // More saturated dark blue a little green
+$color-5: #84aeba; // Darker logo color
+
+$primary-color: $color-1;
+$primary-color-grad: $color-5;
+$secondary-color: $color-2;
+$tertiary-color: $color-2;
+
 
 html, body {
   height: 100%;
@@ -80,14 +88,21 @@ footer {
     background-image: linear-gradient(to bottom, $primary-color-grad 0px, $primary-color 100%);
   }
   &#organization {
-    background-color: #eee;
-    background-image: linear-gradient(to bottom, #eee 0px, #ddd 100%);
+    color: white;
+    background-color: $color-2;
+    background-image: linear-gradient(to bottom, $color-2 0px, $color-4 100%);
   }
 }
 .btn {
    -webkit-border-radius: 10px;
    -moz-border-radius: 5px;
    border-radius: 5px;
+}
+a.btn-primary {
+  color: white;
+  &:hover {
+    color: #999;
+  }
 }
 .no-borders {
   border: none;
@@ -113,7 +128,24 @@ li.nav-logo {
   display: inline-block;
   padding: 4px 10px 4px;
 }
+.navbar {
+  padding-top: 5px;
+  min-height: 60px;
+}
 .navbar-form .form-control {
   font-size: 12px;
   padding: 4px 8px;
 }
+.inverse-dropdown {
+  font-size: 13px;
+  background-color: #222;
+  border-color: #080808;
+  &>li>a{
+    color: #999;
+    &:hover{
+      color: #fff;
+      background-color: #000;
+    }
+  }
+}
+

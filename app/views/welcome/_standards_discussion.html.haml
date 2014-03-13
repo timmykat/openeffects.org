@@ -1,10 +1,11 @@
-%ul.list-group
+%h3 Standards Discussion
 - if @proposed_standard_changes.blank?
-  %li.list-group-item No standard changes are proposed at this time
-- else    
-  - @proposed_standard_changes.each do |change|
-    %li.list-group-item.list-group-item-warning.no-borders
-      = link_to change.title, standard_change_path(change)
-  %li.list-group-item
-    = link_to 'All standard changes', standard_changes_path
-    %span.glyphicon.glyphicon-circle-arrow-right
+  %p No standard changes are proposed at this time
+- else
+  %ul.list-group.no-borders    
+    - @proposed_standard_changes.each do |change|
+      %li.list-group-item.list-group-item-info.no-borders
+        = link_to change.title, standard_change_path(change)
+    %li.list-group-item
+      = link_to 'All standard changes', standard_changes_path
+      %span.glyphicon.glyphicon-circle-arrow-right

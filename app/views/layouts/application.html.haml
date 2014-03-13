@@ -26,20 +26,23 @@
                   %ul.nav.navbar-nav
                     %li.nav-logo
                       = image_tag('OFX_small.png')
+                    %li.dropdown
+                      = link_to raw("Welcome #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}"), root_path
+                      %ul.dropdown-menu.inverse-dropdown
+                        %li
+                          = link_to raw('Why a Standard?'), '#standard', class: '.navbar-link'
+                        %li
+                          = link_to raw('For Implementers'), '#implementers', class: '.navbar-link'
+                        %li
+                          = link_to raw('Association Business'), '#organization', class: '.navbar-link'
                     %li
-                      = link_to 'Welcome', root_path
-                    - if (params[:controller] == 'welcome' and (current_user.nil? or !current_user.has_role? :admin))                          
-                      %li
-                        = link_to raw('Why a Standard? ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#standard'
-                      %li
-                        = link_to raw('For Implementers ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#implementers'
-                      %li
-                        = link_to raw('Organization ' + content_tag(:span, nil, :class => "glyphicon glyphicon-circle-arrow-down")), '#organization'
-                    - if current_user and current_user.has_role? :admin
-                      %li
-                        = link_to 'Dashboard', admin_dashboard_path
+                      = link_to 'Programming Guide', '/api/programming-guide'
                     %li
-                      = link_to 'API Reference', reference_api_docs_path
+                      = link_to 'API Reference', '/api/reference'
+                    - if user_signed_in? and current_user.has_role? :admin
+                      %li
+                        = link_to 'Admin Dashboard', admin_dashboard_path
+                   
               - if user_signed_in?
                 = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form navbar-right form-inline") do
                   %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out

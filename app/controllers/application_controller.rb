@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     
   private
     def require_admin
-      unless current_user and current_user.has_role? :admin
+      unless user_signed_in? and current_user.has_role? :admin
         flash[:alert] = "You must be an admin to do that!"
         begin
           redirect_to :back

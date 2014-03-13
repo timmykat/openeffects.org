@@ -5,18 +5,25 @@
   - else
     .col-md-2
       .form-group
-        = select_tag('status', options_for_select([["Any status", "all"]] + get_change_selection('status')), class: 'status form-control input-small')
+        = select_tag('status', options_for_select([["Any status", "all"]] + get_change_selection('status'),'proposed'), class: 'status form-control input-small')
     .col-md-2
       .form-group
         = select_tag('version', options_for_select([["All versions", "all"]] + get_version_options), class: 'version form-control input-small')
+    .col-md-6
+      %span.sc-key.bg-info Proposed
+      != "&nbsp;&nbsp;&nbsp;"
+      %span.sc-key.bg-success Approved
+      != "&nbsp;&nbsp;&nbsp;"
+      %span.sc-key.bg-danger Withdrawn or Deprecated
     %table.table
       %tr
         %th Version
         %th Title
+        %th Overview
+        %th Activity
         %th Type
         %th Status
         - if current_user and current_user.has_role? :admin
-          %th
           %th
           %th
 
@@ -33,13 +40,27 @@
           - klass += ' new-version-row'
         %tr{ class: klass }
           %td{:class => standard_change.version.current? ? 'current' : ''}= standard_change.version.version
-          %td= standard_change.title
+          %td
+            %b
+              = standard_change.title
+            %br
+            %br
+            = link_to 'view', standard_change, :class => 'btn btn-xs btn-default'
+          - overview = standard_change.overview.gsub(%r|<pre>.*</pre>|m, '') unless standard_change.overview.nil?
+          %td
+            = truncate_html(raw(overview), :length => 400)
+          %td
+            %em
+              != "Last&nbsp;updated:<br />#{standard_change.updated_at.strftime('%e %b \'%y')}"
+            %br
+            - last_commented = standard_change.comments.blank? ? 'never' : standard_change.comments.last.created_at.strftime('%e %b \'%y')
+            %em
+              !="Last&nbsp;commented:<br />#{last_commented}"
           %td= standard_change.type
           %td= standard_change.status
           - if current_user and current_user.has_role? :admin
-            %td= link_to 'Show', standard_change
-            %td= link_to 'Edit', edit_standard_change_path(standard_change)
-            %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= link_to 'Edit', edit_standard_change_path(standard_change), :class => 'btn btn-xs btn-warning'
+            %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
 
   - if current_user and current_user.has_role? :admin
     %br
