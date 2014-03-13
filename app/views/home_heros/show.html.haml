@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Hero image:
+  = @home_hero.hero_image
+
+= link_to 'Edit', edit_home_hero_path(@home_hero)
+\|
+= link_to 'Back', home_heros_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308214257) do
+ActiveRecord::Schema.define(version: 20140313232330) do
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20140308214257) do
   add_index "contents", ["identifier"], name: "index_contents_on_identifier", using: :btree
   add_index "contents", ["published"], name: "index_contents_on_published", using: :btree
   add_index "contents", ["title"], name: "index_contents_on_title", using: :btree
+
+  create_table "home_heros", force: true do |t|
+    t.string   "hero_image_file_name"
+    t.string   "hero_image_content_type"
+    t.integer  "hero_image_file_size"
+    t.datetime "hero_image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "minutes", force: true do |t|
     t.string   "meeting",    default: "",    null: false

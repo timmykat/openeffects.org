@@ -49,6 +49,9 @@ gem 'acts_as_commentable'
 # reCaptcha to hold down the spam
 gem 'recaptcha', :require => 'recaptcha/rails'
 
+# Truncate html properly
+gem 'truncate_html'
+
 # group :doc do
 #   # bundle exec rake doc:rails generates the API under doc/api.
 #   gem 'sdoc', require: false

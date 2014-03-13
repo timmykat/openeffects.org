@@ -1,0 +1,13 @@
+= form_for @home_hero do |f|
+  - if @home_hero.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@home_hero.errors.count, "error")} prohibited this home_hero from being saved:"
+      %ul
+        - @home_hero.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :hero_image
+    = f.text_field :hero_image
+  .actions
+    = f.submit 'Save'
