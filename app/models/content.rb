@@ -1,5 +1,4 @@
 class Content < ActiveRecord::Base
-
   include Ofx::HtmlSanitizer
   
   has_attached_file :image, :styles => { :listing => "50x50", :display => "200x200" }, :default_url => "images/:style/missing.png"

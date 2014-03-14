@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  include FriendlyId
+  friendly_id :slug_candidates, :use => :slugged
+
   # Role functionality from the role_model gem
   include RoleModel
   roles_attribute :roles_mask
@@ -10,8 +13,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :confirmable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-         
-  validates :email, :presence => true
+  
+  validates :name, :presence => true, :uniqueness => true       
+  validates :email, :presence => true, :uniqueness => true
   
   has_attached_file :avatar, :styles => { :listing => "50x50", :display => "200x200" }, :default_url => "images/:style/default_avatar.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage/
@@ -21,6 +25,13 @@ class User < ActiveRecord::Base
   has_many :comments
   
   after_create :send_admin_email
+  
+  def slug_candidates
+    [
+      :name,
+      [:name, :created_at]
+    ]
+  end
 
   # Handle user administration (approval by admin)
   def active_for_authentication?

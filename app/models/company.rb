@@ -1,5 +1,8 @@
 class Company < ActiveRecord::Base
 
+  include FriendlyId
+  friendly_id :name, :use => :slugged
+
   include Ofx::HtmlSanitizer
 
   belongs_to :contact, class_name: "User"
@@ -11,6 +14,7 @@ class Company < ActiveRecord::Base
   validates_attachment_content_type :logo, :content_type => /\Aimage/
   validates_attachment_file_name :logo, :matches => [ /png\Z/, /jpe?g\Z/, /gif\Z/ ]
 
+  
   def self.build_panel
     {
       :use_logos => Company.all.pluck(:logo_file_name).inject(true) { |all, x| all and !x.blank? },

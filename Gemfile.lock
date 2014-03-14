@@ -67,6 +67,8 @@ GEM
     factory_girl_rails (4.4.0)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    friendly_id (5.0.0)
+      activerecord (~> 4.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -189,6 +191,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   devise
   factory_girl_rails (= 4.4.0)
+  friendly_id
   haml-rails
   jquery-rails
   mysql2

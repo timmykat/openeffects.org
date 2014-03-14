@@ -1,5 +1,7 @@
 class NewsItem < ActiveRecord::Base
-
+  include FriendlyId
+  friendly_id :headline, :use => :slugged
+  
   include Ofx::HtmlSanitizer
   
   before_validation :sanitize_textareas

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313232330) do
+ActiveRecord::Schema.define(version: 20140314035714) do
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -57,7 +57,10 @@ ActiveRecord::Schema.define(version: 20140313232330) do
     t.datetime "logo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "companies", ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
 
   create_table "contents", force: true do |t|
     t.string   "identifier"
@@ -99,11 +102,13 @@ ActiveRecord::Schema.define(version: 20140313232330) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "published",  default: false
+    t.string   "slug"
   end
 
   add_index "minutes", ["date"], name: "index_minutes_on_date", using: :btree
   add_index "minutes", ["meeting"], name: "index_minutes_on_meeting", using: :btree
   add_index "minutes", ["published"], name: "index_minutes_on_published", using: :btree
+  add_index "minutes", ["slug"], name: "index_minutes_on_slug", unique: true, using: :btree
 
   create_table "news_items", force: true do |t|
     t.string   "headline",   default: "",    null: false
@@ -112,11 +117,13 @@ ActiveRecord::Schema.define(version: 20140313232330) do
     t.boolean  "published",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "news_items", ["date"], name: "index_news_items_on_date", using: :btree
   add_index "news_items", ["headline"], name: "index_news_items_on_headline", using: :btree
   add_index "news_items", ["published"], name: "index_news_items_on_published", using: :btree
+  add_index "news_items", ["slug"], name: "index_news_items_on_slug", unique: true, using: :btree
 
   create_table "standard_changes", force: true do |t|
     t.integer  "version_id"
@@ -131,8 +138,10 @@ ActiveRecord::Schema.define(version: 20140313232330) do
     t.datetime "updated_at"
     t.integer  "sponsor_id"
     t.text     "discussion"
+    t.string   "slug"
   end
 
+  add_index "standard_changes", ["slug"], name: "index_standard_changes_on_slug", unique: true, using: :btree
   add_index "standard_changes", ["sponsor_id"], name: "index_standard_changes_on_sponsor_id", using: :btree
   add_index "standard_changes", ["version_id"], name: "index_standard_changes_on_version_id", using: :btree
 
@@ -164,6 +173,7 @@ ActiveRecord::Schema.define(version: 20140313232330) do
     t.datetime "updated_at"
     t.boolean  "approved",               default: false
     t.string   "company_or_org"
+    t.string   "slug"
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved", using: :btree
@@ -171,6 +181,7 @@ ActiveRecord::Schema.define(version: 20140313232330) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|

@@ -1,5 +1,7 @@
 class StandardChange < ActiveRecord::Base
-
+  include FriendlyId
+  friendly_id :title, :use => :slugged
+  
   include Ofx::HtmlSanitizer
 
   belongs_to :version

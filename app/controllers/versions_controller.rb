@@ -1,5 +1,6 @@
 class VersionsController < ApplicationController
 
+  before_action :check_role
   before_action :set_version, only: [:edit, :update, :destroy]
 
   def new
@@ -46,6 +47,13 @@ class VersionsController < ApplicationController
   end
   
   private
+    def check_role
+      unless current_user.has_role? :admin
+        flash[:alert} = "You must have adminstrative access to view this."
+        redirect_to root
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_version
       @version = Version.find(params[:id])

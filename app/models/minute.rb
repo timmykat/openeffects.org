@@ -1,4 +1,6 @@
 class Minute < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :meeting_type_and_date, :use => :slugged
 
   include Ofx::HtmlSanitizer
   
@@ -12,6 +14,10 @@ class Minute < ActiveRecord::Base
   
   def self.build_panel(type, num = 3)
     Minute.where(meeting: type, published: true).limit(num)
+  end
+  
+  def meeting_type_and_date
+    "#{:meeting} #{date}"
   end
     
 end

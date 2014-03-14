@@ -1,13 +1,17 @@
-= form_for @home_hero do |f|
+= form_for @home_hero, :html => { :multipart => true, :role => "form", :class => "form-horizontal" } do |f|
   - if @home_hero.errors.any?
-    #error_explanation
+    .alert.alert-danger
       %h2= "#{pluralize(@home_hero.errors.count, "error")} prohibited this home_hero from being saved:"
       %ul
         - @home_hero.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :hero_image
-    = f.text_field :hero_image
+  .form-group
+    = f.label :home_hero
+    - if @home_hero.hero_image.blank?
+      (no logo)
+    - else
+      = image_tag(@home_hero.hero_image.url(:display))
+    = f.file_field :logo
   .actions
     = f.submit 'Save'

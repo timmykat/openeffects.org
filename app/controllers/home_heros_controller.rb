@@ -1,4 +1,5 @@
 class HomeHerosController < ApplicationController
+  before_action :check_role
   before_action :set_home_hero, only: [:show, :edit, :update, :destroy]
 
   # GET /home_heros
@@ -46,6 +47,13 @@ class HomeHerosController < ApplicationController
   end
 
   private
+    def check_role
+      unless current_user.has_role? :admin
+        flash[:alert} = "You must have adminstrative access to view this."
+        redirect_to root
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_home_hero
       @home_hero = HomeHero.find(params[:id])

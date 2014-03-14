@@ -52,6 +52,9 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 # Truncate html properly
 gem 'truncate_html'
 
+# FriendlyId for nice looking urls
+gem 'friendly_id'
+
 # group :doc do
 #   # bundle exec rake doc:rails generates the API under doc/api.
 #   gem 'sdoc', require: false
