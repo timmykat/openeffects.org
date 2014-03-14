@@ -9,6 +9,9 @@ $(function() {
       $('.dropdown-menu', this).slideUp();
   });
   
+  //Use Bootstrap style for file fields
+  $('input[type=file]').bootstrapFileInput();
+  
   // Implement datepicker across date fields
   $('.input-group.date').datepicker({
     format: 'dd-M-yyyy'

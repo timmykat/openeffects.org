@@ -12,8 +12,11 @@
   - if !@members_waiting.blank?
     .row#pending-users
       = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
-  .row#news
-    = render :partial => "news", locals: { news_items: @news_items }
+  .row
+    .col-md-6#news
+      = render :partial => "news", locals: { news_items: @news_items }
+    .col-md-6#hero
+      = render :partial => "heroes", locals: { home_heroes: @home_heroes }
   .row#minutes
     = render :partial => "minutes", locals: { minutes: @minutes }
   .row#content

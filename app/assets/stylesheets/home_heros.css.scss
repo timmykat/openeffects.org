@@ -1,3 +1,32 @@
 // Place all the styles related to the home_heros controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap/variables";
+
+.c_welcome .hero {
+  position: absolute;
+  top: -60px;
+  overflow: hidden;
+}
+@media (max-width: $screen-xs-max) {
+  .c_welcome .hero img {
+    width: $screen-xs-max;
+  }
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .c_welcome .hero img {
+    width: $screen-sm-max;
+  }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .c_welcome .hero img {
+    width: $screen-md-max;
+  }
+}
+@media (min-width: $screen-lg-min) {
+  .c_welcome .hero img {
+    width: 100%;
+  }
+}
+

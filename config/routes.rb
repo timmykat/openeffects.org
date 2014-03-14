@@ -1,6 +1,7 @@
 Ofx::Application.routes.draw do
 
-  resources :home_heros
+#  resources :home_heros
+  post 'admin/home_heroes', to: 'home_heroes#create_and_update'
 
   resources :standard_changes
   resources :versions, except: [:index]

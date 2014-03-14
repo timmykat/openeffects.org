@@ -20,3 +20,6 @@
 
 #Ignore migration data files
 /tmp/*.xml
+
+# Paperclip files
+/public/system

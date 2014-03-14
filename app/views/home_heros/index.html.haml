@@ -1,20 +1,20 @@
 .container
-%h1 Listing home_heros
+  %h1 Listing home_heros
 
-  %table
-    %tr
-      %th Hero image
-      %th
-      %th
-      %th
-
-    - @home_heros.each do |home_hero|
+    %table
       %tr
-        %td= home_hero.hero_image
-        %td= link_to 'Show', home_hero
-        %td= link_to 'Edit', edit_home_hero_path(home_hero)
-        %td= link_to 'Destroy', home_hero, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Hero image
+        %th
+        %th
+        %th
 
-  %br
+      - @home_heros.each do |home_hero|
+        %tr
+          %td= home_hero.hero_image
+          %td= link_to 'Show', home_hero
+          %td= link_to 'Edit', edit_home_hero_path(home_hero)
+          %td= link_to 'Destroy', home_hero, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-  = link_to 'New Home hero', new_home_hero_path
+    %br
+
+    = link_to 'New Home hero', new_home_hero_path
