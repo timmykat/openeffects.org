@@ -21,7 +21,7 @@
 
   .form-group
     = f.label :status
-    = f.select :status, options_for_select(get_change_selection(:status), (@standard_change.type.nil? ? 'proposed' : @standard_change.type)), :class => "form-control"
+    = f.select :status, options_for_select(get_change_selection(:status), (@standard_change.status.blank? ? 'proposed' : @standard_change.status)), :class => "form-control"
 
   .form-group
     = f.label :title
