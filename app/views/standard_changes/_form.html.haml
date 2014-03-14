@@ -48,6 +48,8 @@
     .hint.text-muted (Please fill this in when the change is approved)
     = f.text_area :status_details, :value => @standard_change.status_details, :class => "tinymce form-control", :rows => 7
     
+    = f.hidden_field :last_editor_id, :value => current_user.id
+    
   .form-group
     = f.submit 'Save'
     

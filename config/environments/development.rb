@@ -28,5 +28,5 @@ Ofx::Application.configure do
   config.assets.debug = true
   
   # Default URL for the mailer
-  config.action_mailer.default_url_options = { :host => 'ofx' }
+  config.action_mailer.default_url_options = { :protocol => 'http://', :host => 'localhost', :port => ':3000' }
 end

@@ -11,6 +11,16 @@
 .container
   .row
     .col-md-offset-2.col-md-8
+
+      .btn-group        
+        = link_to 'Back to list of changes', standard_changes_path, :type => 'button', :class => 'btn btn-default'
+        = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+        - if user_signed_in? and current_user.has_role? :admin          
+          = link_to 'Edit', edit_standard_change_path(@standard_change), :type => 'button', :class => 'btn btn-warning'
+      
+      %br
+      %br
+
       .panel{ class: klass }
         .panel-heading
           %h3.panel-title
@@ -37,12 +47,15 @@
           %label Solution
           = raw(@standard_change.solution)
 
+      .btn-group        
+        = link_to 'Back to list of changes', standard_changes_path, :type => 'button', :class => 'btn btn-default'
+        = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+        - if user_signed_in? and current_user.has_role? :admin          
+          = link_to 'Edit', edit_standard_change_path(@standard_change), :type => 'button', :class => 'btn btn-warning'
+
+      %br
+      %br
 
       = render :partial => 'comments/comments'  
 
-      .btn-group        
-        = link_to 'Back to list of changes', standard_changes_path, :type => 'button', :class => 'btn btn-default'
-        - if user_signed_in? and current_user.has_role? :admin
-          = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-          = link_to 'Edit', edit_standard_change_path(@standard_change), :type => 'button', :class => 'btn btn-warning'
 

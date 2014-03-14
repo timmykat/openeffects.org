@@ -10,6 +10,9 @@
         %b Email/login:
         = @user.email
       %p
+        %b Receive notifications?
+        = @user.notifications? ? 'Yes' : 'No'
+      %p
         %b Company or Organization:
         = @user.company_or_org
       %p

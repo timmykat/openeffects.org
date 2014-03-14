@@ -49,7 +49,7 @@ class VersionsController < ApplicationController
   private
     def check_role
       unless current_user.has_role? :admin
-        flash[:alert} = "You must have adminstrative access to view this."
+        flash[:alert] = "You must have adminstrative access to view this."
         redirect_to root
       end
     end

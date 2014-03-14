@@ -6,6 +6,7 @@ class StandardChange < ActiveRecord::Base
 
   belongs_to :version
   belongs_to :sponsor, class_name: "User"
+  belongs_to :last_editor, class_name: User
   
   acts_as_commentable
   has_many :comments, dependent: :destroy, as: :commentable
@@ -22,9 +23,24 @@ class StandardChange < ActiveRecord::Base
   
   self.inheritance_column = nil
 
+  after_save :notify_subscribers
+  
+  # Notify subscribers when a standard change is updated.
+  def notify_subscribers
+    AdminMailer.notify_of_standard_change(self)
+  end
+  
   def self.build_panel(change_status, limit = 3)
     StandardChange.where(status: 'proposed').order("created_at DESC", "title ASC").limit(limit)
   end
 
-
+  def saved_by(current_user)
+    self.last_editor_id = current_user.id
+    self.save
+  end
+  
+  def updated_by(standard_change_params, current_user)
+    self.last_editor_id = current_user.id
+    self.update(standard_change_params)
+  end
 end

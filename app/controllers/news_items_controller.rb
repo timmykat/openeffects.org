@@ -8,6 +8,7 @@ class NewsItemsController < ApplicationController
   end
   
   def show
+    @news_item = NewsItem.friendly.find(params[:id])
   end
 
   def new
@@ -25,7 +26,7 @@ class NewsItemsController < ApplicationController
   end
   
   def edit
-    @news_item = NewsItem.find(params[:id])
+    @news_item = NewsItem.friendly.find(params[:id])
   end
 
   def update
@@ -45,7 +46,7 @@ class NewsItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_news_item
-      @news_item = NewsItem.find(params[:id])
+      @news_item = NewsItem.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

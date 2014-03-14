@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   
   has_one :company, :foreign_key => :contact_id
   has_many :comments
+  has_many :standard_changes, :foreign_key => :last_editor_id
+  has_many :standard_changes, :foreign_key => :sponsor_id
   
   after_create :send_admin_email
   

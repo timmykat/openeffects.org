@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to standard_change_path(@comment.commentable), notice: "The comment was successfully saved."
+      redirect_to standard_change_path(@comment.commentable), notice: "Your comment was successfully saved."
     else
       redirect_to standard_change_path(@comment.commentable)
     end
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   private
     def check_role
       unless current_user.has_role? :admin
-        flash[:alert} = "You must have adminstrative access to view this."
+        flash[:alert] = "You must have adminstrative access to view this."
         redirect_to root
       end
     end

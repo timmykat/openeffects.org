@@ -8,7 +8,7 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes/1
   def show
-    @standard_change = StandardChange.find(params[:id])
+    @standard_change = StandardChange.friendly.find(params[:id])
     @new_comment = @standard_change.comments.new
     @comments = @standard_change.comments.recent
   end
@@ -20,13 +20,14 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes/1/edit
   def edit
+    @standard_change = StandardChange.friendly.find(params[:id])
   end
 
   # POST /standard_changes
   def create
     @standard_change = StandardChange.new(standard_change_params)
 
-    if @standard_change.save
+    if @standard_change.saved_by(current_user)
       redirect_to @standard_change, notice: 'Standard change was successfully created.'
     else
       render action: 'new'
@@ -35,7 +36,7 @@ class StandardChangesController < ApplicationController
 
   # PATCH/PUT /standard_changes/1
   def update
-    if @standard_change.update(standard_change_params)
+    if @standard_change.updated_by(standard_change_params, current_user)
       redirect_to @standard_change, notice: 'Standard change was successfully updated.'
     else
       render action: 'edit'
@@ -51,7 +52,7 @@ class StandardChangesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_standard_change
-      @standard_change = StandardChange.find(params[:id])
+      @standard_change = StandardChange.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

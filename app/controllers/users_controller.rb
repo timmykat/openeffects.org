@@ -3,14 +3,14 @@ class UsersController < ApplicationController
 
   # AJAX methods
   def toggle_approved
-    u = User.find(params[:id])
+    u = User.friendly.find(params[:id])
     u.toggle(:approved)
     u.save
     render :text => u.approved? ? 'approved' : ''
   end
 
   def toggle_role
-    u = User.find(params[:id])
+    u = User.friendly.find(params[:id])
     role = params[:role].to_sym
     if u.has_role? role
       u.roles.delete(role)
@@ -31,10 +31,11 @@ class UsersController < ApplicationController
   end
   
   def show
+    @user = User.friendly.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
   def update
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
