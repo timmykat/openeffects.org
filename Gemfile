@@ -66,13 +66,14 @@ group :development do
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
   gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Stuff for heroku
-group :production do
-  gem 'rails_12factor'
-  gem 'thin'
-end
+# group :production do
+#   gem 'rails_12factor'
+#   gem 'thin'
+# end
 
 # For testing
 group :development, :test do

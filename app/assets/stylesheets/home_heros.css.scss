@@ -4,29 +4,67 @@
 
 @import "bootstrap/variables";
 
+.jumbotron {
+  position: relative;
+  background-color: rgba(255,255,255, 0.6);
+  margin-top: 30px;
+  h1 {
+    color: #339;
+    text-shadow: 3px 3px 3px #bbb;
+    font-weight: bold;
+    font-size: 3vw;
+  }
+  .logo {
+    position: absolute;
+    right: 3%;
+    top: 17%;
+    z-index: 1000;
+  }
+}
 .c_welcome .hero {
   position: absolute;
   top: -60px;
-  overflow: hidden;
+  width: 100%;
+  overflow-left: hide;
 }
 @media (max-width: $screen-xs-max) {
-  .c_welcome .hero img {
-    width: $screen-xs-max;
+  .c_welcome {
+    .logo img {
+      width: 78px;
+    }
+    .hero img {
+      width: $screen-xs-max;
+    }
   }
 }
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .c_welcome .hero img {
-    width: $screen-sm-max;
+  .c_welcome {
+    .logo img {
+      width: 90px;
+    }
+    .hero img {
+      width: $screen-sm-max;
+    }
   }
 }
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-  .c_welcome .hero img {
-    width: $screen-md-max;
+  .c_welcome {
+    .logo img {
+      width: 110px;
+    }
+    .hero img {
+      width: $screen-md-max;
+    }
   }
 }
 @media (min-width: $screen-lg-min) {
-  .c_welcome .hero img {
-    width: 100%;
+  .c_welcome {
+    .logo img {
+      width: 130px;
+    }
+    .hero img {
+      width: 100%;
+    }
   }
 }
 

@@ -52,12 +52,6 @@ footer {
 .admin.btn-group {
   padding-bottom: 10px;
 }
-.logo {
-  position: absolute;
-  right: 40px;
-  top: 40px;
-  z-index: 1000;
-}
 .welcome {
   padding-top: 5%;
   padding-bottom: 5%;
@@ -65,16 +59,6 @@ footer {
   &#welcome {
     padding-top: 5%;
     padding-bottom: 1%;
-    .jumbotron {
-      position: relative;
-      background-color: rgba(255,255,255, 0.6);
-      h1 {
-        color: #339;
-        text-shadow: 3px 3px 3px #bbb;
-        font-weight: bold;
-        font-size: 40px;
-      }
-    }
   }
   &#panels {
     background-repeat: none;

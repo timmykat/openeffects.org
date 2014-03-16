@@ -1,20 +1,17 @@
 require 'ofx/migration'
 
 namespace :ofx do
-  desc "test task"
-  task :do_all do
-    binding.pry
-    Rake::Task['ofx:task1[foo]'].invoke
-    Rake::Task['ofx:task2[bar]'].invoke
+  desc "Add ofx navigation and attendant CSS to the OFX standards document"
+  task :prep_docs, :environment do |task|
+    %w(api_ref guide).each do |doc|
+      p = Ofx::DocPrep.new(doc)
+      p.process_directory
+    end
   end
   
-  desc "test task 1"
-  task :task1, [:param1] => :environment do
-    puts "task 1: #{args.param1}"
-  end
-  desc "test task 2"
-  task :task2, [:param2] => :environment do
-    puts "task 2: #{args.param2}"
+  desc "Update API reference and guide"
+  task :update_docs => :environment do |task|
+    %x( /lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} )  
   end
 
   desc "migrates all the data from openeffects.org to the database for the environment"

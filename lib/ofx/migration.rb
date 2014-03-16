@@ -39,7 +39,7 @@ module Ofx
       
       send("pull_#{@type}".to_sym)
 
-      xsl = Nokogiri::XSLT(File.read("#{File.dirname(__FILE__)}/assets/pretty_print.xsl"))
+      xsl = Nokogiri::XSLT(File.read("#{File.dirname(__FILE__)}/assets/stylesheets/pretty_print.xsl"))
   
       File.open("#{Rails.root}/tmp/migration_#{@type}.xml", 'w') { |f| f.write(xsl.apply_to(@to_doc).to_s) }
     end
