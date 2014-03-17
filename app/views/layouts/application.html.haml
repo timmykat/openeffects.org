@@ -36,9 +36,9 @@
                         %li
                           = link_to raw('Association Business'), '#organization', class: '.navbar-link'
                     %li
-                      = link_to 'Programming Guide', '/api/programming-guide'
+                      = link_to 'Programming Guide', '/guide'
                     %li
-                      = link_to 'API Reference', '/api/reference'
+                      = link_to 'API Reference', '/api_ref'
                     - if user_signed_in? and current_user.has_role? :admin
                       %li
                         = link_to 'Admin Dashboard', admin_dashboard_path

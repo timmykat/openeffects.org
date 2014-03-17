@@ -5,11 +5,13 @@ Ofx::Application.routes.draw do
 #  resources :home_heros
   post 'admin/home_heroes', to: 'home_heroes#create_and_update'
 
-  resources :standard_changes
+  resources :standard_changes do
+    resources :comments, :only => [:create, :destroy]
+  end
+  
   resources :versions, except: [:index]
   
   # Add routes for handling comments (no editing, showing will be handled in standard_changers
-  resources :comments, :only => [:create, :destroy]
   
   # Add route namespace for CKeditor
   #  mount Ckeditor::Engine => '/ckeditor'
@@ -18,9 +20,13 @@ Ofx::Application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
   resources :users, except: [:new, :create]
   
-  #AJAX user routes 
-  get '/users/ajax/toggle_approved', to: 'users#toggle_approved'
-  get '/users/ajax/toggle_role', to: 'users#toggle_role'
+  #AJAX
+  scope :ajax do
+    get 'users/toggle_approved',  to: 'users#toggle_approved'
+    get 'users/toggle_role',      to: 'users#toggle_role'
+    get 'api_docs/update',        to: 'api_docs#update'
+    get 'api_docs/insert_nav',    to: 'api_docs#insert_nav'
+  end
   
 #   devise_scope :user do
 #     post "sign_in", to: "sessions#create"
@@ -42,9 +48,6 @@ Ofx::Application.routes.draw do
   get '/minutes/ajax/toggle_published', to: 'minutes#toggle_published'
   
   resources :news_items
-  
-  # API docs (pulls into an iframe)
-  get 'reference/api_docs', to: 'api_docs#api_docs_iframe'
   
   # Administrative dashboard
   get 'admin/dashboard', to: 'admin#dashboard'

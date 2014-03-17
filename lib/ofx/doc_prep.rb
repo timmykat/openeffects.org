@@ -24,7 +24,6 @@ module Ofx
           %x( cp #{file} #{@destination_dir} )
         else
           puts "Processing #{filename}"
-          binding.pry
           input_xml = Nokogiri::XML(open(file))
         
           #Add the link to the CSS file

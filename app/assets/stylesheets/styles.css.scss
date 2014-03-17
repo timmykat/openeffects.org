@@ -74,10 +74,11 @@ footer {
     background-image: linear-gradient(to bottom, $color-2 0px, $color-4 100%);
   }
 }
-.btn {
-   -webkit-border-radius: 10px;
-   -moz-border-radius: 5px;
-   border-radius: 5px;
+.btn, btn-default {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: none;
 }
 a.btn-primary {
   color: white;
@@ -129,4 +130,5 @@ li.nav-logo {
     }
   }
 }
+  
 

@@ -10,22 +10,28 @@
     = link_to 'Standard Changes <span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, standard_changes_path, :type => 'button', :class => 'btn btn-default'
 
   - if !@members_waiting.blank?
-    .row#pending-users
-      = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
+    .row    
+      .col-md-12#content
+        = render :partial => "members_to_accept", locals: { members_waiting: @members_waiting }
   .row
-    .col-md-6#news
+    .col-md-12#news
       = render :partial => "news", locals: { news_items: @news_items }
-    .col-md-6#hero
-      = render :partial => "heroes", locals: { home_heroes: @home_heroes }
-  .row#minutes
-    = render :partial => "minutes", locals: { minutes: @minutes }
-  .row#content
-    = render :partial => "miscellaneous_content", locals: { contents: @contents }
-  .row#companies
-    = render :partial => "member_companies", locals: { companies: @companies }
-  .row#versions
-    .col-md-6#links
-      = render :partial => "links", locals: {links: @links }
+  .row
+    .col-md-6#user_docs
+      = render :partial => "user_docs"
     .col-md-6#versions
       = render :partial => "versions", locals: { versions: @versions }
+  .row
+    .col-md-12#minutes
+      = render :partial => "minutes", locals: { minutes: @minutes }
+  .row
+    .col-md-12#content
+      = render :partial => "miscellaneous_content", locals: { contents: @contents }
+  .row
+    .col-md-6#links
+      = render :partial => "links", locals: {links: @links }
+    .col-md-6#hero
+      = render :partial => "heroes", locals: { home_heroes: @home_heroes }
+  .row#companies
+    = render :partial => "member_companies", locals: { companies: @companies }
 

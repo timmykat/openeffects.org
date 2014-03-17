@@ -10,8 +10,8 @@ namespace :ofx do
   end
   
   desc "Update API reference and guide"
-  task :update_docs => :environment do |task|
-    %x( /lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} )  
+  task :update_docs, [:release] => :environment do |task, args|
+    %x( #{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} #{args.release} )  
   end
 
   desc "migrates all the data from openeffects.org to the database for the environment"

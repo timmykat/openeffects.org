@@ -1,0 +1,27 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Update API documentation
+  .panel-body
+    %p.text-danger NOTE: At the moment these are synchronous processes, so they tie up the server while running.
+    %table.table-condensed.manage-api
+      %tr
+        %td
+          = form_tag '/ajax/api_docs/update', id: 'pull-from-github', method: 'get' do
+            .form-group
+              = text_field_tag :release, nil,class: 'form-control', :placeholder => 'Release'
+            .form-group
+              %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary' } Pull and Make
+          %br
+          = content_tag('div', nil, class: 'update-status', data: { running: image_url('ajax-running.gif') })
+        %td
+          %p Pull the latest version of the OpenFX repository on github and make the documentation.
+      %tr
+        %td
+          = form_tag '/ajax/api_docs/insert_nav', id: 'insert-navbars', method: 'get' do
+            .form-group
+              %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary' } Insert Navbars
+          %br
+          = content_tag('div', nil, class: 'insert-nav-status', data: { running: image_url('ajax-running.gif') })
+        %td
+          %p Parse the documentation HTML to insert navbars at the top of the documentation.
+       
