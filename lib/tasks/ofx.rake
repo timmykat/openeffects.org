@@ -2,7 +2,7 @@ require 'ofx/migration'
 
 namespace :ofx do
   desc "Add ofx navigation and attendant CSS to the OFX standards document"
-  task :prep_docs, :environment do |task|
+  task :prep_docs => :environment do |task|
     %w(api_ref guide).each do |doc|
       p = Ofx::DocPrep.new(doc)
       p.process_directory
