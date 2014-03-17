@@ -15,7 +15,7 @@
               %th{ :colspan => 3 }
         %tbody
           - @versions.each do |v|
-            %tr
+            %tr{class: v.current? ? 'bg-success' : '' }
               %td
                 - if v.current?
                   %span.glyphicon.glyphicon-hand-right

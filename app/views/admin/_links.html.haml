@@ -1,0 +1,27 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Useful Links
+  .panel-body
+    %table.table-condensed
+      %tbody
+        - unless @links.blank?
+          - @links.each do |link|
+            %tr
+              %td
+                = form_tag "/links/#{link.id}", :method => 'put', :role => 'form', :class => 'form-inline' do 
+                  .form-group
+                    = text_field_tag 'link[url]', link.url, :class => "form-control input-sm", :placeholder => "Link url"
+                  .form-group
+                    = text_field_tag 'link[title]', link.title, :class => "form-control input-sm", :placeholder => "Link text"
+                  %button{ :type => 'submit', :class => 'btn btn-sm btn-primary' } Save
+                  .form-group
+                    = link_to 'Delete', link, :method => :delete, :type => 'button', :class => 'btn btn-sm btn-danger', :data => { :confirm => 'Are you sure?' }
+        %tr
+          %td
+            = form_tag links_path, :method => 'post', :role => 'form', :class => 'form-inline' do
+              .form-group
+                = text_field_tag 'link[url]', nil, :class => "form-control input-sm", :placeholder => "Link url"
+              .form-group
+                = text_field_tag 'link[title]', nil, :class => "form-control input-sm", :placeholder => "Link text"
+                %button{ :type => 'submit', :class => 'btn btn-sm btn-primary' } Create
+ 

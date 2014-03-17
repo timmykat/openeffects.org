@@ -1,5 +1,7 @@
 Ofx::Application.routes.draw do
 
+  resources :links
+  
 #  resources :home_heros
   post 'admin/home_heroes', to: 'home_heroes#create_and_update'
 

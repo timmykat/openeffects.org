@@ -1,9 +1,11 @@
 .panel.panel-info
   .panel-heading
-    %h3.panel-title Links
+    %h3.panel-title Useful Links
   .panel-body
-    = raw(@links_for_implementers.content)
-
+    %ul.list-group.no-borders
+    - @links_for_implementers.each do |link|
+      %li.list-group-item.no-borders
+        = link_to link.title, link.url, :target => /http/.match(link.url) ? '_blank' : 'self'
     - if !user_signed_in?
       %p
         = link_to 'Sign up to become a member', new_user_registration_path, :class => 'btn btn-sm btn-warning'

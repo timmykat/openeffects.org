@@ -22,8 +22,8 @@
                 %button.unpublished.btn.btn-xs.btn-primary Publish
             %td= content.identifier
             %td= content.title
-            %td= content.pdf.nil? ? '(none)' : image_tag 'pdf_icon.png'
-            - if current_content.has_role? :admin
+            %td= content.pdf.blank? ? '(none)' : image_tag('pdf_icon.png')
+            - if user_signed_in? and current_user.has_role? :admin
               %td= link_to 'Show', content
               %td= link_to 'Edit', edit_content_path(content)
               %td= link_to 'Delete', content, :method => :delete, :data => { :confirm => 'Are you sure?' }

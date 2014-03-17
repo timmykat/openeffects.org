@@ -24,5 +24,8 @@
   .row#companies
     = render :partial => "member_companies", locals: { companies: @companies }
   .row#versions
-    = render :partial => "versions", locals: { versions: @versions }
+    .col-md-6#links
+      = render :partial => "links", locals: {links: @links }
+    .col-md-6#versions
+      = render :partial => "versions", locals: { versions: @versions }
 
