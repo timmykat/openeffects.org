@@ -65,8 +65,6 @@ group :development do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
-  gem 'better_errors'
-  gem 'binding_of_caller'
 end
 
 # Stuff for heroku
