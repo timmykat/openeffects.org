@@ -55,6 +55,9 @@ gem 'truncate_html'
 # FriendlyId for nice looking urls
 gem 'friendly_id'
 
+# Stream output for update command
+gem 'POpen4'
+
 # group :doc do
 #   # bundle exec rake doc:rails generates the API under doc/api.
 #   gem 'sdoc', require: false
@@ -65,9 +68,10 @@ group :development do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
-  gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+gem 'puma'
 
 # Stuff for heroku
 # group :production do

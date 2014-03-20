@@ -11,8 +11,14 @@ namespace :ofx do
   
   desc "Update API reference and guide"
   task :update_docs, [:release] => :environment do |task, args|
-    %x( #{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} #{args.release} )  
-  end
+    $stdout.sync = true
+    cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} #{args.release}"
+    IO.popen(cmd, 'r') do |io| 
+      while (line = io.gets)
+        puts line
+      end
+    end
+   end
 
   desc "migrates all the data from openeffects.org to the database for the environment"
   task :migrate => ["ofx:pull[all]", "ofx:push[all]"]
