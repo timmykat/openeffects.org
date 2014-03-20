@@ -10,6 +10,14 @@
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }
     %script{ :src => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" }
   %body{ :role => "document", 'data-spy' => 'scroll', 'data-target' => '.navbar-top', :class => "c_#{params[:controller]} a_#{params[:action]}"}
+    #terminal.modal.fade
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            .button{ type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+            %h4{ class: 'modal-title' } Terminal Output
+          .modal-body
+            .window
     .wrapper
       .navbar.navbar-inverse.navbar-fixed-top{ :role => "navigation" }
         .container
@@ -70,4 +78,4 @@
       
     %footer
       .container
-        Copyright  &copy;#{Time.now.year} The Open Effects Association 
+        Copyright  &copy;#{Time.now.year} The Open Effects Association
