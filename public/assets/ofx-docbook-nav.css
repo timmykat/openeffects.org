@@ -6,6 +6,12 @@
        url("/assets/glyphicons-halflings-regular.ttf") format('truetype'),
        url("/assets/glyphicons-halflings-regular.svg#glyphicons-halflings-regular") format('svg');
 }
+@font-face {
+    font-family: "persan";
+    font-style: normal;
+    font-weight: normal;
+    src: url("/assets/persans-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/persans-webfont.woff") format("woff"), url("/assets/persans-webfont.ttf") format("truetype"), url("/assets/persans-webfont.svg#persan") format("svg");
+}
 body {
   margin:0;
   padding: 0;
@@ -28,6 +34,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   content: "\e134";
   width: 30px;
+}
+#ofx-main-nav, #ofx-main-nav td, #ofx-main-nav ul {
+  font-family: 'persan';
 }
 #ofx-main-nav {
   font-size: 13px;

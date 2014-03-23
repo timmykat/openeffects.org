@@ -34,18 +34,11 @@ $(function() {
           $('.update-status').html('DONE').removeClass('text-warning').addClass('text-success');
         }
       }      
+      ajaxCall(url, source);
     } else {
+      ajaxCall(url);
       $('.update-status').html('Running <img src="' + $('.update-status').data('running') + '" />').removeClass('text-danger', 'text-success').addClass('text-warning')
     }
-    $.ajax({
-      url: url,
-      data: $form.serialize(),
-      success: function() {
-        source.close();
-        $('#terminal .window').append('<p>DONE</p>');
-        $('.update-status').html('DONE').removeClass('text-warning').addClass('text-success');
-      }
-    });
   });
   $('#insert-navbars button').on('click', function(e) {
     e.preventDefault()
