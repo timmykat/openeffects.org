@@ -4,8 +4,8 @@
 - else
   %ul.list-group.no-borders    
     - @proposed_standard_changes.each do |change|
-      %li.list-group-item.list-group-item-info.no-borders
+      %li.list-group-item.no-borders
         = link_to change.title, standard_change_path(change)
-    %li.list-group-item
+    %li.list-group-item.list-group-item-info
       = link_to 'All standard changes', standard_changes_path
       %span.glyphicon.glyphicon-circle-arrow-right

@@ -10,10 +10,30 @@ $primary-color-grad: $color-5;
 $secondary-color: $color-2;
 $tertiary-color: $color-2;
 
+@mixin specify-font($ofx-font) {
+  html, body {
+    height: 100%;
+    font-family: "#{$ofx-font}";
+  }
+  p, ol, ul, td {
+    font-family: "#{$ofx-font}";
+  }
+}
+
+@include specify-font('persan');
 
 html, body {
   height: 100%;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
 body { padding-top: 40px; }
 @media screen and (max-width: 768px) {
     body { padding-top: 0px; }
