@@ -1,0 +1,22 @@
+// Place all the styles related to the home_heros controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#welcome {
+  background-image: image-url("<%= HomeHero.where(active: true).first.hero_image(:md) %>");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .jumbotron {
+    h1 {
+      font-size: 48px;
+    }
+    position: relative;
+    .logo {
+      position: absolute;
+      right: 3%;
+      top: 27%;
+      height: 33%;
+    }
+  }
+}

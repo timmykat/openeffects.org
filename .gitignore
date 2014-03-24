@@ -25,6 +25,5 @@
 /public/system
 
 # Docbook files
-/public/api_ref
-/public/guide
+/public/documentation
 /public/unprepped
