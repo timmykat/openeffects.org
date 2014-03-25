@@ -6,6 +6,9 @@
     %table.table-condensed.manage-api
       %tr
         %td
+          %p
+            %b FIRST:
+            Pull the latest version of the OpenFX repository on github and make the documentation.
           = form_tag '/ajax/api_docs/update', id: 'pull-from-github', method: 'get' do
             .form-group
               = text_field_tag :release, nil,class: 'form-control', :placeholder => 'Release'
@@ -13,15 +16,18 @@
               %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary' } Pull and Make
           %br
           = content_tag('div', nil, class: 'update-status', data: { running: image_url('ajax-running.gif') })
-        %td
-          %p Pull the latest version of the OpenFX repository on github and make the documentation.
       %tr
-        %td
+        %td(colspan='2')
+          %p           
+            %b SECOND:
+            Parse the documentation HTML to insert navbars at the top of the documentation.
           = form_tag '/ajax/api_docs/insert_nav', id: 'insert-navbars', method: 'get' do
             .form-group
-              %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary' } Insert Navbars
+              %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary', id: 'all' } All Docs
+            .btn-group
+              - Rails.configuration.ofx[:support_docs]['docs'].each do |doc|
+                %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-info', id: doc } 
+                  = "#{doc.titlecase.gsub(/_/,' ')} Only"
           %br
           = content_tag('div', nil, class: 'insert-nav-status', data: { running: image_url('ajax-running.gif') })
-        %td
-          %p Parse the documentation HTML to insert navbars at the top of the documentation.
        

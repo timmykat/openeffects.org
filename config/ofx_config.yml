@@ -1,6 +1,11 @@
-documentation_repo: 
-  development: /Volumes/Delahaye/tim/Development/git-repos/openfx
-  production:  
+support_docs:
+  docs:
+    - api_doc
+    - reference
+    - guide
+  repo: 
+    development: /Volumes/Delahaye/tim/Development/git-repos/openfx
+    production:  
 meeting_type:
   agm: Association General Meeting
   dirm: Directors' Meeting
@@ -26,8 +31,8 @@ sanitizer:
       - href
       - type
 recaptcha:
-  public_key:   6LedYO8SAAAAAPho35-jU-DHbGAPeNJVZpcsYAgi 
-  private_key:  6LedYO8SAAAAAJOIj8RKirQWUOc5LF_F8jnYeei- 
+  !ruby/sym public_key:   6LedYO8SAAAAAPho35-jU-DHbGAPeNJVZpcsYAgi 
+  !ruby/sym private_key:  6LedYO8SAAAAAJOIj8RKirQWUOc5LF_F8jnYeei- 
 
 migration:
   !ruby/sym base_url: http://openeffects.org

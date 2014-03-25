@@ -24,6 +24,10 @@
 # Paperclip files
 /public/system
 
-# Docbook files
-/public/documentation
+# Docbook files which get rewritten
 /public/unprepped
+/public/documentation
+/public/assets/OFX_small.png
+/public/assets/ofx-docbook-nav.css
+/public/assets/OFX_navheader.png
+/public/assets/ofxStyle.css
