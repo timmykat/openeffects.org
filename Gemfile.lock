@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/seuros/capistrano-puma.git
+  revision: 14280e524c076bea71438f987dc7deadaa786ab0
+  specs:
+    capistrano-puma (0.3.3)
+      capistrano (~> 3.0)
+      puma
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,9 +58,6 @@ GEM
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-rvm (0.1.1)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -149,6 +154,8 @@ GEM
     rake (10.1.1)
     recaptcha (0.3.6)
     role_model (0.8.1)
+    rvm-capistrano (1.5.0)
+      capistrano (>= 2.15.4)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
     sass (3.2.14)
@@ -207,8 +214,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1.2)
+  capistrano-puma!
   capistrano-rails (~> 1.1)
-  capistrano-rvm
   devise
   factory_girl_rails (= 4.4.0)
   friendly_id
@@ -224,6 +231,7 @@ DEPENDENCIES
   rails (= 4.0.1)
   recaptcha
   role_model
+  rvm-capistrano
   sanitize
   sass-rails (~> 4.0.0)
   shoulda

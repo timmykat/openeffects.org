@@ -1,6 +1,9 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
+set :rvm_ruby_string, :local
+set :rvm_autolibs_flag, 'install-packages'
+
 set :application, 'ofx'
 set :repo_url, 'ssh://ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com/home/ec2-user/git-repos/ofx-staging.git'
 set :stages, %w(staging production)
@@ -36,7 +39,7 @@ set :pty, true
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/documentation}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
