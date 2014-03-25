@@ -6,6 +6,8 @@
 # Don't declare `role :all`, it's a meta role
 role :web, %w{ofx-amazon}
 
+set :rvm_type, :user
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
