@@ -16,7 +16,7 @@ set :rvm_type, :user
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-# server 'ec2-54-186-175-209.us-west-2.compute.amazonaws.com', user: 'ec2-user', roles: %w{web}, my_property: :my_value
+# server 'ec2-54-186-175-209.us-west-2.compute.amazonaws.com', user: 'deploy', roles: %w{web}, primary: true
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
