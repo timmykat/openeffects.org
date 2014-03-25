@@ -5,13 +5,13 @@ set :application, 'ofx'
 set :repo_url, 'ssh://ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com/home/ec2-user/git-repos/ofx-staging.git'
 set :stages, %w(staging production)
 
-set :ssh_options, { forward_agent: true}
+set :ssh_options, { keys: '~/.ssh/ofx-amazon.pem', forward_agent: true}
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Set deploy user
-set :user, 'deploy'
+set :user, 'ec2-user'
 
 # Set environment (testing production)
 set :rails_env, 'production'
