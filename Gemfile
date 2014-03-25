@@ -83,6 +83,10 @@ gem 'puma'
 group :development, :test do
 #  gem 'rspec-rails', '~> 3.0.0.beta2'
   gem 'factory_girl_rails', "4.4.0"
+  
+  # Use capistrano for deployment (not needed in production)
+  gem 'capistrano'
+  gem 'capistrano-ext'
 end
 
 group :test do
@@ -91,6 +95,7 @@ group :test do
   gem 'shoulda-callback-matchers'
 #  gem 'database_cleaner'
 end
+
 
 # Use this ruby version  
 ruby '1.9.3'

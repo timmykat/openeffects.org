@@ -7,6 +7,10 @@
 # Ignore bundler config.
 /.bundle
 
+# No secret info
+config/database.yml
+config/ofx_config.yml
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
