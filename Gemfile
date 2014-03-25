@@ -9,6 +9,9 @@ gem 'mysql2'
 # Use haml for templates
 gem 'haml-rails'
 
+# Javascript environment
+gem 'therubyracer'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -55,9 +58,6 @@ gem 'truncate_html'
 # FriendlyId for nice looking urls
 gem 'friendly_id'
 
-# Stream output for update command
-gem 'POpen4'
-
 # group :doc do
 #   # bundle exec rake doc:rails generates the API under doc/api.
 #   gem 'sdoc', require: false
@@ -69,9 +69,6 @@ group :development do
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
 end
-
-# Need to use a threaded server for the doc creation terminal output
-gem 'puma'
 
 # Stuff for heroku
 # group :production do

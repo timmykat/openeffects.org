@@ -5,6 +5,8 @@
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
 role :web, %w{ofx-amazon}
+role :app, %w{ofx-amazon}
+role :db, %w{ofx-amazon}
 
 set :rvm_type, :user
 
