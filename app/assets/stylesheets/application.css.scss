@@ -25,9 +25,15 @@
   }
 }
 
- @include declare-font-face('persan','persans-webfont');
- @include declare-font-face('persan','persansb-webfont', bold);
- @include declare-font-face('persan','persansi-webfont', normal, italic);
+@include declare-font-face('museo','MuseoSans_500-webfont');
+@include declare-font-face('persans-bold','persansb-webfont', bold);
+@include declare-font-face('museo','MuseoSans_500-webfont', normal, italic);
+
+/*
+* @include declare-font-face('persan','persans-webfont');
+* @include declare-font-face('persan','persansb-webfont', bold);
+* @include declare-font-face('persan','persansi-webfont', normal, italic);
+*/
  
 /*
  * @include declare-font-face('quicksand','quicksand-regular-webfont');

@@ -25,29 +25,14 @@ end
 # load File.join(Rails.root, 'lib', 'tasks', 'ofx.rake')
 class ApiDocsController < ApplicationController
   include ActionController::Live 
-  
-  def test
-    response.headers['Content-Type'] = 'text/event-stream'
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    sse = ServerSide::SSE.new(response.stream)
-    begin
-      10.times {
-        sse.write({ :message => "This is my message}" }.to_json)
-        sleep 1
-      }
-    rescue IOError
-    ensure
-      sse.close
-    end
-  end
-  
+    
   def update
     if params[:release].blank?
       respond_to do |format|
         format.json { render :json => { error: 'Please specify a release' }}
       end
     else
-      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} #{params[:release]} 2>&1"
+      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:support_docs]['repo'][Rails.env]} #{params[:release]} 2>&1"
       response.headers['Content-Type'] = 'text/event-stream'
       response.headers['Access-Control-Allow-Origin'] = '*'
       sse = ServerSide::SSE.new(response.stream)
@@ -64,8 +49,24 @@ class ApiDocsController < ApplicationController
     end
   end
   
-  def insert_nav  
-    %x( bundle exec rake 'ofx:prep_docs' )  
-    respond_to { |format| format.json { render :json => { :data => 'Done' }}}
+  def insert_nav
+    process_doc = params[:process_doc] || 'all'
+    response.headers['Content-Type'] = 'text/event-stream'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    sse = ServerSide::SSE.new(response.stream)
+    $stdout.sync = true
+    begin
+      Rails.configuration.ofx[:support_docs]['docs'].each do |doc|
+        next unless process_doc == 'all' || process_doc == doc
+        sse.write "#{doc.upcase}"
+        p = Ofx::DocPrep.new(doc)
+        p.process_directory(sse)
+      end
+      sse.write "DONE\n"
+    ensure
+      response.status = 304
+      sse.close
+    end
+    render json: { status: 'ok' }
   end  
 end

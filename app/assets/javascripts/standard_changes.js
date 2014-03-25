@@ -5,7 +5,6 @@ $(function() {
   klass = $('select').val()
   $('.c_standard_changes tr.' + klass).show()
   $('select').on('change', function(e) {
-    console.log('Got it');
     if ($(this).val() == 'all') {
       $('tr').slideDown(1000);
     } else {

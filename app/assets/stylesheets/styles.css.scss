@@ -10,7 +10,8 @@ $primary-color-grad: $color-5;
 $secondary-color: $color-2;
 $tertiary-color: $color-2;
 
-@mixin specify-font($ofx-font) {
+@mixin specify-font($ofx-font, $ofx-bold-font) {
+  @if not $ofx-bold-font { $ofx-bold-font: $ofx-font};
   html, body {
     height: 100%;
     font-family: "#{$ofx-font}";
@@ -18,16 +19,21 @@ $tertiary-color: $color-2;
   p, ol, ul, td {
     font-family: "#{$ofx-font}";
   }
+  h1, .h1, h2, .h2, h3, h4, h5, h6 {
+    font-family: "#{$ofx-bold-font}";
+    font-weight: bold;
+  }
 }
 
-@include specify-font('persan');
+@include specify-font('museo', 'persans-bold');
+
 
 html, body {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
+h3, .h3 {
+  font-size: 20px;
 }
 
 em {

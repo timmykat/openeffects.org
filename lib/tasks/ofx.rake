@@ -3,7 +3,7 @@ require 'ofx/migration'
 namespace :ofx do
   desc "Add ofx navigation and attendant CSS to the OFX standards document"
   task :prep_docs => :environment do |task|
-    %w(api_ref guide).each do |doc|
+    Rails.configuration.ofx[:support_docs]['docs'].each do |doc|
       p = Ofx::DocPrep.new(doc)
       p.process_directory
     end
@@ -12,7 +12,7 @@ namespace :ofx do
   desc "Update API reference and guide"
   task :update_docs, [:release] => :environment do |task, args|
     $stdout.sync = true
-    cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:documentation_repo][Rails.env]} #{args.release}"
+    cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx['support_docs']['repo'][Rails.env]} #{args.release}"
     IO.popen(cmd, 'r') do |io| 
       while (line = io.gets)
         puts line

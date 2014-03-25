@@ -1,7 +1,7 @@
 $(function() {
   
   // Dropdown on hover rather than on click for nav
-  $('.c_welcome .dropdown').hover(
+  $('.c_welcome .dropdown, .dropdown.api').hover(
     function() {
       $('.dropdown-menu', this).slideDown();
     },
