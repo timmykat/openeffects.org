@@ -7,9 +7,6 @@
 # Ignore bundler config
 /.bundle
 
-# Ignore bin directory
-/bin
-
 # No secret info
 config/database.yml
 config/ofx_config.yml
