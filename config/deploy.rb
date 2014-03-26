@@ -8,7 +8,7 @@ set :application, 'openeffects.org'
 set :repo_url, 'file://home/ec2-user/git-repos/ofx-staging.git'
 
 ## default is /var/www/#{:application}
-# set :deploy_to, '/var/www/openeffects.org'
+set :deploy_to, '/var/www/openeffects.org'
 
 set :user, 'ec2-user'
 
