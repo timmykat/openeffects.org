@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle
 
 # No secret info
 config/database.yml
@@ -35,5 +36,4 @@ config/ofx_config.yml
 /public/assets/ofx-docbook-nav.css
 /public/assets/OFX_navheader.png
 /public/assets/ofxStyle.css
-.bundle
 
