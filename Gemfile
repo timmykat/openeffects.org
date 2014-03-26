@@ -83,8 +83,10 @@ group :development, :test do
   
   # Use capistrano for deployment (not needed in production)
   gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-db-tasks', require: false
   gem 'capistrano-bundler'
+  gem 'capistrano-db-tasks', require: false
+  gem 'capistrano-rvm'
+  
 #  gem 'capistrano-puma', github: "seuros/capistrano-puma"
 end
 
