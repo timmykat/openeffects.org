@@ -82,13 +82,11 @@ group :development, :test do
   gem 'factory_girl_rails', "4.4.0"
   
   # Use capistrano for deployment (not needed in production)
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
-3  gem 'capistrano-puma', github: "seuros/capistrano-puma"
+  gem 'capistrano-rvm'
+  
+#  gem 'capistrano-puma', github: "seuros/capistrano-puma"
 end
-
-gem 'rvm-capistrano'
 
 group :test do
   gem 'pry'
