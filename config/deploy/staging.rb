@@ -9,6 +9,7 @@ role :app, %w{ofx-amazon}
 role :db, %w{ofx-amazon}
 
 set :rvm_type, :user
+set :user, 'ec2-user'
 
 # Extended Server Syntax
 # ======================
