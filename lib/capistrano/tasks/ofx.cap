@@ -1,0 +1,10 @@
+namespace :deploy do
+  task :ofx_config do
+    on roles(:app) do
+      execute :cp, "-f", " ~/production_assets/ofx/*.yml", "#{shared_path}/config/"
+    end
+  end
+
+  before :check, :ofx_config
+end
+

@@ -35,3 +35,5 @@ config/ofx_config.yml
 /public/assets/ofx-docbook-nav.css
 /public/assets/OFX_navheader.png
 /public/assets/ofxStyle.css
+.bundle
+

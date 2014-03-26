@@ -201,6 +201,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_commentable
   bootstrap-sass (~> 3.1.1)
+  capistrano-bundler
   capistrano-db-tasks
   capistrano-rails (~> 1.1)
   devise

@@ -4,9 +4,9 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :web, %w{ofx-amazon}
-role :app, %w{ofx-amazon}
-role :db, %w{ofx-amazon}
+role :web, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
+role :app, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
+role :db, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 
 # Extended Server Syntax
 # ======================
