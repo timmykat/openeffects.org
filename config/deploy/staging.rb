@@ -8,8 +8,6 @@ role :web, %w{ofx-amazon}
 role :app, %w{ofx-amazon}
 role :db, %w{ofx-amazon}
 
-set :rails_env, 'production'
-
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
