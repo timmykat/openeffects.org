@@ -83,7 +83,6 @@ group :development, :test do
   
   # Use capistrano for deployment (not needed in production)
   gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rvm'
   
 #  gem 'capistrano-puma', github: "seuros/capistrano-puma"
 end
