@@ -86,7 +86,7 @@ module Ofx
                 input_xml.at_css('#top').children.first.add_previous_sibling(@@inserted_html)            
               when 'guide', 'reference'
                 body = input_xml.at_css('body')
-                body.inner_html = "<div class='wrapper #{type}'>#{body.inner_html}</div><!--.wrapper-->"
+                body.inner_html = "<div class='wrapper' id='#{@type}'>#{body.inner_html}</div><!--.wrapper-->"
                 body.children.first.add_previous_sibling(@@inserted_html)  
             end
           

@@ -22,12 +22,10 @@
             %b SECOND:
             Parse the documentation HTML to insert navbars at the top of the documentation.
           = form_tag '/ajax/api_docs/insert_nav', id: 'insert-navbars', method: 'get' do
-            .form-group
-              %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-primary', id: 'all' } All Docs
             .btn-group
               - Rails.configuration.ofx[:support_docs]['docs'].each do |doc|
                 %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-info', id: doc } 
-                  = "#{doc.titlecase.gsub(/_/,' ')} Only"
+                  = "#{doc.titlecase.gsub(/_/,' ')}"
           %br
           = content_tag('div', nil, class: 'insert-nav-status', data: { running: image_url('ajax-running.gif') })
        

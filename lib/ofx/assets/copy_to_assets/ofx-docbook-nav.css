@@ -67,9 +67,9 @@ body {
 }
 
 /* Wrapper for programming guide and reference */
-.wrapper.reference {
-  bg-color: #e0f3f8;
+#reference {
+  background-color: #e0f3f8;
 }
-.wrapper.guide {
-  bg-color: #e5f4f2;
+#guide {
+  background-color: #e5f4f2;
 }

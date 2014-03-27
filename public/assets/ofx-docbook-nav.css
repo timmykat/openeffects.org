@@ -65,3 +65,11 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+/* Wrapper for programming guide and reference */
+#reference {
+  background-color: #e0f3f8;
+}
+#guide {
+  background-color: #e5f4f2;
+}
