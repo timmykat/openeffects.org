@@ -33,26 +33,26 @@
                 .navbar-top
                   %ul.nav.navbar-nav
                     %li.nav-logo
-                      = image_tag('OFX_small.png')
+                      = link_to image_tag('OFX_small.png'), root_path, class: 'navbar-link'
                     %li.dropdown
                       = link_to raw("Welcome #{content_tag(:span, nil, :class => (params[:controller] == 'welcome' ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-circle-arrow-left'))}"), root_path
                       %ul.dropdown-menu.inverse-dropdown
                         %li
-                          = link_to raw('Why a Standard?'), '#standard', class: '.navbar-link'
+                          = link_to raw('Why a Standard?'), '#standard', class: 'navbar-link'
                         %li
-                          = link_to raw('For Implementers'), '#implementers', class: '.navbar-link'
+                          = link_to raw('For Implementers'), '#implementers', class: 'navbar-link'
                         %li
-                          = link_to raw('Association Business'), '#organization', class: '.navbar-link'
+                          = link_to raw('Association Business'), '#organization', class: 'navbar-link'
                     %li.dropdown.api 
                       %a.navbar-link API Documentation #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}
                       %ul.dropdown-menu.inverse-dropdown
                         %li
-                          = link_to 'Programming Guide', '/documentation/guide', class: '.navbar-link'
+                          = link_to 'Programming Guide', '/documentation/guide', class: 'navbar-link'
                         %li
-                          = link_to 'Programming Reference', '/documentation/reference', class: '.navbar-link'
+                          = link_to 'Programming Reference', '/documentation/reference', class: 'navbar-link'
                         %li
-                          = link_to 'API Reference', '/documentation/api_doc', class: '.navbar-link'                     
-                    %li= link_to 'Standards Discussion', :standard_changes, class: '.navbar-link'
+                          = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link'                     
+                    %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
                     - if user_signed_in? and current_user.has_role? :admin
                       %li
                         = link_to 'Admin Dashboard', admin_dashboard_path
