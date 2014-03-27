@@ -11,9 +11,11 @@
 config/database.yml
 config/ofx_config.yml
 
-# Ignore the default SQLite database.
+# Ignore the default SQLite database and dump files
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/*.sql
+/db/*.bz2
 
 # Ignore all logfiles and tempfiles.
 /log/*.log

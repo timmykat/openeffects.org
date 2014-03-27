@@ -5,7 +5,9 @@ class HomeHeroesController < ApplicationController
     msg = []
     
     unless params[:home_hero][:hero_image].blank?
-      hh = HomeHero.new(home_hero_params + { active: true })
+      params[:home_hero].delete(:id)
+      params[:home_hero] = params[:home_hero].merge({ :active => true })
+      hh = HomeHero.new(home_hero_params)
       unless hh.save
         msg << "There was a problem saving the hero image"
       end
@@ -40,7 +42,7 @@ class HomeHeroesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def home_hero_params
-      params.require(:home_hero).permit(:id, :hero_image, delete: [])
+      params.require(:home_hero).permit(:id, :hero_image, :active, delete: [])
     end
 
 end
