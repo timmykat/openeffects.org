@@ -140,6 +140,9 @@ li.nav-logo {
   padding-top: 5px;
   min-height: 60px;
 }
+.navbar-nav > li.nav-logo > a {
+  padding: 0;
+}
 .navbar-form .form-control {
   font-size: 12px;
   padding: 4px 8px;
