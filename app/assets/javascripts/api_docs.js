@@ -1,7 +1,9 @@
 $(function() {
   // Preload running gif
-  var runningImage = new Image();
-  runningImage.src = $('.update-status').data('running')
+  if ($('body').hasClass('c_admin')) {
+    var runningImage = new Image();
+    runningImage.src = '/assets/ajax-running.gif';
+  }
   var termOut = function(line) { return '&gt; ' + line + '<br />'; }
   $('#pull-from-github button').on('click', function(e) {
     $('#terminal').modal('show')
