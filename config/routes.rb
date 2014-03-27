@@ -5,9 +5,8 @@ Ofx::Application.routes.draw do
 #  resources :home_heros
   post 'admin/home_heroes', to: 'home_heroes#create_and_update'
 
-  resources :standard_changes do
-    resources :comments, :only => [:create, :destroy]
-  end
+  resources :standard_changes
+  resources :comments, :only => [:create, :destroy]
   
   resources :versions, except: [:index]
   
