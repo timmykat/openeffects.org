@@ -8,8 +8,7 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes/1
   def show
-    @standard_change = StandardChange.friendly.find(params[:id])
-    @new_comment = @standard_change.comments.new
+    @comment = @standard_change.comments.new
     @comments = @standard_change.comments.recent
   end
 
@@ -20,7 +19,6 @@ class StandardChangesController < ApplicationController
 
   # GET /standard_changes/1/edit
   def edit
-    @standard_change = StandardChange.friendly.find(params[:id])
   end
 
   # POST /standard_changes
@@ -52,6 +50,7 @@ class StandardChangesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_standard_change
+      binding.pry
       @standard_change = StandardChange.friendly.find(params[:id])
     end
 

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
     
-  private
+  private    
     def require_admin
       unless user_signed_in? and current_user.has_role? :admin
         flash[:alert] = "You must be an admin to do that!"
