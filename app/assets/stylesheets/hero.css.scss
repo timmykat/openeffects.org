@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #welcome {
-  background-image: image-url("<%= HomeHero.where(active: true).first.hero_image(:md) %>");
+  background-image: url('/assets/hero_1200.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

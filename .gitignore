@@ -26,13 +26,14 @@ config/ofx_config.yml
 /tmp/*.xml
 
 # Paperclip files
-/public/system
+/public/system/*
+!/public/system/companies
+!/public/system/home_heros
+!/public/system/paperclip_attachments.yml
+
 
 # Docbook files which get rewritten
 /public/unprepped
 /public/documentation
-/public/assets/OFX_small.png
-/public/assets/ofx-docbook-nav.css
-/public/assets/OFX_navheader.png
-/public/assets/ofxStyle.css
+/public/assets/hero*
 

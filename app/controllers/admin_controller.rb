@@ -7,7 +7,7 @@ class AdminController < ApplicationController
     @companies        = ::Company.order(:name).to_a
     @contents         = ::Content.order(:identifier).to_a
     @versions         = ::Version.order(version: :desc).to_a
-    @home_heroes      = ::HomeHero.order(:active).to_a
+    @home_heroes      = ::HomeHero.order(active: :desc).to_a
     @links            = ::Link.all.to_a
   end
   

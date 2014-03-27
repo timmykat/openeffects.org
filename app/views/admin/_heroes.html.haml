@@ -1,25 +1,29 @@
 .panel.panel-default
   .panel-heading
-    %h3.panel-title Hero Image
+    %h3.panel-title Hero Image (max 10)
   .panel-body
-    = form_tag('home_heroes', :multipart => true, :role => "form") do
+    = form_tag(admin_home_heroes_path, :id => 'home_heroes', :multipart => true, :role => "form") do
       - if !@home_heroes.blank?
         %table.table-condensed
           %thead
             %th Active
             %th
+            %th Delete
           %tbody
             - @home_heroes.each do |home_hero|
               %tr
                 %td
-                  = radio_button_tag("home_heroes[hid-#{home_hero.id}][active]", home_hero.id, home_hero.active)
+                  = radio_button_tag("home_hero[id]", home_hero.id, home_hero.active?)
                 %td
                   .form-group
                     = image_tag(home_hero.hero_image(:list_display))
-      %p 
-        Upload a new hero image:
-        = hidden_field_tag "home_heroes[hid-0][active]", true
-        = file_field_tag "home_heroes[hid-0][hero_image]"
+                %td{align: 'center'}
+                  .form-group
+                    = check_box_tag("home_hero[delete][]", home_hero.id)
+      - if @home_heroes.length <= 10
+        %p 
+          Upload a new hero image (will be set as active):
+          = file_field_tag "home_hero[hero_image]"
 
       %p
-        .form-group= submit_tag 'Save', :class => 'btn btn-primary'
+        .form-group= submit_tag 'Save/Update/Delete', :class => 'btn btn-primary'

@@ -1,0 +1,22 @@
+---
+:User:
+  :avatar:
+  - :display
+  - :listing
+:Company:
+  :logo:
+  - :display
+  - :listing
+:Content:
+  :image:
+  - :display
+  - :listing
+  :pdf:
+  - :thumbnail
+:HomeHero:
+  :hero_image:
+  - :lg
+  - :list_display
+  - :md
+  - :sm
+  - :xs
