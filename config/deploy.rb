@@ -2,6 +2,7 @@
 lock '3.1.0'
 
 set :application, 'openeffects.org'
+#set :repo_url, 'file://ofx-amazon:/home/ec2-user/git-repos/openeffects.org.git'
 set :repo_url, 'ssh://ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com/home/ec2-user/git-repos/openeffects.org.git'
 
 ## default is /var/www/#{:application}
@@ -10,6 +11,9 @@ set :deploy_to, '/var/www/openeffects.org'
 # We're deploying the production environment
 set :rails_env, 'production'
 
+set :ssh_options, {
+  forward_agent: true
+}
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/ofx_config.yml}
