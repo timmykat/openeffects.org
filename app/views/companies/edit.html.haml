@@ -9,4 +9,5 @@
 
   .btn-group
     = link_to 'Show', @company, :type => 'button', :class => 'btn btn-default'
-    = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, companies_path, :type => 'button', :class => 'btn btn-default'
+  .btn-group        
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Dashboard'), admin_dashboard_path, :type => 'button', :class => 'btn btn-default'

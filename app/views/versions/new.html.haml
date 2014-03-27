@@ -3,4 +3,5 @@
 
   = render 'form'
     
-  = link_to 'Back', versions_path
+  .btn-group
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Dashboard'), "#{admin_dashboard_path}#versions", :type => 'button', :class => 'btn btn-default'

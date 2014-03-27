@@ -4,6 +4,6 @@ module ApplicationHelper
   end
   
   def get_version_options
-    Version.all.to_a.map { |v| [v.version, "v#{v.version.gsub('.','')}"] }
+    Version.order(version: :desc).to_a.map { |v| [v.version, "v#{v.version.gsub('.','')}"] }
   end
 end

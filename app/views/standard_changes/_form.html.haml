@@ -17,7 +17,7 @@
   
   .form-group  
     = f.label :version
-    = f.collection_select :version_id, Version.all, :id, :version, :class => "form-control"
+    = f.collection_select :version_id, Version.order(version: :desc), :id, :version, :class => "form-control"
 
   .form-group
     = f.label :status

@@ -50,7 +50,6 @@ class StandardChangesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_standard_change
-      binding.pry
       @standard_change = StandardChange.friendly.find(params[:id])
     end
 

@@ -3,4 +3,6 @@
 
   = render 'form'
 
-  = link_to 'Back', standard_changes_path
+
+  .btn-group        
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to List'), standard_changes_path, :type => 'button', :class => 'btn btn-default'

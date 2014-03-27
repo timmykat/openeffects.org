@@ -9,4 +9,4 @@
 
   .btn-group
     = link_to 'Show', @standard_change, :type => 'button', :class => 'btn btn-default'
-    = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, standard_changes_path, :type => 'button', :class => 'btn btn-default'
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to List'), standard_changes_path, :type => 'button', :class => 'btn btn-default'

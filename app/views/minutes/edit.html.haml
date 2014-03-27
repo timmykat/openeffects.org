@@ -9,4 +9,4 @@
 
   .btn-group
     = link_to 'Show', @minute, :type => 'button', :class => 'btn btn-default'
-    = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, minute_path, :type => 'button', :class => 'btn btn-default'
+    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Dashboard'), admin_dashboard_path, :type => 'button', :class => 'btn btn-default'

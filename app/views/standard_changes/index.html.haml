@@ -3,18 +3,26 @@
   - if @standard_changes.blank?
     %p There are currently no standard changes.
   - else
-    .col-md-2
-      .form-group
-        = select_tag('status', options_for_select([["Any status", "all"]] + get_change_selection('status'),'proposed'), class: 'status form-control input-small')
-    .col-md-2
-      .form-group
-        = select_tag('version', options_for_select([["All versions", "all"]] + get_version_options), class: 'version form-control input-small')
-    .col-md-6
-      %span.sc-key.bg-info Proposed
-      != "&nbsp;&nbsp;&nbsp;"
-      %span.sc-key.bg-success Approved
-      != "&nbsp;&nbsp;&nbsp;"
-      %span.sc-key.bg-danger Withdrawn or Deprecated
+    - if current_user and current_user.has_role? :admin
+      .row
+        .col-md-2
+          .btn.btn-default
+            = link_to 'New Standard change', new_standard_change_path, :type => 'button'
+          %br
+          %br
+    .row   
+      .col-md-2
+        .form-group
+          = select_tag('status', options_for_select([["Any status", "all"]] + get_change_selection('status'),'proposed'), class: 'status form-control input-small')
+      .col-md-2
+        .form-group
+          = select_tag('version', options_for_select([["All versions", "all"]] + get_version_options), class: 'version form-control input-small')
+      .col-md-6
+        %span.sc-key.bg-info Proposed
+        != "&nbsp;&nbsp;&nbsp;"
+        %span.sc-key.bg-success Approved
+        != "&nbsp;&nbsp;&nbsp;"
+        %span.sc-key.bg-danger Withdrawn or Deprecated
     %table.table
       %tr
         %th Version

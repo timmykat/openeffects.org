@@ -33,7 +33,7 @@
     
   .form-group
     = f.label :summary
-    = f.text_area :summary, :value => @news_item, :class => "tinymce form-control", :rows => 20
+    = f.text_area :summary, :value => raw(@news_item.summary), :class => "tinymce form-control", :rows => 20
         
   .form-group
     = f.submit 'Save'

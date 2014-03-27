@@ -23,9 +23,9 @@
   
       .form-group
         = f.label :status
-        = f.select :status, options_for_select(get_version_status_selection, @version.status), :class => "form-control"
+        = f.select :status, options_for_select(get_version_status_selection, @version.status), class: "version input-sm form-control"
     
   .form-group
-    = f.submit 'Save' 
+    = f.submit 'Save', class: 'btn btn-default'
     
 = tinymce       
