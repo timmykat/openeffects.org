@@ -11,7 +11,7 @@
             %th Current
             %th Version
             %th Status
-            - if current_user and current_user.has_role? :admin
+            - if user_signed_in? and current_user.has_role? :admin
               %th{ :colspan => 3 }
         %tbody
           - @versions.each do |v|
@@ -22,7 +22,7 @@
               %td
                 %b= v.version
               %td= Rails.configuration.ofx[:version_status][v.status]
-              - if current_user.has_role? :admin
+              - if user_signed_in? and current_user.has_role? :admin
                 %td= link_to 'Edit', edit_version_path(v)
                 %td= link_to 'Delete', v, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

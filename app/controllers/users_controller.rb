@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :require_admin
+  before_action :require_admin_or_self, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # AJAX methods
@@ -53,6 +55,14 @@ class UsersController < ApplicationController
   end
   
   private
+    # Require that only the user or an admin can only perform these actions on himself
+    def require_admin_or_self
+      unless user_signed_in? and (current_user.has_role? :admin or current_user.id == params[:id])
+        flash[:alert] = "I'm sorry, you don't have the privileges to do that."
+        redirect_to root_path
+      end 
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.friendly.find(params[:id])

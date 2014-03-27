@@ -10,7 +10,7 @@
           %th Identifier
           %th Title
           %th PDF
-          - if current_user and current_user.has_role? :admin
+          - if user_signed_in? and current_user.has_role? :admin
             %th{ :colspan => 3 }
       %tbody
         - @contents.each do |content|

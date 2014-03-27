@@ -27,7 +27,7 @@
 
   .btn-group        
     = link_to 'Back to company list', companies_path, :type => 'button', :class => 'btn btn-default'
-    - if current_user and current_user.has_role? :admin
+    - if user_signed_in? and current_user.has_role? :admin
       = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
       = link_to 'Edit', edit_company_path(@company), :type => 'button', :class => 'btn btn-warning'
 

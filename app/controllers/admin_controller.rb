@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  before_action :require_admin
+
   def dashboard
     @minutes          = ::Minute.order("minutes.date DESC").to_a
     @news_items       = ::NewsItem.order(date: :desc).to_a

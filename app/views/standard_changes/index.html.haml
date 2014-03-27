@@ -3,7 +3,7 @@
   - if @standard_changes.blank?
     %p There are currently no standard changes.
   - else
-    - if current_user and current_user.has_role? :admin
+    - if user_signed_in? and current_user.has_role? :admin
       .row
         .col-md-2
           .btn.btn-default
@@ -31,7 +31,7 @@
         %th Activity
         %th Type
         %th Status
-        - if current_user and current_user.has_role? :admin
+        - if user_signed_in? and current_user.has_role? :admin
           %th
           %th
 
@@ -66,11 +66,11 @@
               !="Last&nbsp;commented:<br />#{last_commented}"
           %td= standard_change.type
           %td= standard_change.status
-          - if current_user and current_user.has_role? :admin
+          - if user_signed_in? and current_user.has_role? :admin
             %td= link_to 'Edit', edit_standard_change_path(standard_change), :class => 'btn btn-xs btn-warning'
             %td= link_to 'Destroy', standard_change, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-xs btn-danger'
 
-  - if current_user and current_user.has_role? :admin
+  - if user_signed_in? and current_user.has_role? :admin
     %br
     .btn.btn-default
       = link_to 'New Standard change', new_standard_change_path, :type => 'button'

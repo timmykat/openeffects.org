@@ -10,7 +10,7 @@
           %th Name
           %th URL
           %th Contact
-          - if current_user and current_user.has_role? :admin
+          - if user_signed_in? and current_user.has_role? :admin
             %th{ :colspan => 3 }
       %tbody
         - @companies.each do |company|
@@ -19,7 +19,7 @@
             %td= company.name
             %td= link_to company.url, company.url, :target => '_blank' 
             %td= company.contact.blank? ? '(none)' : company.contact.name
-            - if current_user and current_user.has_role? :admin
+            - if user_signed_in? and current_user.has_role? :admin
               %td= link_to 'Show', company
               %td= link_to 'Edit', edit_company_path(company)
               %td= link_to 'Delete', company, :method => :delete, :data => { :confirm => 'Are you sure?' }

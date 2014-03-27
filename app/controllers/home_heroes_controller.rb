@@ -1,5 +1,5 @@
 class HomeHeroesController < ApplicationController
-  before_action :check_role
+  before_action :require_admin
 
   def create_and_update
     msg = []
@@ -33,13 +33,6 @@ class HomeHeroesController < ApplicationController
   end
   
   private
-    def check_role
-      unless current_user.has_role? :admin
-        flash[:alert] = "You must have adminstrative access to view this."
-        redirect_to root
-      end
-    end
-
     # Only allow a trusted parameter "white list" through.
     def home_hero_params
       params.require(:home_hero).permit(:id, :hero_image, :active, delete: [])
