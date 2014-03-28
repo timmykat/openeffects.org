@@ -8,6 +8,8 @@ role :web, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 role :app, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 role :db, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 
+set :ping_url, 'http://ofx.wordsareimages.com'
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
