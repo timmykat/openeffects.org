@@ -41,8 +41,10 @@ class ApiDocsController < ApplicationController
       sse.write("Remaking unprepped doc directories<br/>")
       case Rails.env
         when 'development'
+          logger.info("Making docs - working in #{Rails.root}")
           base_dir = Rails.root
         when 'production'
+          logger.info("Making docs - working in #{Rails.configuration.ofx[:deploy_dir]}")
           base_dir = File.join(Rails.configuration.ofx[:deploy_dir], 'shared')
       end          
       %x[ rm -r #{File.join(base_dir, 'public', 'unprepped')} ]
