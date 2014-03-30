@@ -16,7 +16,7 @@ $(function() {
     var ajaxCall = function(url, eventResource) {
       $.ajax({
         url: url,
-        success: function() {
+        complete: function() {
           eventResource.close();
           $('.update-status').html('DONE <span class="glyphicon glyphicon-thumbs-up"></span>').removeClass('text-warning').addClass('text-success');
         }
@@ -54,7 +54,7 @@ $(function() {
     var ajaxCall = function(url, eventResource) {
       $.ajax({
         url: url,
-        success: function(data) {
+        complete: function(data) {
           eventResource.close();
           $('.insert-nav-status').html('DONE <span class="glyphicon glyphicon-thumbs-up"></span>').removeClass('text-warning').addClass('text-success');
         }
