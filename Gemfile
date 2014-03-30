@@ -58,10 +58,8 @@ gem 'truncate_html'
 # FriendlyId for nice looking urls
 gem 'friendly_id'
 
-# group :doc do
-#   # bundle exec rake doc:rails generates the API under doc/api.
-#   gem 'sdoc', require: false
-# end
+# Need to hand assets without digests for the API docs
+gem 'non-stupid-digest-assets'
  
 # Development tools
 group :development do
@@ -71,26 +69,18 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'puma'
-end
 
-# Stuff for heroku
-# group :production do
-#   gem 'rails_12factor'
-#   gem 'thin'
-# end
-
-# For testing
-group :development, :test do
-#  gem 'rspec-rails', '~> 3.0.0.beta2'
-  gem 'factory_girl_rails', "4.4.0"
-  
   # Use capistrano for deployment (not needed in production)
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler'
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-rvm'
-  
-#  gem 'capistrano-puma', github: "seuros/capistrano-puma"
+end
+
+
+# For testing
+group :development, :test do
+  gem 'factory_girl_rails', "4.4.0"  
 end
 
 group :test do

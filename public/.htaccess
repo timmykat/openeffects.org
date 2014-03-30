@@ -1,0 +1,2 @@
+# remove trailing slash
+RewriteRule ^(.*)/$ /$1 [L,R=301]
