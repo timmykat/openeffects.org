@@ -42,23 +42,27 @@ class ApiDocsController < ApplicationController
       case Rails.env
         when 'development'
           logger.info("Making docs - working in #{Rails.root}")
-          base_dir = Rails.root
+          destination_dir = File.join(Rails.root, 'public', 'unprepped')
         when 'production'
           logger.info("Making docs - working in #{Rails.configuration.ofx[:deploy_dir]}")
-          base_dir = File.join(Rails.configuration.ofx[:deploy_dir], 'shared')
+          destination_dir = File.join(Rails.configuration.ofx[:deploy_dir], 'shared', 'public', 'unprepped')
       end          
-      %x[ rm -r #{File.join(base_dir, 'public', 'unprepped')} ]
-      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'api_doc')} ]
-      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'guide')} ]
-      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'reference')} ]
+      %x[ rm -r #{destination_dir} ]
+      %x[ mkdir -p #{File.join(destination_dir, 'api_doc')} ]
+      %x[ mkdir -p #{File.join(destination_dir, 'guide')} ]
+      %x[ mkdir -p #{File.join(destination_dir, 'reference')} ]
       
       # Additional step for production of ensuring the link from current to shared
       if (Rails.env == 'production')
-        %x[rm #{File.join(Rails.root, 'public', 'unprepped')}]
-        %x[ln -s #{File.join(base_dir, 'public', 'unprepped')} #{File.join(Rails.root, 'public', 'unprepped')}]
+        %x[rm -r #{destination_dir}]
+        %x[ln -s #{destination_dir} #{File.join(Rails.root, 'public', 'unprepped')}]
       end 
-        
-      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:support_docs]['repo'][Rails.env]} #{params[:release]} #{Rails.env} 2>&1"
+      
+      # The command takes three parameters:
+      # 1) ENV-local OpenFX repo location (from ofx yaml configuration file)
+      # 2) Release identifier (from dashboard)
+      # 3) The destination directory
+      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:support_docs]['repo'][Rails.env]} #{params[:release]} #{destination_dir} 2>&1"
       IO.popen(cmd, 'r') do |io| 
         begin
           while (line = io.gets)
