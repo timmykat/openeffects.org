@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
   def destroy
     name = @company.name
     @company.destroy
-    redirect_to companies_url, notice: '#{name} was successfully deleted.'
+    redirect_to companies_url, notice: "#{name} was successfully deleted."
   end
   
   private
