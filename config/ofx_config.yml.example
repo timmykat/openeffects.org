@@ -1,11 +1,12 @@
+deploy_dir: /var/www/openeffects.org
 support_docs:
   docs:
     - api_doc
     - reference
     - guide
-  repo: 
-    development: <location of the openfx repo on your machine>
-    staging: /home/ec2-user/git-repos/openfx.git
+  repo:
+    development: ######  
+    production: /home/ec2-user/openfx_files
 meeting_type:
   agm: Association General Meeting
   dirm: Directors' Meeting
@@ -31,8 +32,8 @@ sanitizer:
       - href
       - type
 recaptcha:
-  !ruby/sym public_key:   ##########
-  !ruby/sym private_key:  ########## 
+  !ruby/sym public_key:   #### 
+  !ruby/sym private_key:  ####
 
 migration:
   !ruby/sym base_url: http://openeffects.org

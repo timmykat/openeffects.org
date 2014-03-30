@@ -62,7 +62,6 @@ class ApiDocsController < ApplicationController
           while (line = io.gets)
             sse.write(line)
           end
-        rescue IOError
         ensure
           response.status = 304
           sse.close

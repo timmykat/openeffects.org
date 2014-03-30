@@ -1,1 +1,1 @@
-NonStupidDigestAssets.whitelist = [/tinymce\/.*/, /webfont/]
+NonStupidDigestAssets.whitelist = [/tinymce\/.*/, /webfont/, /ajax-running.gif/]
