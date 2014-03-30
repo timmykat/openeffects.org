@@ -32,15 +32,37 @@ class ApiDocsController < ApplicationController
         format.json { render :json => { error: 'Please specify a release' }}
       end
     else
-      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:support_docs]['repo'][Rails.env]} #{params[:release]} 2>&1"
+      sse = ServerSide::SSE.new(response.stream)
       response.headers['Content-Type'] = 'text/event-stream'
       response.headers['Access-Control-Allow-Origin'] = '*'
-      sse = ServerSide::SSE.new(response.stream)
+      
+      # Handle the unprepped document directory
+      # Handle differently for dev and production
+      sse.write("Remaking unprepped doc directories<br/>")
+      case Rails.env
+        when 'development'
+          base_dir = Rails.root
+        when 'production'
+          base_dir = File.join(Rails.configuration.ofx[:deploy_dir], 'shared')
+      end          
+      %x[ rm -r #{File.join(base_dir, 'public', 'unprepped')} ]
+      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'api_doc')} ]
+      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'guide')} ]
+      %x[ mkdir -p #{File.join(base_dir, 'public', 'unprepped', 'reference')} ]
+      
+      # Additional step for production of ensuring the link from current to shared
+      if (Rails.env == 'production')
+        %x[rm #{File.join(Rails.root, 'public', 'unprepped')}]
+        %x[ln -s #{File.join(base_dir, 'public', 'unprepped')} #{File.join(Rails.root, 'public', 'unprepped')}]
+      end 
+        
+      cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{Rails.configuration.ofx[:support_docs]['repo'][Rails.env]} #{params[:release]} #{Rails.env} 2>&1"
       IO.popen(cmd, 'r') do |io| 
         begin
           while (line = io.gets)
             sse.write(line)
           end
+        rescue IOError
         ensure
           response.status = 304
           sse.close
