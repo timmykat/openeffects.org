@@ -25,10 +25,6 @@
         - else
           = image_tag(@company.logo.url(:display))
 
-  .btn-group        
-    = link_to 'Back to company list', companies_path, :type => 'button', :class => 'btn btn-default'
-    - if user_signed_in? and current_user.has_role? :admin
-      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_company_path(@company), :type => 'button', :class => 'btn btn-warning'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'company', instance: @company, edit_page: false }
 
   

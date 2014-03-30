@@ -21,10 +21,6 @@
       %hr
       %p= raw(@minute.minutes)
 
-  .btn-group        
-    = link_to 'Back to minute list', minutes_path, :type => 'button', :class => 'btn btn-default'
-    - if current_user
-      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_minute_path(@minute), :type => 'button', :class => 'btn btn-warning'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'minute', instance: @minute, edit_page: false }
 
   

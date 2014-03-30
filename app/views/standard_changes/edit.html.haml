@@ -7,6 +7,4 @@
         .col-lg-offset-1.col-lg-10
           = render 'form'
 
-  .btn-group
-    = link_to 'Show', @standard_change, :type => 'button', :class => 'btn btn-default'
-    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to List'), standard_changes_path, :type => 'button', :class => 'btn btn-default'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'standard_change', instance: @standard_change, edit_page: true }

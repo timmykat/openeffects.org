@@ -4,6 +4,4 @@
       %h1.panel-title Edit Member
       = render 'form'
 
-      .btn-group
-        = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, users_path, :type => 'button', :class => 'btn btn-default'
-        = link_to 'Show', @user, :type => 'button', :class => 'btn btn-default'
+      = render :partial => 'components/back_dash_edit', :locals => { model: 'user', instance: @user, edit_page: true }

@@ -16,8 +16,7 @@ Ofx::Application.routes.draw do
   
   #AJAX
   scope :ajax do
-    get 'users/toggle_approved',  to: 'users#toggle_approved'
-    get 'users/toggle_role',      to: 'users#toggle_role'
+    get 'users/toggle',           to: 'users#toggle'
     get 'api_docs/update',        to: 'api_docs#update'
     get 'api_docs/insert_nav',    to: 'api_docs#insert_nav'
     get 'api_docs/test',          to: 'api_docs#test'

@@ -18,13 +18,13 @@
           = f.label "Company or Organization"
           = f.text_field :company_or_org, :class => "form-control"
 
-        .form-group
-          = f.label :password
-          = f.password_field :password, :required => true, :class => "form-control"
-
-        .form-group
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation, :required => true, :class => "form-control"
+        .row
+          .col-md-3
+            = f.label :password
+            = f.password_field :password, :required => true, :class => "form-control"
+          .col-md-3
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, :required => true, :class => "form-control"
 
 
         .form-group

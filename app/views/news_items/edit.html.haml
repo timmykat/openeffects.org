@@ -7,6 +7,4 @@
         .col-lg-offset-1.col-lg-10
           = render 'form'
 
-  .btn-group
-    = link_to 'Show', @news_item, :type => 'button', :class => 'btn btn-default'
-    = link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> Back'.html_safe, admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'news_item', instance: @news_item, edit_page: true }

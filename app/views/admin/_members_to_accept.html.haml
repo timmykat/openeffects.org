@@ -3,21 +3,18 @@
     %h3.panel-title 
       Members Awaiting Approval
   .panel-body
-    %table.table-condensed
+    %table.table-condensed#users
       %thead
         %tr
-          %th Accept
+          %th Approve
           %th Name
           %th Email
           %th Company
       %tbody
         - members_waiting.each do |user|
           %tr
-            %td
-              - if user.approved?
-                %button.approved.btn.btn-xs.btn-success Approved
-              - else
-                %button.accept.btn.btn-xs.btn-primary Accept
+            %td.text-center
+              = render :partial => 'components/user_status', :locals => { :user => user }
             %td= user.name
             %td= user.email
             %td= user.company_or_org

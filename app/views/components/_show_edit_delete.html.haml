@@ -1,0 +1,4 @@
+.btn-group
+  = link_to 'Show', instance, class: 'btn btn-xs btn-default'
+  = link_to 'Edit', send("edit_#{model}_path", instance), class: 'btn btn-xs btn-warning'
+  = link_to 'Delete', instance, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-xs btn-danger'

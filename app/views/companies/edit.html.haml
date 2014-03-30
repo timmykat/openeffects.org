@@ -7,7 +7,4 @@
         .col-lg-offset-1.col-lg-10
           = render 'form'
 
-  .btn-group
-    = link_to 'Show', @company, :type => 'button', :class => 'btn btn-default'
-  .btn-group        
-    = link_to raw('<span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Dashboard'), admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'company', instance: @company, edit_page: true }

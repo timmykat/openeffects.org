@@ -4,24 +4,24 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # AJAX methods
-  def toggle_approved
+  def toggle
     u = User.friendly.find(params[:id])
-    u.toggle(:approved)
-    u.save
-    render :text => u.approved? ? 'approved' : ''
-  end
-
-  def toggle_role
-    u = User.friendly.find(params[:id])
-    role = params[:role].to_sym
-    if u.has_role? role
-      u.roles.delete(role)
-      ret = nil
-    else 
-      u.roles << role
-      ret = 'added'
+    case params[:value]
+      when 'approved'
+        u.toggle(:approved)
+        u.save
+        ret = u.approved? ? 'approved' : ''
+      when 'role'
+        role = params[:role].to_sym
+        if u.has_role? role
+          u.roles.delete(role)
+          ret = nil
+        else 
+          u.roles << role
+          ret = 'added'
+        end
+        u.save    
     end
-    u.save
     render :text => ret
   end
 

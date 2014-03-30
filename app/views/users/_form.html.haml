@@ -19,7 +19,7 @@
 
   .form-group
     = f.label :notifications
-    = f.check_box :notifications, :value => @user.notifications, :class => "form-control"
+    = f.check_box :notifications, :value => @user.notifications, :disabled => @user.id != current_user.id
     %p.hint Check this if you'd like to receive e-mail notifications when standard changes are updated or commented.
 
   .form-group

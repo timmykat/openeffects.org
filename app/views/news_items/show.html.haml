@@ -17,11 +17,6 @@
       %label Summary
       %p= raw(@news_item.summary)
 
-  .btn-group        
-    = link_to 'To welcome page', root_path, :type => 'button', :class => 'btn btn-default'
-    = link_to 'All news items', news_items_path, :type => 'button', :class => 'btn btn-default'
-    - if user_signed_in? and current_user.has_role? :admin
-      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_news_item_path(@news_item), :type => 'button', :class => 'btn btn-warning'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'news_item', instance: @news_item, edit_page: false }
 
   

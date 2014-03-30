@@ -23,10 +23,6 @@
         - else
           = image_tag(@user.avatar.url(:display))
 
-  .btn-group        
-    = link_to 'Back to user list', users_path, :type => 'button', :class => 'btn btn-default'
-    - if user_signed_in? and current_user.has_role? :admin
-      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_user_path(@user), :type => 'button', :class => 'btn btn-warning'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'user', instance: @user, edit_page: false }
 
   

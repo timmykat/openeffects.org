@@ -22,10 +22,6 @@
         - else
           = link_to image_tag(@content.logo.url(:display)), @content.pdf
 
-  .btn-group        
-    = link_to 'Back to content list', contents_path, :type => 'button', :class => 'btn btn-default'
-    - if user_signed_in? and current_user.has_role? :admin
-      = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-default'
-      = link_to 'Edit', edit_content_path(@content), :type => 'button', :class => 'btn btn-warning'
+  = render :partial => 'components/back_dash_edit', :locals => { model: 'content', instance: @content, edit_page: false }
 
   

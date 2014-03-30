@@ -1,0 +1,9 @@
+.btn-group        
+  = link_to raw("<span class='glyphicon glyphicon-circle-arrow-left'></span> Back to #{model.gsub('_',' ')} list"), send("#{model.pluralize}_path"), :type => 'button', :class => 'btn btn-default'
+  - if user_signed_in? and current_user.has_role? :admin          
+    = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-info'
+    - unless edit_page
+      = link_to 'Edit', send("edit_#{model}_path", instance), :type => 'button', :class => 'btn btn-warning'
+  - if model == 'user' and !edit_page and user_signed_in? and current_user.id == instance.id
+    = link_to 'Edit', send("edit_#{model}_path", instance), :type => 'button', :class => 'btn btn-warning'
+    
