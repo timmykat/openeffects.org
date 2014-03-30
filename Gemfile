@@ -59,7 +59,7 @@ gem 'truncate_html'
 gem 'friendly_id'
 
 # Need to hand assets without digests for the API docs
-gem 'non-stupid-digest-assets'
+gem 'non-stupid-digest-assets', :git => "http://github.com/timmykat/non-stupid-digest-assets"
  
 # Development tools
 group :development do
