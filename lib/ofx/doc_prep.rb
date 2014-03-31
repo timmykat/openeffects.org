@@ -14,7 +14,7 @@ module Ofx
       @destination_dir = File.join(Rails.root,'public',@doc_dir)
     end
     
-    def process_directory(sse = nil)
+    def process_directory(stream = nil)
 
       ## Clear and remake the destination directory and asset directory
       %x[ rm -r #{@destination_dir} ]
@@ -43,28 +43,31 @@ module Ofx
         
         case filename
           when /\.css$/
-            if sse.nil?
+            if stream.nil?
               puts "Processing css: #{filename}"
             else
-              sse.write "Processing css: #{filename}"
+              stream.write("event: terminal-output\n")
+              stream.write("data: Processing css: #{filename}\n\n")
             end  
             # Make url refs absolute
             process_asset_file.call(file, /url\(('[a-zA-Z_0-9].*\.(png|jpg|gif)')\)/, "url('/#{@doc_dir}/#{$1}')")
             
           when /\.js$/
-            if sse.nil?
+            if stream.nil?
               puts "Processing js #{filename}"
             else
-              sse.write "Processing js: #{filename}"
+              stream.write("event: terminal-output\n")
+              stream.write("data: Processing js: #{filename}\n\n")
             end
             # Make url refs absolute
             process_asset_file.call(file, /"([a-zA-Z_0-9].*\.html(#[a-zA-Z_0-9].*){0.1})"/, "\"/#{@doc_dir}/#{$1}\"")
             
           when /\.html$/
-            if sse.nil?
+            if stream.nil?
               puts "Processing html #{filename}"
             else
-              sse.write "Processing html: #{filename}"
+              stream.write("event: terminal-output\n")
+              stream.write("data: Processing html: #{filename}\n\n")
             end
             input_xml = Nokogiri::XML(open(file))
         
@@ -94,10 +97,11 @@ module Ofx
             File.open("#{@destination_dir}/#{filename}", 'w') { |f| f.write(@@xsl.apply_to(input_xml).to_s) }
             
           else  
-           if sse.nil?
+           if stream.nil?
               puts "Copying file: #{filename}"
             else
-              sse.write "Copying file: #{filename}"
+              stream.write("event: terminal-output\n")
+              stream.write("data: Copying file: #{filename}\n\n")
             end
             %x( cp #{file} #{@destination_dir} )
 #            %x( cp #{file} "#{File.join(Rails.root, 'public', @docs_dir_path)}" )

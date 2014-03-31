@@ -16,10 +16,11 @@ Ofx::Application.routes.draw do
   
   #AJAX
   scope :ajax do
-    get 'users/toggle',           to: 'users#toggle'
-    get 'api_docs/update',        to: 'api_docs#update'
-    get 'api_docs/insert_nav',    to: 'api_docs#insert_nav'
-    get 'api_docs/test',          to: 'api_docs#test'
+    get 'users/toggle',               to: 'users#toggle'
+    get 'api_docs/start_stream',      to: 'api_docs#start_stream'
+    get 'api_docs/update',            to: 'api_docs#update'
+    get 'api_docs/insert_nav',        to: 'api_docs#insert_nav'
+    get 'api_docs/test',              to: 'api_docs#test'
   end
   
   
