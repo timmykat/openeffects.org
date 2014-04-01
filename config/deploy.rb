@@ -29,8 +29,8 @@ set :assets_dir, %w(public/assets public/system public/documentation)
 
 namespace :deploy do
   desc 'Copy ofx config file (kluge!)'
-  task :copy_correct_config
-    on roles(:app), in: :sequence, wait: 5 do
+  task :copy_correct_config do
+    on roles(:app) do
       execute :cp, '~/ofx_config.yml', shared_path.join('config')
     end
   end

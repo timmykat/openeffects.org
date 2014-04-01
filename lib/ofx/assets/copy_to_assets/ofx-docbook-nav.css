@@ -42,11 +42,11 @@ body {
   font-size: 13px;
   background-color: #222;
   border-color: #080808;
-  padding: 10px 0 10px 20px;
+  padding: 6px 0 8px 20px;
 }
 #ofx-main-nav ul {
   list-style-type: none;
-  margin-left: 0;
+  margin: 0;
   padding-left: 0;
 }
 #ofx-main-nav ul li {
