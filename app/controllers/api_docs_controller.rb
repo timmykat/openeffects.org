@@ -1,25 +1,4 @@
-# SSE module
 require 'json'
- 
-# module ServerSide
-#   class SSE
-#     def initialize io
-#       @io = io
-#     end
-#  
-#     def write object, options = {}
-#       options.each do |k,v|
-#         @io.write "#{k}: #{v}n"
-#       end
-#       @io.write "data: #{object}\n\n"
-#     end
-#  
-#     def close
-#       @io.close
-#     end
-#   end
-# end
-#
 
 class ApiDocsController < ApplicationController
   include ActionController::Live  # See https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/metal/live.rb
@@ -72,14 +51,30 @@ class ApiDocsController < ApplicationController
     if (Rails.env == 'production')
       response.stream.write("event: terminal-output\n")
       response.stream.write("data: Creating 'unprepped' shared directory link\n\n")
-      %x[ln -s #{destination_dir} #{File.join(Rails.root, 'public', 'unprepped')}]
+      
+      cmd = "ln -s #{destination_dir} #{File.join(Rails.root, 'public', 'unprepped')}"
+      %x[ #{cmd} ]
+      response.stream.write("event: terminal-output\n")
+      response.stream.write("data: #{cmd}\n\n")
     end
 
     response.stream.write("event: terminal-output\n")
     response.stream.write("data: Moving docs into 'unprepped' directory\n\n")
-    %x[ cp -r #{File.join(docs_source_dir, 'doc', 'html', '*')} #{api_doc_dir}  ]
-    %x[ cp -r #{File.join(docs_source_dir, 'Documentation', 'Guide', '*')} #{guide_dir}  ]
-    %x[ cp -r #{File.join(docs_source_dir, 'Documentation', 'Reference', '*')} #{reference_dir}  ]
+
+    cmd = "cp -r #{File.join(docs_source_dir, 'doc', 'html', '*')} #{api_doc_dir}"
+    %x[ #{cmd} ]
+    response.stream.write("event: terminal-output\n")
+    response.stream.write("data: #{cmd}\n\n")
+
+    cmd = "cp -r #{File.join(docs_source_dir, 'Documentation', 'Guide', '*')} #{guide_dir}"
+    %x[ #{cmd} ]
+    response.stream.write("event: terminal-output\n")
+    response.stream.write("data: #{cmd}\n\n")
+
+    cmd = "cp -r #{File.join(docs_source_dir, 'Documentation', 'Reference', '*')} #{reference_dir}"
+    %x[ #{cmd} ]
+    response.stream.write("event: terminal-output\n")
+    response.stream.write("data: #{cmd}\n\n")
 
     response.stream.write("event: terminal-output\n")
     response.stream.write("data: DONE\n\n")
@@ -93,7 +88,7 @@ class ApiDocsController < ApplicationController
     response.stream.close
     render :json => { status: :ok }
   end
-  
+    
   def insert_nav
     process_doc = params[:process_doc] || 'all'
     response.headers['Content-Type'] = 'text/event-stream'
