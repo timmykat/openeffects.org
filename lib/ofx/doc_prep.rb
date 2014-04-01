@@ -42,25 +42,25 @@ module Ofx
         }
         
         case filename
-          when /\.css$/
-            if stream.nil?
-              puts "Processing css: #{filename}"
-            else
-              stream.write("event: terminal-output\n")
-              stream.write("data: Processing css: #{filename}\n\n")
-            end  
-            # Make url refs absolute
-            process_asset_file.call(file, /url\(('[a-zA-Z_0-9].*\.(png|jpg|gif)')\)/, "url('/#{@doc_dir}/#{$1}')")
+#           when /\.css$/
+#             if stream.nil?
+#               puts "Processing css: #{filename}"
+#             else
+#               stream.write("event: terminal-output\n")
+#               stream.write("data: Processing css: #{filename}\n\n")
+#             end  
+#             # Make url refs absolute
+#             process_asset_file.call(file, /url\(('[a-zA-Z_0-9].*\.(png|jpg|gif)')\)/, "url('/#{@doc_dir}/#{$1}')")
             
-          when /\.js$/
-            if stream.nil?
-              puts "Processing js #{filename}"
-            else
-              stream.write("event: terminal-output\n")
-              stream.write("data: Processing js: #{filename}\n\n")
-            end
-            # Make url refs absolute
-            process_asset_file.call(file, /"([a-zA-Z_0-9].*\.html(#[a-zA-Z_0-9].*){0.1})"/, "\"/#{@doc_dir}/#{$1}\"")
+#           when /\.js$/
+#             if stream.nil?
+#               puts "Processing js #{filename}"
+#             else
+#               stream.write("event: terminal-output\n")
+#               stream.write("data: Processing js: #{filename}\n\n")
+#             end
+#             # Make url refs absolute
+#             process_asset_file.call(file, /"([a-zA-Z_0-9].*\.html(#[a-zA-Z_0-9].*){0.1})"/, "\"/#{@doc_dir}/#{$1}\"")
             
           when /\.html$/
             if stream.nil?
