@@ -51,8 +51,9 @@ class ApiDocsController < ApplicationController
     if (Rails.env == 'production')
       response.stream.write("event: terminal-output\n")
       response.stream.write("data: Creating 'unprepped' shared directory link\n\n")
+      %x[ rm #{File.join(Rails.root, 'public', 'prepped')} ]
       
-      cmd = "ln -s #{destination_dir} #{File.join(Rails.root, 'public', 'unprepped')}"
+      cmd = "ln -s #{destination_dir} #{File.join(Rails.root, 'public')}"
       %x[ #{cmd} ]
       response.stream.write("event: terminal-output\n")
       response.stream.write("data: #{cmd}\n\n")
