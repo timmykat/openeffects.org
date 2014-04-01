@@ -28,6 +28,15 @@ set :db_local_clean, true
 set :assets_dir, %w(public/assets public/system public/documentation)
 
 namespace :deploy do
+  desc 'Copy ofx config file (kluge!)'
+  task :copy_correct_config
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :cp, '~/ofx_config.yml', shared_path.join('config')
+    end
+  end
+  
+  before :restart, :copy_correct_config
+  
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
