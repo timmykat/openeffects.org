@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("/assets/glyphicons-halflings-regular.eot");
-  src: url("/assets/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'),
-       url("/assets/glyphicons-halflings-regular.woff") format('woff'),
-       url("/assets/glyphicons-halflings-regular.ttf") format('truetype'),
-       url("/assets/glyphicons-halflings-regular.svg#glyphicons-halflings-regular") format('svg');
+  src: url("/assets/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("/assets/bootstrap/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'),
+       url("/assets/bootstrap/glyphicons-halflings-regular.woff") format('woff'),
+       url("/assets/bootstrap/glyphicons-halflings-regular.ttf") format('truetype'),
+       url("/assets/bootstrap/glyphicons-halflings-regular.svg#glyphicons-halflings-regular") format('svg');
 }
 @font-face {
     font-family: "persan";
@@ -35,7 +35,7 @@ body {
   content: "\e132";
   width: 30px;
 }
-#ofx-main-nav, #ofx-main-nav td, #ofx-main-nav ul {
+#ofx-main-nav {
   font-family: 'persan';
 }
 #ofx-main-nav {
@@ -43,9 +43,6 @@ body {
   background-color: #222;
   border-color: #080808;
   padding: 10px 0 10px 20px;
-}
-#ofx-main-nav td {
-  vertical-align: center;
 }
 #ofx-main-nav ul {
   list-style-type: none;
@@ -56,6 +53,9 @@ body {
   display: inline-block;
   padding: 0 10px 0 10px;
   margin-left: 0;
+}
+#ofx-main-nav ul img {
+  vertical-align: middle;
 }
 #ofx-main-nav ul a {
   color: #999;
