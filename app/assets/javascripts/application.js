@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require tinymce-jquery
-//= require_tree ../../../vendor/assets/.
+//= require ../../../vendor/assets/javascripts/bootstrap-datepicker
+//= require ../../../vendor/assets/javascripts/bootstrap-file-input
+//= require ../../../vendor/assets/javascripts/jquery.smooth-scroll
 //= require_tree .
