@@ -10,6 +10,8 @@ class NewsItem < ActiveRecord::Base
   validates :summary, :presence => true
   validates :published, :inclusion => { in: [true, false] }
 
+  default_scope order('date DESC')
+
   def self.build_panel(num = 3)
     NewsItem.where(published: true).limit(num).to_a
   end

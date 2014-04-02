@@ -1,0 +1,12 @@
+%h2 News
+.panel.panel-primary
+  .panel-heading
+    %h3.panel-title The Latest from Open FX
+  .panel-body
+    - if @news_items.blank?
+      %p There are no news items at this time.
+    - else    
+      %ul.no-bullets
+        - @news_items.each do |item|
+          %li.headline
+            = link_to item.headline, news_item_path(item)
