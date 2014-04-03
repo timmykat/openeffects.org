@@ -8,11 +8,19 @@ role :app, %w{openeffe@74.220.215.119}
 role :web, %w{openeffe@74.220.215.119}
 role :db,  %w{openeffe@74.220.215.119}
 
+# We're deploying the production environment
+set :rails_env, 'production'
+
 #set :repo_url, 'file://ofx-amazon:/home/ec2-user/git-repos/openeffects.org.git'
-set :repo_url, 'ssh://openeffe@openeffe@74.220.215.119/home4/openeffe/git-repos/ofx-website.git'
+set :repo_url, 'ssh://openeffe@74.220.215.119/home4/openeffe/git-repos/ofx-website.git'
 
 ## default is /var/www/#{:application}
 set :deploy_to, '/home4/openeffe/web_apps/ofx-website'
+
+set :tmp_dir, "/home4/openeffe/tmp"
+set :ssh_options, {
+  keys: [File.join(ENV["HOME"], ".ssh", "ofx-hostmonster")]
+}
 
 # Extended Server Syntax
 # ======================

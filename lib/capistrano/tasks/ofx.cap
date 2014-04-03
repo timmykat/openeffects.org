@@ -1,10 +1,11 @@
 namespace :deploy do
   task :ofx_config do
     on roles(:app) do
-      execute :cp, "-f", " ~/production_assets/ofx/*.yml", "#{shared_path}/config/"
+      execute :cp, "-f", " ~/production_assets/ofx/database.yml.#{fetch(:stage)}", "#{shared_path}/config/database.yml"
+      execute :cp, "-f", " ~/production_assets/ofx/ofx_config.yml.#{fetch(:stage)}", "#{shared_path}/config/ofx_config.yml"
     end
   end
-
+  
   before :check, :ofx_config
 end
 

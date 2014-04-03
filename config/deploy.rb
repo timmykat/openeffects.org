@@ -3,9 +3,6 @@ lock '3.1.0'
 
 set :application, 'openeffects.org'
 
-# We're deploying the production environment
-set :rails_env, 'production'
-
 set :ssh_options, {
   forward_agent: true
 }
