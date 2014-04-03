@@ -223,6 +223,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   mysql2
+  nokogiri
   non-stupid-digest-assets!
   paperclip
   pry

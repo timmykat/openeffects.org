@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# As per http://stackoverflow.com/questions/18627075/nokogiri-1-6-0-still-pulls-in-wrong-version-of-libxml-on-os-x
+gem 'nokogiri'
+
 # User rails 4
 gem 'rails', '4.0.1'
 

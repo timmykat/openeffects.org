@@ -3,8 +3,7 @@ namespace :deploy do
     on roles(:app) do
       execute :cp, "-f", " ~/production_assets/ofx/database.yml.#{fetch(:stage)}", "#{shared_path}/config/database.yml"
       execute :cp, "-f", " ~/production_assets/ofx/ofx_config.yml.#{fetch(:stage)}", "#{shared_path}/config/ofx_config.yml"
-      if (fetch[:stage] == 'production')
-        execute :cp, "-fr", " ~/production_assets/ofx/dot_bundle/", "#{shared_path}/.bundle"
+      if (fetch(:stage) == :production)
         execute :cp, "-fr", " ~/production_assets/ofx/dot_htaccess", "#{shared_path}/public/.htaccess"
       end
     end
