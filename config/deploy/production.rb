@@ -22,6 +22,9 @@ set :ssh_options, {
   keys: [File.join(ENV["HOME"], ".ssh", "ofx-hostmonster")]
 }
 
+set :linked_dirs, fetch(:linked_dirs) << '.bundle' # Need a version of Nokogiri compiled on HostMonster
+
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
