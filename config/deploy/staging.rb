@@ -8,7 +8,23 @@ role :web, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 role :app, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 role :db, %w{ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com}
 
+# On Amazon EC2
 set :ping_url, 'http://ofx.wordsareimages.com'
+set :repo_url, 'ssh://ec2-user@ec2-54-186-175-209.us-west-2.compute.amazonaws.com/home/ec2-user/git-repos/openeffects.org.git'
+set :deploy_to, '/var/www/openeffects.org'
+
+
+namespace :deploy do  
+  desc 'Copy ofx config file (kluge!)'
+  task :copy_correct_config do
+    if fetch(:branch) == 
+    on roles(:app) do
+      execute :cp, '~/ofx_config.yml', shared_path.join('config')
+    end
+  end
+  
+  before :restart, :copy_correct_config
+end
 
 # Extended Server Syntax
 # ======================
