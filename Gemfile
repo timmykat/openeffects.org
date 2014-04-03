@@ -94,5 +94,5 @@ end
 
 
 # Use this ruby version  
-ruby '1.9.3', :groups => [:development, :staging]
+#ruby '1.9.3', :groups => [:development, :staging]
 
