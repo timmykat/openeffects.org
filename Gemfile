@@ -74,7 +74,6 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler'
   gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-rvm'
 end
 
 
