@@ -11,7 +11,7 @@ set :ssh_options, {
 set :linked_files, %w{config/database.yml config/ofx_config.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle vendor/assets}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle }
 set :linked_dirs, fetch(:linked_dirs) << 'public/assets' << 'public/system' << 'public/documentation' << 'public/unprepped'
 
 ## 'capistrano-db-tasks' settings
