@@ -1,4 +1,5 @@
 .btn-group
-  = link_to 'Show', instance, class: 'btn btn-xs btn-default'
-  = link_to 'Edit', send("edit_#{model}_path", instance), class: 'btn btn-xs btn-warning'
-  = link_to 'Delete', instance, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-xs btn-danger'
+  = link_to 'View', instance, class: 'btn btn-xs btn-default'
+  - if user_signed_in? and current_user.has_role? :admin
+    = link_to 'Edit', send("edit_#{model}_path", instance), class: 'btn btn-xs btn-warning'
+    = link_to 'Delete', instance, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-xs btn-danger'

@@ -10,8 +10,6 @@
           %th Identifier
           %th Title
           %th PDF
-          - if user_signed_in? and current_user.has_role? :admin
-            %th{ :colspan => 3 }
       %tbody
         - @contents.each do |content|
           %tr
@@ -23,10 +21,7 @@
             %td= content.identifier
             %td= content.title
             %td= content.pdf.blank? ? '(none)' : image_tag('pdf_icon.png')
-            - if user_signed_in? and current_user.has_role? :admin
-              %td= link_to 'Show', content
-              %td= link_to 'Edit', edit_content_path(content)
-              %td= link_to 'Delete', content, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'content', :instance => content }
 
   .btn.btn-default
     = link_to 'New Content', new_content_path, :type => 'button'

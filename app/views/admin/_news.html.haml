@@ -10,15 +10,12 @@
           %tr
             %th Date
             %th Headline
-            %th{ :colspan => 3 } Actions
         %tbody
           - @news_items.each do |item|
             %tr
               %td= item.date
               %td= item.headline
-              %td= link_to 'Show', item
-              %td= link_to 'Edit', edit_news_item_path(item)
-              %td= link_to 'Delete', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+              %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'news_item', :instance => item }
         
     %br
       = link_to 'New news item', new_news_item_path, :type => 'button', :class => 'btn btn-primary'

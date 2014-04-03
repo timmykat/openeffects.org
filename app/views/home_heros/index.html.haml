@@ -1,20 +1,15 @@
 .container
-  %h1 Listing home_heros
+  %h1 Home Heroes
 
     %table
       %tr
         %th Hero image
-        %th
-        %th
-        %th
 
       - @home_heros.each do |home_hero|
         %tr
           %td= home_hero.hero_image
-          %td= link_to 'Show', home_hero
-          %td= link_to 'Edit', edit_home_hero_path(home_hero)
-          %td= link_to 'Destroy', home_hero, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'home_hero', :instance => home_hero }
 
     %br
 
-    = link_to 'New Home hero', new_home_hero_path
+    = link_to 'New Home hero', new_home_hero_path, :class => 'btn btn-default'

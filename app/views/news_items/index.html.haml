@@ -21,10 +21,7 @@
                 %button.unpublished.btn.btn-xs.btn-primary Publish
             %td= news_item.headline
             %td= news_item.date
-            - if user_signed_in? and current_user.has_role? :admin
-              %td= link_to 'Show', news_item
-              %td= link_to 'Edit', edit_news_item_path(news_item)
-              %td= link_to 'Delete', news_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'news_item', :instance => news_item }
 
   .btn.btn-default
     = link_to 'New Item', new_news_item_path, :type => 'button'

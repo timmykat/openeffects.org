@@ -12,7 +12,6 @@
             %th Title
             %th Image
             %th PDF
-            %th{ :colspan => 3 } Actions
         %tbody
           - contents.each do |content|
             %tr
@@ -20,9 +19,7 @@
               %td= content.title
               %td= content.image.blank? ? '(none)' : image_tag(content.image(:list)) 
               %td= content.pdf.blank? ? '(none)' : (link_to image_tag('pdf_icon.png'), content.pdf.url)
-              %td= link_to 'Show', content
-              %td= link_to 'Edit', edit_content_path(content)
-              %td= link_to 'Delete', content, :method => :delete, :data => { :confirm => 'Are you sure?' }
+              %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'content', :instance => content }
         
     %br
       = link_to 'New miscellaneous content', new_content_path, :type => 'button', :class => 'btn btn-primary'

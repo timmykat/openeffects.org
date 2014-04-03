@@ -12,8 +12,8 @@
             %th Name
             %th URL
             %th Contact
-            %th Join Dateå
-            %th{ :style => 'text-align: center;'} Actions
+            %th Join Date
+
         %tbody
           - companies.each do |company|
             %tr
@@ -23,10 +23,7 @@
               %td= company.contact.blank? ? '(none)' : company.contact.name
               %td= company.joined.blank? ? '' : company.joined.strftime('%d-%b-%Y')
               %td{ :style => 'text-align: center;'}
-                .btn-group
-                  = link_to 'Show', company, class: 'btn btn-default btn-sm'
-                  = link_to 'Edit', edit_company_path(company), class: 'btn btn-warning btn-sm'
-                  = link_to 'Delete', company, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+              %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'company', :instance => company }
         
     %br
       = link_to 'New member company', new_company_path, :type => 'button', :class => 'btn btn-primary'

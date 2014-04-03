@@ -19,10 +19,7 @@
             %td= company.name
             %td= link_to company.url, company.url, :target => '_blank' 
             %td= company.contact.blank? ? '(none)' : company.contact.name
-            - if user_signed_in? and current_user.has_role? :admin
-              %td= link_to 'Show', company
-              %td= link_to 'Edit', edit_company_path(company)
-              %td= link_to 'Delete', company, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'company', :instance => company }
 
   .btn.btn-default
     = link_to 'New Company', new_company_path, :type => 'button'

@@ -1,5 +1,15 @@
+- if comment.user.blank?
+  -  comment_author = 'unattributed'
+  -  comment_author_id = '0'
+- else
+  - comment_author = comment.user.name
+  - comment_author_id = comment.user.id.to_s
 .well.well-sm
-  .comment
-    = raw(comment.comment)
+  %div{ :id => "cid-#{comment.id}", :class => "comment #{'user-' << comment_author_id}" }
+    %div{:class => (user_signed_in? and (current_user.id.to_s == comment_author_id)) ? 'content editable' : 'content'}
+      = raw(comment.comment)
+    - if user_signed_in? and (current_user.id.to_s == comment_author_id) or current_user.has_role? :admin
+      .pull-right
+        .glyphicon.glyphicon-trash.delete
   .author.text-muted
-    = "#{comment.user ? comment.user.name : 'unattributed' } | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"
+    = "#{comment_author} | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"

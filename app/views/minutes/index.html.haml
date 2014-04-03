@@ -10,8 +10,6 @@
           %th Meeting
           %th Date
           %th Location
-          - if user_signed_in? and current_user.has_role? :admin
-            %th{ :colspan => 3 }
       %tbody
         - @minutes.each do |minute|
           %tr
@@ -23,10 +21,7 @@
             %td= textify(minute.meeting)
             %td= minute.date.strftime('%d-%b-%Y')
             %td= minute.location
-            - if user_signed_in? and current_user.has_role? :admin
-              %td= link_to 'Show', minute
-              %td= link_to 'Edit', edit_minute_path(minute)
-              %td= link_to 'Delete', minute, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'minute', :instance => minute }
 
   .btn.btn-default
     = link_to 'New Minutes', new_minute_path, :type => 'button'

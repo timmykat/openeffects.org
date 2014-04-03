@@ -1,4 +1,5 @@
 default:
+  menubar: false
   cleanup_on_startup: false
   cleanup: false
   convert_urls: false,

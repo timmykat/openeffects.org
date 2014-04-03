@@ -18,9 +18,7 @@
               %td= minute.date
               %td= textify(minute.meeting)
               %td= minute.location
-              %td= link_to 'Show', minute
-              %td= link_to 'Edit', edit_minute_path(minute)
-              %td= link_to 'Delete', minute, :method => :delete, :data => { :confirm => 'Are you sure?' }
+              %td= render :partial => 'components/show_edit_delete', :locals => { :model => 'minute', :instance => minute }
         
     %br
       = link_to 'New minutes', new_minute_path, :type => 'button', :class => 'btn btn-primary'
