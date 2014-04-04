@@ -31,6 +31,7 @@ $(function() {
       });
     }
   });
+  //Fix id here.
   $('.glyphicon-trash').on('click', function(e) {
     var $commentBody = $(e.currentTarget).parent().parent()
     var id = $commentBody.attr('id').replace('cid-','');
