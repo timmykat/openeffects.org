@@ -2,7 +2,13 @@
   .col-md-offset-1.col-md-10
     - if @content.published?
       %h2= @content.title
+      - unless @content.image.blank?
+        .image.pull-right
+          = image_tag @content.image(:display)
       = raw(@content.content)
+      %p
+        - unless @content.pdf.blank?
+          = link_to image_tag('pdf_icon.png') << " " <<  @content.pdf_title, @content.pdf.url, :title => 'Articles of Association', :target => '_blank'
     - else
       %h2 Oops!
       %p Sorry, this isn't ready for prime time, yet.

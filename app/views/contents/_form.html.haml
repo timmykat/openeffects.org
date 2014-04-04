@@ -24,13 +24,18 @@
   .form-group
     = f.label :content
     = f.text_area :content, :value => @content.content, :class => "tinymce form-control", :rows => 20
-    
-  .form-group
-    = f.label :pdf
-    = f.file_field :pdf
-    - if !@content.pdf.blank?
-      = image_tag 'pdf_icon.png'
-      = @content.pdf.name
+  
+  = field_set_tag 'PDF attachment' do
+    .form-group
+      = f.label :title
+      = f.text_field :pdf_title, :value => @content.pdf_title, :class => "form-control"
+       
+    .form-group
+      = f.label :pdf
+      = f.file_field :pdf
+      - if !@content.pdf.blank?
+        = image_tag 'pdf_icon.png'
+        = @content.pdf.name
 
   .form-group
     = f.label :image

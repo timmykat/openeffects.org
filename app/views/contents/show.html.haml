@@ -6,21 +6,23 @@
       - else
         - klass = "text-danger"
       %h3.panel-title
-        = @content.identifier
-        %div{:class => "pull-right #{klass}"}
+        %div{:class => "#{klass}"}
           = @content.published? ? 'Published' : 'UNPUBLISHED'
     .panel-body
+      - unless @content.image.blank?
+        .image.pull-right
+          = image_tag @content.image(:display)
       %p
-        %b Title:
+        %strong Identifier:
+        = @content.identifier
+      %p
+        %strong Title:
         = @content.title
       %label Content
       %p= raw(@content.content)
       %p
-        %b PDF file:
-        - if @content.pdf.blank?
-          (none)
-        - else
-          = link_to image_tag(@content.logo.url(:display)), @content.pdf
+        - unless @content.pdf.blank?
+          = link_to image_tag('pdf_icon.png') << " " <<  @content.pdf_title, @content.pdf.url, :title => 'Articles of Association', :target => '_blank'
 
   = render :partial => 'components/back_dash_edit', :locals => { model: 'content', instance: @content, edit_page: false }
 
