@@ -1,11 +1,12 @@
 .panel.panel-default
   .panel-body
     %h4.text-primary Discussion
+    - if current_user    
+      = render 'comments/form'
     - if @comments.blank?
       %p No comments on this change yet
     - else
+      %h5 Comments
       - @comments.each do |comment|
         = render :partial => 'comments/comment', locals: { :comment => comment }
 
-    - if current_user    
-      = render 'comments/form'

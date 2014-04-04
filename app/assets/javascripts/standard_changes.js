@@ -21,13 +21,22 @@ $(function() {
     plugins: [ "lists autolink link table paste save" ],
     toolbar: "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link | save",
     save_onsavecallback: function() {
+      var $commentWell = $(this.bodyElement).parent().parent()
+      var editorId = $(this.bodyElement).attr('id')
       var id = $(this.bodyElement).parent().attr('id').replace('cid-','');
       var comment = $(this)[0].bodyElement.innerHTML;
       var postData = "comment[comment]=" + encodeURIComponent(comment)
       $.ajax({
         method: 'patch',
         url: "/comments/" + id, 
-        data: postData
+        data: postData,
+        success: function(data) {
+          console.log($commentWell)
+          $commentWell.switchClass(null, 'confirmed', 50, null, function() {
+              $commentWell.switchClass('confirmed', null, 2000);
+            }
+          );
+        }
       });
     }
   });
@@ -39,7 +48,7 @@ $(function() {
       method: 'delete',
       url: "/comments/" + id,
       success: function (data) {
-        $commentBody.parent().remove();
+        $commentBody.parent().addClass('deleted').remove();
       }
     });
   });

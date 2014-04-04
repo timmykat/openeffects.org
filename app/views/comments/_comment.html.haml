@@ -9,7 +9,8 @@
     %div{:class => (user_signed_in? and (current_user.id.to_s == comment_author_id)) ? 'content editable' : 'content'}
       = raw(comment.comment)
     - if user_signed_in? and (current_user.id.to_s == comment_author_id or current_user.has_role? :admin)
-      .pull-right
+      .pull-right.text-muted
+        Click text to edit
         .glyphicon.glyphicon-trash.delete
   .author.text-muted
     = "#{comment_author} | #{comment.created_at.strftime('%l:%M %P,  %e %b %Y')}"
