@@ -1,0 +1,45 @@
+.container
+  .col-md-offset-2.col-md-8
+    .panel.panel-info
+      .panel-heading
+        %h3 OFX Contact Form
+      .panel-body
+        = form_for :contact_form do |f|
+          .form-group
+            = f.label :name
+            = f.text_field :name, :value => @user.name, :class => 'form-control' 
+        
+          .form-group
+            = f.label :email
+            = f.text_field :email, :value => @user.email, :class => 'form-control' 
+        
+          .form-group
+            %strong Send to:
+            %ul.no-bullets
+              %li
+                = f.radio_button :destination, 'association', :checked => 'checked'
+                %label The Association
+              %li
+                = f.radio_button :destination, 'developers'
+                %label OFX Developers Google Group
+              %li
+                = f.radio_button :destination, 'members', :disabled => @user.nil?
+                %label OFX Members Google Group
+              - if user_signed_in? and current_user.has_role? :director
+                %li
+                  = f.radio_button :destination, 'directors'
+                  %label OFX Directors Google Group
+              - if Rails.env == 'development'
+                %li
+                  = f.radio_button :destination, 'test'
+                  %label Testing Email
+       
+          .form-group
+            = f.label :subject
+            = f.text_field :subject, :class => 'form-control' 
+
+          .form-group
+            = f.label :message
+            = f.text_area :message, :class => 'form-control', :rows => 10
+            
+          = f.submit 'Send' 

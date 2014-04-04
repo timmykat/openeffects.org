@@ -40,6 +40,10 @@ Ofx::Application.routes.draw do
   
   resources :news_items
   
+  # Contact form 
+  get   '/contact_form',        to: "contact_form#display"
+  post  '/contact_form',        to: "contact_form#send_form_mail"
+  
   # Administrative dashboard
   get 'admin/dashboard', to: 'admin#dashboard'
 end

@@ -34,4 +34,24 @@ class AdminMailer < ActionMailer::Base
       mail(to: u.email, subject: "OFX Standards discussion: comment on #{@title} (v. #{@version})").deliver
     end
   end
+  
+  def contact_form(em)
+    @sender = em[:name]
+    @message = em[:message]
+    
+    recipient = case em[:destination]
+                  when 'association'
+                    'info@openeffects.org'
+                  when 'developers'
+                    'ofx-discussion@groups.google.com'
+                  when 'members'
+                    'ofxa-members@groups.google.com'
+                  when 'directors'
+                    'ofxa-directors@groups.google.com'
+                  when 'test'
+                    'tkinnel@gmail.com'
+                end
+                
+    mail(to: recipient, from: em[:email], subject: em[:subject]).deliver
+  end
 end
