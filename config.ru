@@ -2,4 +2,4 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 use Rack::Static, :urls => ["/api_doc"], :root => 'public'
-run Ofx::Application
+run Rails.application
