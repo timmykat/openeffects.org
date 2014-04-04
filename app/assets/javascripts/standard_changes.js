@@ -25,8 +25,8 @@ $(function() {
       var comment = $(this)[0].bodyElement.innerHTML;
       var postData = "comment[comment]=" + encodeURIComponent(comment)
       $.ajax({
-        method: 'put',
-        url: "/comments/#{id}", 
+        method: 'patch',
+        url: "/comments/" + id, 
         data: postData
       });
     }
