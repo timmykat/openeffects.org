@@ -8,7 +8,7 @@
   %div{ :id => "cid-#{comment.id}", :class => "comment #{'user-' << comment_author_id}" }
     %div{:class => (user_signed_in? and (current_user.id.to_s == comment_author_id)) ? 'content editable' : 'content'}
       = raw(comment.comment)
-    - if user_signed_in? and (current_user.id.to_s == comment_author_id) or current_user.has_role? :admin
+    - if user_signed_in? and (current_user.id.to_s == comment_author_id or current_user.has_role? :admin)
       .pull-right
         .glyphicon.glyphicon-trash.delete
   .author.text-muted
