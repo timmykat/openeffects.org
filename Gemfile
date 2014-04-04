@@ -76,6 +76,7 @@ group :development do
   # Use capistrano for deployment (not needed in production)
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
   gem 'capistrano-db-tasks', require: false
 end
 
@@ -94,5 +95,5 @@ end
 
 
 # Use this ruby version  
-#ruby '1.9.3', :groups => [:development, :staging]
+ruby '1.9.3'
 
