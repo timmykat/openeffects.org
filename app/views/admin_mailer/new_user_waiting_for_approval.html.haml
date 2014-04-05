@@ -1,0 +1,13 @@
+%p The following users are waiting to be approved:
+
+%ul
+  - @waiting_users.each do |u|
+    %li #{u.email}  |  #{u.name}  |  #{u.company_or_org}
+
+%p Please approve them at #{@admin_url}
+
+%hr
+%p
+  The Open Effects Assocation
+  %br
+  = link_to 'http://openeffects.org', 'http://openeffects.org'
