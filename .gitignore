@@ -27,6 +27,9 @@ config/ofx_config.yml
 #Ignore migration data files
 /tmp/*.xml
 
+#Ignore bundle files
+vendor/bundle
+
 # Paperclip files
 /public/system/*
 !/public/system/companies
