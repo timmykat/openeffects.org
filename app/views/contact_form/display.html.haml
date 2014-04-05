@@ -7,11 +7,11 @@
         = form_for :contact_form do |f|
           .form-group
             = f.label :name
-            = f.text_field :name, :value => @user.name, :class => 'form-control' 
+            = f.text_field :name, :value => (@user.nil? ? "" : @user.name), :class => 'form-control' 
         
           .form-group
             = f.label :email
-            = f.text_field :email, :value => @user.email, :class => 'form-control' 
+            = f.text_field :email, :value => (@user.nil? ? "" : @user.email), :class => 'form-control' 
         
           .form-group
             %strong Send to:
@@ -29,10 +29,10 @@
                 %li
                   = f.radio_button :destination, 'directors'
                   %label OFX Directors Google Group
-              - if Rails.env == 'development'
+              - if user_signed_in? and current_user.has_role? :admin
                 %li
                   = f.radio_button :destination, 'test'
-                  %label Testing Email
+                  %label Testing Email (sends to Tim)
        
           .form-group
             = f.label :subject
