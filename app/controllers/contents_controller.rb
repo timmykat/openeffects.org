@@ -1,6 +1,6 @@
 class ContentsController < ApplicationController
   
-  before_action :require_admin
+  before_action :require_admin, except: [:page_display]
   before_action :set_content, only: [:show, :edit, :update, :destroy]
 
   # GET /Contents
