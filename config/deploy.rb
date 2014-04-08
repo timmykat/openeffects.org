@@ -8,7 +8,7 @@ set :ssh_options, {
 }
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/ofx_config.yml}
+set :linked_files, %w{ config/database.yml config/ofx_config.yml public/.htaccess }
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle }
