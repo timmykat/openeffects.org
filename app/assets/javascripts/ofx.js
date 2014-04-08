@@ -41,4 +41,11 @@ $(function() {
       }
     }
   }
+  $(window).on('load, resize', function() {
+    if ($('.jumbotron h1').css('font-size') == '24px') {
+      $('ul.nav.desktop').removeClass('desktop').addClass('mobile');
+    } else {
+      $('ul.nav.mobile').removeClass('mobile').addClass('desktop');
+    }
+  });
 });

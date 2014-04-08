@@ -19,3 +19,8 @@
 .well.deleted {
   background-color: #cceee;
 }
+@media (max-width: 768px) {
+  .table-responsive .overview {
+    display: none;
+  }
+} 

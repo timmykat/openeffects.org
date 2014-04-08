@@ -26,7 +26,7 @@
       .navbar.navbar-inverse.navbar-fixed-top{ :role => "components" }
         .container
           .navbar-header
-            %button{ :class => "navbar-toggle", :data_target => ".navbar-collapse", :data_toggle => "collapse", :type => "button" }
+            %button{ :class => "navbar-toggle", 'data-target' => ".navbar-collapse", 'data-toggle' => "collapse", :type => "button" }
               %span.sr-only Toggle components
               %span.icon-bar
               %span.icon-bar
@@ -35,47 +35,57 @@
             .row
               .navbar-left
                 .navbar-top
-                  %ul.nav.navbar-nav
-                    %li.nav-logo
-                      = link_to image_tag('OFX_small.png'), root_path, class: 'navbar-link'
-                    %li.dropdown
-                      = link_to raw("Welcome #{content_tag(:span, nil, :class => (params[:controller] == 'welcome' ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-circle-arrow-left'))}"), root_path
-                      %ul.dropdown-menu.inverse-dropdown
+                  .mobile
+                    %ul.nav.navbar-nav
+                      %li= link_to 'Welcome', root_path
+                      %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
+                      %li= link_to 'Contact', contact_form_path, class: 'navbar-link'
+                      - if user_signed_in? and current_user.has_role? :admin
                         %li
-                          = link_to raw('Why a Standard?'), '#standard', class: 'navbar-link'
+                          = link_to 'Admin Dashboard', admin_dashboard_path
+                  .desktop
+                    %ul.nav.navbar-nav
+                      %li.nav-logo
+                        = link_to image_tag('OFX_small.png'), root_path, class: 'navbar-link'
+                      %li.dropdown
+                        = link_to raw("Welcome #{content_tag(:span, nil, :class => (params[:controller] == 'welcome' ? 'glyphicon glyphicon-circle-arrow-down' : 'glyphicon glyphicon-circle-arrow-left'))}"), root_path
+                        %ul.dropdown-menu.inverse-dropdown
+                          %li
+                            = link_to raw('Why a Standard?'), '#standard', class: 'navbar-link'
+                          %li
+                            = link_to raw('For Implementers'), '#implementers', class: 'navbar-link'
+                          %li
+                            = link_to raw('Association Business'), '#organization', class: 'navbar-link'
+                      %li.dropdown.api 
+                        %a.navbar-link API Documentation #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}
+                        %ul.dropdown-menu.inverse-dropdown
+                          %li
+                            = link_to 'Programming Guide', '/documentation/guide', class: 'navbar-link'
+                          %li
+                            = link_to 'Programming Reference', '/documentation/reference', class: 'navbar-link'
+                          %li
+                            = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link'                     
+                      %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
+                      %li= link_to 'Contact', contact_form_path, class: 'navbar-link'
+                      - if user_signed_in? and current_user.has_role? :admin
                         %li
-                          = link_to raw('For Implementers'), '#implementers', class: 'navbar-link'
-                        %li
-                          = link_to raw('Association Business'), '#organization', class: 'navbar-link'
-                    %li.dropdown.api 
-                      %a.navbar-link API Documentation #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}
-                      %ul.dropdown-menu.inverse-dropdown
-                        %li
-                          = link_to 'Programming Guide', '/documentation/guide', class: 'navbar-link'
-                        %li
-                          = link_to 'Programming Reference', '/documentation/reference', class: 'navbar-link'
-                        %li
-                          = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link'                     
-                    %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
-                    %li= link_to 'Contact', contact_form_path, class: 'navbar-link'
-                    - if user_signed_in? and current_user.has_role? :admin
-                      %li
-                        = link_to 'Admin Dashboard', admin_dashboard_path
-                   
-              - if user_signed_in?
-                = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form navbar-right form-inline") do
-                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
-                %p.navbar-text.navbar-right
-                  Member: #{current_user.name}
+                          = link_to 'Admin Dashboard', admin_dashboard_path
+
+              .desktop     
+                - if user_signed_in?
+                  = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form navbar-right form-inline") do
+                    %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
+                  %p.navbar-text.navbar-right
+                    Member: #{current_user.name}
               
-              - else
-                = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form navbar-right form-inline") do
-                  .form-group
-                    = text_field_tag "user[email]", nil, :class => "form-control input-xs", :placeholder => 'Email'
-                  .form-group
-                    = password_field_tag "user[password]", nil, :class => "form-control input-xs", :placeholder => 'Password'
+                - else
+                  = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form navbar-right form-inline") do
+                    .form-group
+                      = text_field_tag "user[email]", nil, :class => "form-control input-xs", :placeholder => 'Email'
+                    .form-group
+                      = password_field_tag "user[password]", nil, :class => "form-control input-xs", :placeholder => 'Password'
                   
-                  %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign in
+                    %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign in
                  
       .container{ :role => "main" }    
         -if flash[:notice]

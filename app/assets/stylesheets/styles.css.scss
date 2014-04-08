@@ -186,3 +186,20 @@ ul.footer-link-group {
     padding: 0 10px;
   }
 }
+.mobile {
+  display: none;
+}
+.desktop {
+  display: block;
+}
+@media (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+    ul.nav {
+      padding: 5px;
+    }
+  }
+} 
