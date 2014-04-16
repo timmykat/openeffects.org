@@ -5,5 +5,5 @@ RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-# remove trailing slash
-RewriteRule ^(.*)/$ /$1 [L,R=301]
+# remove trailing slash - causes a redirect
+# RewriteRule ^(.*)/$ /$1 [L,R=301]

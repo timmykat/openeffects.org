@@ -23,8 +23,6 @@ set :ssh_options, {
   keys: [File.join(ENV["HOME"], ".ssh", "ofx-hostmonster")]
 }
 
-set :linked_files, fetch(:linked_files) << 'public/.htaccess'
-
 
 # Extended Server Syntax
 # ======================
