@@ -6,7 +6,5 @@ namespace :deploy do
       execute :cp, "-fr", " ~/production_assets/ofx/dot_htaccess", "#{shared_path}/public/.htaccess"
     end
   end
-  
-  before :check, :ofx_config
 end
 

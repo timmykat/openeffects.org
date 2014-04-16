@@ -4,23 +4,23 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{openeffe@74.220.215.119}
-role :web, %w{openeffe@74.220.215.119}
-role :db,  %w{openeffe@74.220.215.119}
+role :app, %w{timmykat@timberwolf.dreamhost.com}
+role :web, %w{timmykat@timberwolf.dreamhost.com}
+role :db,  %w{timmykat@timberwolf.dreamhost.com}
 
 # We're deploying the production environment
 set :rails_env, 'production'
 
 #set :repo_url, 'file://ofx-amazon:/home/ec2-user/git-repos/openeffects.org.git'
-set :ping_url, 'http://74.220.215.119'
-set :repo_url, 'ssh://openeffe@74.220.215.119/home4/openeffe/git-repos/ofx-website.git'
+# set :ping_url, 'http://74.220.215.119'
+set :repo_url, 'ssh://timmykat@timberwolf.dreamhost.com/home/timmykat/git-repos/openeffects.org.git'
 
 ## default is /var/www/#{:application}
-set :deploy_to, '/home4/openeffe/web_apps/ofx-website'
+set :deploy_to, '/home/timmykat/web_apps/openeffects.org'
 
-set :tmp_dir, "/home4/openeffe/tmp"
+set :tmp_dir, "/home/timmykat/tmp"
 set :ssh_options, {
-  keys: [File.join(ENV["HOME"], ".ssh", "ofx-hostmonster")]
+  keys: [File.join(ENV["HOME"], ".ssh", "dreamhost")]
 }
 
 
