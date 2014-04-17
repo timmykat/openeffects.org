@@ -76,7 +76,8 @@
                   = form_tag(destroy_user_session_path, method: 'delete', role: "form", class: "navbar-form navbar-right form-inline") do
                     %button{ :type => 'submit', :class => "btn btn-sm btn-primary" } Sign out
                   %p.navbar-text.navbar-right
-                    Member: #{current_user.name}
+                    Member: 
+                    = link_to  current_user.name, edit_user_registration_path(current_user)
               
                 - else
                   = form_tag(new_user_session_path, method: 'post', role: "form", class: "navbar-form navbar-right form-inline") do

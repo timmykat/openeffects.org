@@ -16,11 +16,11 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar, :notifications)
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar, :current_password)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar, :current_password, :notifications)
   end
 
   private :sign_up_params
@@ -28,6 +28,6 @@ class RegistrationsController < Devise::RegistrationsController
   
   private
     def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar) }
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name, :company_or_org, :avatar, :notifications) }
     end
 end

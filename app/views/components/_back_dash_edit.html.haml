@@ -4,6 +4,6 @@
     = link_to 'Dashboard', admin_dashboard_path, :type => 'button', :class => 'btn btn-info'
     - unless edit_page
       = link_to 'Edit', send("edit_#{model}_path", instance), :type => 'button', :class => 'btn btn-warning'
-  - if model == 'user' and !edit_page and user_signed_in? and current_user.id == instance.id
+  - if model == 'user_registration' and !edit_page and user_signed_in? and current_user.id == instance.id
     = link_to 'Edit', send("edit_#{model}_path", instance), :type => 'button', :class => 'btn btn-warning'
     

@@ -48,4 +48,7 @@ $(function() {
       $('ul.nav.mobile').removeClass('mobile').addClass('desktop');
     }
   });
+  
+  //Add asterisks to required fields
+  $('[required="required"]').closest('.form-group').children('label').append('<span style="color: #c00;">*</span>');
 });

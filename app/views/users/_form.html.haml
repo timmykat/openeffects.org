@@ -17,10 +17,6 @@
     = f.label "Company or Organization"
     = f.text_field :company_or_org, :value => @user.company_or_org, :class => "form-control"
 
-  .form-group
-    = f.label :notifications
-    = f.check_box :notifications, :value => @user.notifications, :disabled => @user.id != current_user.id
-    %p.hint Check this if you'd like to receive e-mail notifications when standard changes are updated or commented.
 
   .form-group
     = f.submit 'Update', :class => 'btn btn-primary'     
