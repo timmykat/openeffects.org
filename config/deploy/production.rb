@@ -4,16 +4,16 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{timmykat@timberwolf.dreamhost.com}
-role :web, %w{timmykat@timberwolf.dreamhost.com}
-role :db,  %w{timmykat@timberwolf.dreamhost.com}
+role :app, %w{timmykat@wordsare.dreamhosters.com}
+role :web, %w{timmykat@wordsare.dreamhosters.com}
+role :db,  %w{timmykat@wordsare.dreamhosters.com}
 
 # We're deploying the production environment
 set :rails_env, 'production'
 
 #set :repo_url, 'file://ofx-amazon:/home/ec2-user/git-repos/openeffects.org.git'
-# set :ping_url, 'http://74.220.215.119'
-set :repo_url, 'ssh://timmykat@timberwolf.dreamhost.com/home/timmykat/git-repos/openeffects.org.git'
+set :ping_url, 'http://wordsare.dreamhosters.com'
+set :repo_url, 'ssh://timmykat@wordsare.dreamhosters.com/home/timmykat/git-repos/openeffects.org.git'
 
 ## default is /var/www/#{:application}
 set :deploy_to, '/home/timmykat/web_apps/openeffects.org'

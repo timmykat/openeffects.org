@@ -1,5 +1,5 @@
 GIT
-  remote: http://github.com/timmykat/non-stupid-digest-assets
+  remote: https://github.com/timmykat/non-stupid-digest-assets
   revision: b4c0878fc468e80b3be9032af5a546297ea3a765
   specs:
     non-stupid-digest-assets (1.0.4)
