@@ -16,7 +16,8 @@ set :ping_url, 'http://wordsare.dreamhosters.com'
 set :repo_url, 'ssh://timmykat@wordsare.dreamhosters.com/home/timmykat/git-repos/openeffects.org.git'
 
 ## default is /var/www/#{:application}
-set :deploy_to, '/home/timmykat/web_apps/openeffects.org'
+#set :deploy_to, '/home/timmykat/web_apps/openeffects.org'
+set :deploy_to, '/home/timmykat/wordsare.dreamhosters.com'
 
 set :tmp_dir, "/home/timmykat/tmp"
 set :ssh_options, {
