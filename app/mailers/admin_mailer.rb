@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: 'tim@wordsareimages.com'
+  default from: 'no-reply@openeffects.org'
   
   def new_user_waiting_for_approval
     cfg = Rails.configuration.action_mailer.default_url_options

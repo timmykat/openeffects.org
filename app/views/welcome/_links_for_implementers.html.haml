@@ -8,4 +8,4 @@
         = link_to link.title, link.url, :target => /http/.match(link.url) ? '_blank' : 'self'
     - if !user_signed_in?
       %p
-        = link_to 'Sign up to become a member', new_user_registration_path, :class => 'btn btn-sm btn-warning'
+        = link_to 'Register as a site user', new_user_registration_path, :class => 'btn btn-sm btn-warning'
