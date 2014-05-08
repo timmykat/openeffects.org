@@ -4,25 +4,19 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{timmykat@wordsare.dreamhosters.com}
-role :web, %w{timmykat@wordsare.dreamhosters.com}
-role :db,  %w{timmykat@wordsare.dreamhosters.com}
+role :app, %w{ubuntu@54.84.149.154}
+role :web, %w{ubuntu@54.84.149.154}
+role :db,  %w{ubuntu@54.84.149.154}
 
 # We're deploying the production environment
 set :rails_env, 'production'
 
 #set :repo_url, 'file://ofx-amazon:/home/ec2-user/git-repos/openeffects.org.git'
-set :ping_url, 'http://wordsare.dreamhosters.com'
-set :repo_url, 'ssh://timmykat@wordsare.dreamhosters.com/home/timmykat/git-repos/openeffects.org.git'
+set :ping_url, 'http://54.84.149.154'
+set :repo_url, 'ssh://ubuntu@54.84.149.154/home/ubuntu/git-repos/openeffects.org.git'
 
 ## default is /var/www/#{:application}
-#set :deploy_to, '/home/timmykat/web_apps/openeffects.org'
-set :deploy_to, '/home/timmykat/wordsare.dreamhosters.com'
-
-set :tmp_dir, "/home/timmykat/tmp"
-set :ssh_options, {
-  keys: [File.join(ENV["HOME"], ".ssh", "dreamhost")]
-}
+set :deploy_to, '/var/www/openeffects.org'
 
 
 # Extended Server Syntax
