@@ -1,13 +1,10 @@
 .container
   %h2 Forgot your password?
   = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f|
-    = f.error_notification
     .form-group
       =f.label :email, :class => "col-sm-2 control-label"
       .col-sm-10
         = f.text_field :email, :required => false, :autofocus => true, :class => "form-control"
     .form-group
       .col-sm-offset-2.col-sm-10
-        = f.submit "Sign in", :class => "btn btn-large btn-primary"
-    .col-sm-offset-2.col-sm-10
-      = render "devise/shared/links"
+        = f.submit "Reset my password", :class => "btn btn-large btn-primary"

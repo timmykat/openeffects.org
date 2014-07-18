@@ -28,5 +28,6 @@ module Ofx
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     
+    config.ofx = YAML::load(File.open("#{Rails.root}/config/ofx_config.yml")).deep_symbolize_keys
   end
 end
