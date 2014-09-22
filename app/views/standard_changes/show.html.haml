@@ -25,7 +25,7 @@
             = @standard_change.version.version
 
           %p
-            %b= "#{Rails.configuration.ofx[:standard_change_type][@standard_change.type]} Change"
+            %b= "#{Rails.configuration.ofx[:standard_change_type][@standard_change.type.to_sym]} Change"
 
           - if @standard_change.status == 'approved'
             %label Final status

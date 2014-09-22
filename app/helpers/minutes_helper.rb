@@ -4,6 +4,6 @@ module MinutesHelper
   end
   
   def textify(key)
-    Rails.configuration.ofx[:meeting_type][key]
+    Rails.configuration.ofx[:meeting_type][key.to_sym]
   end
 end

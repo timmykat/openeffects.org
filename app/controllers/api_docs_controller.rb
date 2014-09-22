@@ -10,7 +10,7 @@ class ApiDocsController < ApplicationController
   def update
     response.headers['Content-Type'] = 'text/event-stream'
     
-    docs_source_dir = Rails.configuration.ofx[:support_docs]['repo'][Rails.env]
+    docs_source_dir = Rails.configuration.ofx[:support_docs][:repo][Rails.env.to_sym]
     cmd = "#{Rails.root}/lib/ofx/scripts/pullLatestRelease.sh #{docs_source_dir} #{params[:release]} 2>&1"
 
     # First generate the release
@@ -95,7 +95,7 @@ class ApiDocsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
 
     $stdout.sync = true
-    Rails.configuration.ofx[:support_docs]['docs'].each do |doc|
+    Rails.configuration.ofx[:support_docs][:docs].each do |doc|
       next unless process_doc == 'all' || process_doc == doc
       response.stream.write("event: terminal-output\n")
       response.stream.write("data: #{doc.upcase}\n\n")

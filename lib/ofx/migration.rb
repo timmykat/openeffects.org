@@ -26,7 +26,7 @@ module Ofx
       return nil if ! %w(minutes standards).include? type
       @type = type
       @base_url = Rails.configuration.ofx[:migration][:base_url]
-      @index_url = "#{@base_url}#{Rails.configuration.ofx[:migration][:index][type]}"
+      @index_url = "#{@base_url}#{Rails.configuration.ofx[:migration][:index][type.to_sym]}"
     end
     
 # -- PULL methods for retrieving information from the old site
