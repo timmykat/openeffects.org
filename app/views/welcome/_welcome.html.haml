@@ -1,2 +1,3 @@
-%h2= @ofx_welcome.title
-= raw(@ofx_welcome.content)
+- if @ofx_welcome
+  %h2= @ofx_welcome.title
+  = raw(@ofx_welcome.content)
