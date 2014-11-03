@@ -85,5 +85,5 @@ Ofx::Application.configure do
   config.action_mailer.smtp_settings = mailconf[:settings]
 
   # Default URL for the mailer
-  config.action_mailer.default_url_options = { :protocol => 'http://', :host => mailconf[:domain] }
+  config.action_mailer.default_url_options = { :protocol => 'http://', :host => mailconf[:settings][:domain] }
 end
