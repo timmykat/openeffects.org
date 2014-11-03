@@ -78,12 +78,10 @@ Ofx::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Default URL
+  # Set up action mailer
   config.action_mailer.raise_delivery_errors = true
   mailconf = Rails.configuration.ofx[:mailer][:staging]
   config.action_mailer.delivery_method = mailconf[:delivery_method]
   config.action_mailer.smtp_settings = mailconf[:settings]
-
-  # Default URL for the mailer
   config.action_mailer.default_url_options = { :protocol => 'http://', :host => mailconf[:settings][:domain] }
 end

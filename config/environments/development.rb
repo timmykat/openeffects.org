@@ -13,11 +13,12 @@ Ofx::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
+  # Set up action mailer
   config.action_mailer.raise_delivery_errors = true
   mailconf = Rails.configuration.ofx[:mailer][:development]
   config.action_mailer.delivery_method = mailconf[:delivery_method]
   config.action_mailer.smtp_settings = mailconf[:settings]
+  config.action_mailer.default_url_options = { :protocol => 'http://', :host => mailconf[:settings][:domain], :port => ':3000' }
   
   config.action_mailer.default_options = {from: 'no-reply@openeffects.org'}
   
@@ -33,6 +34,4 @@ Ofx::Application.configure do
   config.assets.debug = true
   config.serve_static_assets = true
    
-  # Default URL for the mailer
-  config.action_mailer.default_url_options = { :protocol => 'http://', :host => mailconf[:domain], :port => ':3000' }
 end

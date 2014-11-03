@@ -61,9 +61,12 @@ Ofx::Application.configure do
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( bootstrap-datepicker.js boostrap-file-input.js jquery.smooth-scroll.js )
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  # Set up action mailer
+  mailconf = Rails.configuration.ofx[:mailer][:production]
+  config.action_mailer.delivery_method = mailconf[:delivery_method]
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mail.perform_deliveries = true
+  config.action_mailer.default_url_options = { :from => "no-reply@#{mailconf[:settings][:domain]}", :host => mailconf[:settings][:domain] }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -78,6 +81,4 @@ Ofx::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Default URL
-  config.action_mailer.default_url_options = { :host => 'openeffects.org' }
 end
