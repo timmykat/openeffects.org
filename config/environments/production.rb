@@ -65,7 +65,7 @@ Ofx::Application.configure do
   mailconf = Rails.configuration.ofx[:mailer][:production]
   config.action_mailer.delivery_method = mailconf[:delivery_method]
   config.action_mailer.raise_delivery_errors = false
-  config.action_mail.perform_deliveries = true
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :from => "no-reply@#{mailconf[:settings][:domain]}", :host => mailconf[:settings][:domain] }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
