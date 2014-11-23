@@ -68,7 +68,6 @@ gem 'non-stupid-digest-assets', :git => "https://github.com/timmykat/non-stupid-
 # Development tools
 group :development do
   gem 'pry-rails'
-  gem 'pry-debugger'
   gem 'pry-stack_explorer'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -96,5 +95,5 @@ end
 
 
 # Use this ruby version  
-ruby '1.9.3'
+ruby '2.1.5'
 
