@@ -42,3 +42,5 @@ vendor/bundle
 /public/documentation
 /public/assets/hero*
 
+# Ignore deploy files
+config/deploy/*.rb
