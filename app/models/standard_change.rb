@@ -15,8 +15,8 @@ class StandardChange < ActiveRecord::Base
   
   before_validation :sanitize_textareas
   validates :title, presence: true, length: { maximum: 100 }
-  validates :type, inclusion: { in: Rails.configuration.ofx[:standard_change_type].keys, message: 'is not a valid change type' }
-  validates :status, inclusion: { in: Rails.configuration.ofx[:standard_change_status].keys, message: 'is not a valid status' }
+  validates :type, inclusion: { in: Rails.configuration.ofx[:standard_change_type].keys.map{ |k| k.to_s }, message: 'is not a valid change type' }
+  validates :status, inclusion: { in: Rails.configuration.ofx[:standard_change_status].keys.map{ |k| k.to_s }, message: 'is not a valid status' }
 
   # Because of Rails' penchant for single-table inheritance (:type would ordinarily indicate a subclass in this case),
   # we need to specify that there is no inheritance column
