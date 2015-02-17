@@ -61,9 +61,10 @@
               = render :partial => 'components/show_edit_delete', :locals => { :model => 'standard_change', :instance => standard_change }
               %br
               %br
-              .archive
-                = check_box_tag "archived", standard_change.archived? ? '1' : '0', standard_change.archived?, class: "#{standard_change.id}"
-                Archive
+              - if user_signed_in? and current_user.has_role? :admin
+                .archive
+                  = check_box_tag "archived", standard_change.archived? ? '1' : '0', standard_change.archived?, class: "#{standard_change.id}"
+                  Archive
             - overview = standard_change.overview.gsub(%r|<pre>.*</pre>|m, '') unless standard_change.overview.nil?
             %td.overview
               = truncate_html(raw(overview), :length => 400)
