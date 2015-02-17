@@ -13,13 +13,15 @@ class AdminMailer < ActionMailer::Base
   end
   
   def notify_of_standard_change(standard_change)
-    @name = User.friendly.find(standard_change.last_editor_id).name
-    @title = standard_change.title
-    cfg = Rails.configuration.action_mailer.default_url_options
-    @url = "#{cfg[:protocol]}#{cfg[:host]}#{cfg[:port]}/standard_change/#{standard_change.slug}"
-    @version = standard_change.version.version
-    subscribers = User.where(notifications: true).to_a.each do |u|
-      mail(to: u.email, subject: "OFX Standards discussion for #{@title} (v. #{@version})").deliver
+    unless standard_change.last_editor_id.blank?
+      @name = User.friendly.find(standard_change.last_editor_id).name
+      @title = standard_change.title
+      cfg = Rails.configuration.action_mailer.default_url_options
+      @url = "#{cfg[:protocol]}#{cfg[:host]}#{cfg[:port]}/standard_change/#{standard_change.slug}"
+      @version = standard_change.version.version
+      subscribers = User.where(notifications: true).to_a.each do |u|
+        mail(to: u.email, subject: "OFX Standards discussion for #{@title} (v. #{@version})").deliver
+      end
     end
   end
 

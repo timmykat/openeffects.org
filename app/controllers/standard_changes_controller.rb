@@ -1,9 +1,25 @@
 class StandardChangesController < ApplicationController
   before_action :set_standard_change, only: [:show, :edit, :update, :destroy]
+
+
+  def archive
+    @standard_change = StandardChange.find(params[:id])
+    if @standard_change.update_attribute(:archived, params[:archived])
+      render :json => { status: 'ok' }
+    else
+      render :json => { status: 'error' }
+    end
+  end  
   
   # GET /standard_changes
   def index
-    @standard_changes = StandardChange.recent_first
+    if params[:archived]
+      @standard_changes = StandardChange.archived.recent_first
+      @archived = true 
+    else
+      @standard_changes = StandardChange.current.recent_first
+      @archived = false 
+    end
   end
 
   # GET /standard_changes/1
@@ -55,6 +71,6 @@ class StandardChangesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def standard_change_params
-      params.require(:standard_change).permit(:version_id, :committee, :title, :type, :status, :status_details, :overview, :solution, :discussion)
+      params.require(:standard_change).permit(:version_id, :committee, :title, :type, :status, :status_details, :overview, :solution, :discussion, :archived)
     end
 end

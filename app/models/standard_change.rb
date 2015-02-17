@@ -11,6 +11,8 @@ class StandardChange < ActiveRecord::Base
   acts_as_commentable
   has_many :comments, dependent: :destroy, as: :commentable
   
+  scope :current, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
   scope :recent_first, -> { includes(:version).order("versions.version DESC, standard_changes.status ASC, standard_changes.title ASC") }
   
   before_validation :sanitize_textareas
@@ -31,7 +33,7 @@ class StandardChange < ActiveRecord::Base
   end
   
   def self.build_panel(change_status, limit = 3)
-    StandardChange.where(status: 'proposed').order("created_at DESC", "title ASC").limit(limit)
+    StandardChange.current.where(status: 'proposed').order("created_at DESC", "title ASC").limit(limit)
   end
 
   def saved_by(current_user)

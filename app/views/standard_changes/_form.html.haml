@@ -15,6 +15,10 @@
       - when 'withdrawn'
         - klass = "bg-danger"
   
+  .form-group
+    = f.check_box :archived, :value => @standard_change.archived
+    = f.label "Archived"
+
   .form-group  
     = f.label :version
     = f.collection_select :version_id, Version.order(version: :desc), :id, :version, :class => "form-control"

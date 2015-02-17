@@ -6,6 +6,8 @@ Ofx::Application.routes.draw do
   post 'admin/home_heroes', to: 'home_heroes#create_and_update'
 
   resources :standard_changes
+  get 'standard_changes/:id/archive', to: 'standard_changes#archive'
+  
   resources :comments, :except => [:index]
   
   resources :versions, except: [:index]

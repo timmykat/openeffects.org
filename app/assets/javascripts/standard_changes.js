@@ -13,6 +13,22 @@ $(function() {
     }
   });
   
+  //Archiving capability
+  $('.archive input[type=checkbox]').change(function(e) {
+    var $archive_div = $(this).parent();
+    $.get('/standard_changes/' + $(this).attr('class') + '/archive', {archived: $(this).is(':checked') }, function(response) {
+      if (response.status == 'ok') {
+        $archive_div.animate({'background-color': 'green'}, 200, function() { 
+          $(this).animate({'background-color': 'transparent'}, 2000 );
+        });
+      } else {
+        $archive_div.animate({'background-color': 'red'}, 200, function() { 
+          $(this).animate({'background-color': 'transparent'}, 2000 )
+        });
+      }     
+    });
+  });
+  
   //TinyMCE Inline editing of comments
   tinymce.init({
     selector: '.editable',

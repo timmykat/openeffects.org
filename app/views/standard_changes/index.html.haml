@@ -1,15 +1,22 @@
 .container
   %h1 Standard Changes
   - if @standard_changes.blank?
-    %p There are currently no standard changes.
+    %p There are currently no #{@archived ? 'archived ' : ''}standard changes.
   - else
     - if user_signed_in? and current_user.has_role? :admin
       .row
-        .col-md-2
-          .btn.btn-default
-            = link_to 'New Standard change', new_standard_change_path, :type => 'button'
-          %br
-          %br
+        - unless @archived
+          .col-md-2
+            .btn.btn-default
+              = link_to 'New standard change', new_standard_change_path, :type => 'button'
+          .col-md-2
+            .btn.btn-warning
+              = link_to 'Archived standard changes', "#{standard_changes_path}?archived=true", :type => 'button'
+        - else
+          .col-md-2
+            .btn.btn-success
+              = link_to 'Current standard changes', "#{standard_changes_path}", :type => 'button'
+      %br
     .row   
       .col-md-2
         .form-group
@@ -52,6 +59,11 @@
               %br
               %br
               = render :partial => 'components/show_edit_delete', :locals => { :model => 'standard_change', :instance => standard_change }
+              %br
+              %br
+              .archive
+                = check_box_tag "archived", standard_change.archived? ? '1' : '0', standard_change.archived?, class: "#{standard_change.id}"
+                Archive
             - overview = standard_change.overview.gsub(%r|<pre>.*</pre>|m, '') unless standard_change.overview.nil?
             %td.overview
               = truncate_html(raw(overview), :length => 400)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404215826) do
+ActiveRecord::Schema.define(version: 20150216222104) do
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -133,8 +133,10 @@ ActiveRecord::Schema.define(version: 20140404215826) do
     t.string   "slug"
     t.integer  "sponsor_id"
     t.integer  "last_editor_id"
+    t.boolean  "archived",       default: false
   end
 
+  add_index "standard_changes", ["archived"], name: "index_standard_changes_on_archived", using: :btree
   add_index "standard_changes", ["last_editor_id"], name: "index_standard_changes_on_last_editor_id", using: :btree
   add_index "standard_changes", ["slug"], name: "index_standard_changes_on_slug", unique: true, using: :btree
   add_index "standard_changes", ["sponsor_id"], name: "index_standard_changes_on_sponsor_id", using: :btree
