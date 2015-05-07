@@ -17,7 +17,7 @@ class AdminMailer < ActionMailer::Base
       @name = User.friendly.find(standard_change.last_editor_id).name
       @title = standard_change.title
       cfg = Rails.configuration.action_mailer.default_url_options
-      @url = "#{cfg[:protocol]}#{cfg[:host]}#{cfg[:port]}/standard_change/#{standard_change.slug}"
+      @url = "#{cfg[:protocol]}#{cfg[:host]}#{cfg[:port]}/standard_changes/#{standard_change.slug}"
       @version = standard_change.version.version
       subscribers = User.where(notifications: true).to_a.each do |u|
         mail(to: u.email, subject: "OFX Standards discussion for #{@title} (v. #{@version})").deliver
