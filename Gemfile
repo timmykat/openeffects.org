@@ -74,6 +74,7 @@ group :development do
   gem 'puma'
 
   # Use capistrano for deployment (not needed in production)
+  gem 'capistrano', "~> 3.1"
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'

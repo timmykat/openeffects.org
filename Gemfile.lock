@@ -209,6 +209,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
+  capistrano (~> 3.1)
   capistrano-bundler
   capistrano-db-tasks
   capistrano-rails (~> 1.1)
