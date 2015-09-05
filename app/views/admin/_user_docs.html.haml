@@ -21,7 +21,7 @@
           %p           
             %b SECOND:
             Parse the documentation HTML to insert navbars at the top of the documentation.
-          = form_tag '/ajax/api_docs/insert_nav', id: 'insert-navbars', method: 'get' do
+          = form_tag '/ajax/api_docs/insert_nav', id: 'insert-navbars', method: 'post' do
             .btn-group
               - Rails.configuration.ofx[:support_docs][:docs].each do |doc|
                 %button{ :type => 'submit', :class => 'btn btn-sm btn-default btn-info', id: doc } 

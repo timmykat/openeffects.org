@@ -22,6 +22,7 @@ module Ofx
       
       ## Copy the ofx css/image assets to public/assets
       %x[ cp #{File.join(File.dirname(__FILE__),'assets','copy_to_assets', "*")} #{File.join(Rails.root, 'public', 'assets')} ]
+      
 
       Dir["#{@source_dir}/*"].each do |file|
     
@@ -92,7 +93,7 @@ module Ofx
                 body.inner_html = "<div class='wrapper' id='#{@type}'>#{body.inner_html}</div><!--.wrapper-->"
                 body.children.first.add_previous_sibling(@@inserted_html)  
             end
-          
+            
           
             File.open("#{@destination_dir}/#{filename}", 'w') { |f| f.write(@@xsl.apply_to(input_xml).to_s) }
             
