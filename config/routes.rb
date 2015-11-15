@@ -14,7 +14,10 @@ Ofx::Application.routes.draw do
   
   # Add Devise for user authorization, create the other user routes normally
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations', passwords: 'passwords' }
+  
+  # Add additional user resources
   resources :users, except: [:new, :create]
+  post 'users/new_by_admin',          to: 'users#new_by_admin'
   
   #AJAX
   scope :ajax do

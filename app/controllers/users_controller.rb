@@ -1,7 +1,21 @@
 class UsersController < ApplicationController
-  skip_before_action :require_admin
+  skip_before_action :require_admin, except: [:new_by_admin]
   before_action :require_admin_or_self, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
+  # Work outside devise for admin-created new users because it does session checking
+  def new_by_admin
+    @user = User.new(user_params)
+    @user.approved = true
+    @user.password = Rails.configuration.ofx[:default_password]
+    @user.password_confirmation = Rails.configuration.ofx[:default_password]
+    if @user.save 
+      AdminMailer.notify_of_new_account(@user)     
+      redirect_to users_path, notice: "The new user was successfully created, and a notification email was sent to #{@user.email}."
+    else
+      redirect_to users_path, alert: "There was a problem creating the user."
+    end
+  end
 
   # AJAX methods
   def toggle
@@ -51,6 +65,7 @@ class UsersController < ApplicationController
   def destroy
     name = @user.name
     @user.destroy
+    Rails.cache.clear
     redirect_to users_url, notice: "#{name} was successfully deleted."
   end
   

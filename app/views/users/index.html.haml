@@ -2,6 +2,26 @@
   - user_signed_in? and current_user.has_role? :admin
 - num_roles = admin? ? @roles.length : 1
 .container
+  - if admin?
+    %h1 Create  new user
+    .well.well-sm
+      .row
+        .col-md-6.col-md-offset-1
+          = form_tag 'users/new_by_admin', { :method => :post, :multipart => true, :class => "form-horizontal" } do 
+            .form-group
+              %label Email
+              = text_field_tag 'user[email]', nil, :class => "form-control"
+
+            .form-group
+              %label Name
+              = text_field_tag 'user[name]', nil, :class => "form-control"
+
+            .form-group
+              %label Company or Organization
+              = text_field_tag 'user[company_or_org]', nil, :class => "form-control"
+
+            .form-group
+              = submit_tag 'Create user', :class => 'btn btn-primary'       
   %h1 All Users
   - if @users.blank?
     %p There are no users!
@@ -16,18 +36,18 @@
           %th Company
           %th{ :colspan => num_roles, :class => 'text-center' } 
             - if !admin?
-              Director
+              Directors
             - else
               Roles
           %th.text-center Avatar
           - if admin?
             %th Notifications?
             %th
-          %tr
-            %th{ :colspan => 4 }
-            - @roles.each do |r|
-              %th.text-center= r.to_s.titlecase
-            - if admin?
+          - if admin?  
+            %tr
+              %th{ :colspan => 4 }
+              - @roles.each do |r|
+                %th.text-center= r.to_s.titlecase
               %th
           
       %tbody
