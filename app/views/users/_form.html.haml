@@ -19,5 +19,5 @@
 
 
   .form-group
-    = f.hidden_field :approved, :value => (user_signed_in? && current_user.has_role? admin)
+    = f.hidden_field :approved, :value => (user_signed_in? && (current_user.has_role? :admin))
     = f.submit 'Update', :class => 'btn btn-primary'     
