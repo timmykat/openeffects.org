@@ -60,9 +60,9 @@
                         %a.navbar-link API Documentation #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}
                         %ul.dropdown-menu.inverse-dropdown
                           %li
-                            = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link'
+                            = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link', target: '_blank'
                           %li
-                            = link_to 'Programming Reference', 'http://openfx.readthedocs.io/en/doc/Reference/index.html', class: 'navbar-link'
+                            = link_to 'Programming Reference', 'http://openfx.readthedocs.io/en/doc/Reference/index.html', class: 'navbar-link', target: '_blank'
                           %li
                             = link_to 'Programming Guide', 'http://openfx.readthedocs.io/en/doc/Guide/index.html', class: 'navbar-link', target: '_blank'
                       %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
