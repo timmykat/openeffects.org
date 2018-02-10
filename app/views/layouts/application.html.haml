@@ -60,11 +60,11 @@
                         %a.navbar-link API Documentation #{content_tag(:span, nil, :class => 'glyphicon glyphicon-circle-arrow-down')}
                         %ul.dropdown-menu.inverse-dropdown
                           %li
-                            = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link'                     
+                            = link_to 'API Reference', 'http://openfx.readthedocs.io/en/doc/Reference/index.html', class: 'navbar-link'
                           %li
                             = link_to 'Programming Reference', '/documentation/reference', class: 'navbar-link'
                           %li
-                            = link_to 'Programming Guide (github)', 'https://github.com/ofxa/openfx/blob/master/Guide/Doc/ofxProgrammingGuide.adoc', class: 'navbar-link', target: '_blank'
+                            = link_to 'Programming Guide', 'http://openfx.readthedocs.io/en/doc/Guide/index.html', class: 'navbar-link', target: '_blank'
                       %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
                       %li= link_to 'Contact', contact_form_path, class: 'navbar-link'
                       - if user_signed_in? and current_user.has_role? :admin
