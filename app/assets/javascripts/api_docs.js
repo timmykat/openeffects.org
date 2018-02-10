@@ -42,7 +42,8 @@ $(function() {
     
     $('.insert-nav-status').html('Running <img src="' + $('.insert-nav-status').data('running') + '" />').removeClass('text-danger', 'text-success').addClass('text-warning')
     $form = $(e.currentTarget).parent().parent()
-    var url = $form.attr('action') + '?' + $form.serialize() + '&process_doc=' + id;
+    
+    var url = $form.attr('action') + '?' + $form.serialize() + '&process_doc=' + id + '&timestamp=' + Date.now();
 
     var source = new EventSource(url);
     source.addEventListener('terminal-output', function(e) {

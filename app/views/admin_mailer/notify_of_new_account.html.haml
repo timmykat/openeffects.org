@@ -1,0 +1,16 @@
+%p Dear #{@user.name}:
+%p 
+  A new account has been created for you at 
+  %a{:href => @url, :title => 'Go to the OFX website'} openeffects.org
+  
+%ul
+  %li Username: #{@user.email}
+  %li Password: #{Rails.configuration.ofx[:default_password]}
+  
+%p Please change your password immediately when you log in.
+%br
+%p Welcome to OFX; we look forward to your participation.
+%br
+%p 
+  Best regards,
+  %br The OFX team

@@ -12,7 +12,7 @@ class VersionsController < ApplicationController
   end
 
   def create
-    current_version = Version.where(current: true)
+    current_version = Version.where(current: true).first
     @version = Version.new(version_params)
     if @version.save    
       # If we are setting this new version to current, the old current version shouldn't be
@@ -27,7 +27,7 @@ class VersionsController < ApplicationController
   end
 
   def update
-    current_version = Version.where(current: true)
+    current_version = Version.where(current: true).first
     if @version.update(version_params)
       # If we are updating this version to current, the old current version shouldn't be
       if @version.current?

@@ -37,6 +37,14 @@ class AdminMailer < ActionMailer::Base
     end
   end
   
+  def notify_of_new_account(user)
+    @user = user
+    cfg = Rails.configuration.action_mailer.default_url_options
+    @url = "#{cfg[:protocol]}#{cfg[:host]}#{cfg[:port]}"
+    mail(to: @user.email, subject: "New user account at openeffects.org").deliver
+  end
+    
+  
   def contact_form(em)
     @sender = em[:name]
     @message = em[:message]
