@@ -9,7 +9,7 @@ require 'capistrano/bundler'
 
 # Includes tasks from other gems included in your Gemfile
 require 'capistrano/rails'
-require 'capistrano/rvm'
+require 'capistrano/rbenv'
 require 'capistrano-db-tasks'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
