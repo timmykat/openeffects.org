@@ -1,0 +1,15 @@
+{
+  "name": "ofx",
+  "version": "1.0.0",
+  "description": "Open Effects Org website",
+  "main": "index.js",
+  "repository": "git@github-ofx:timmykat/openeffects.org.git",
+  "author": "Tim Kinnel <tim@wordsareimages.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.4.0",
+    "jquery-ui": "^1.12.1",
+    "jquery-ujs": "^1.2.2",
+    "tinymce": "^5.0.3"
+  }
+}

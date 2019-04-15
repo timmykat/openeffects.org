@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery.ui.effect
-//= require jquery_ujs
-//= require tinymce-jquery
+//= require jquery/dist/jquery
+//= require jquery-ui/ui/effect
+//= require jquery-ujs/src/rails
+//= require tinymce
 //= require_tree .
