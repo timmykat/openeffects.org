@@ -7,6 +7,9 @@
 # Ignore bundler config
 /.bundle
 
+# Ignore backup files
+*.bak
+
 # No secret info
 config/database.yml
 config/ofx_config.yml
@@ -30,6 +33,8 @@ config/ofx_config.yml
 #Ignore bundle files
 vendor/bundle
 
+/public/assets/*
+
 # Paperclip files
 /public/system/*
 !/public/system/companies
@@ -44,3 +49,6 @@ vendor/bundle
 
 # Ignore deploy files
 config/deploy/*.rb
+
+# Asset source
+node_modules/
