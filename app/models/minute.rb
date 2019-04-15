@@ -11,7 +11,7 @@ class Minute < ActiveRecord::Base
   validates :minutes, :presence => true
   validates :published, :inclusion => { in: [true, false] }
   
-  default_scope order('date DESC')
+  default_scope { order('date DESC') }
 
   
   def self.build_panel(type, num = 3)
