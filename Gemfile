@@ -1,10 +1,13 @@
+# ruby version
+ruby '2.6.2'
+
 source 'https://rubygems.org'
 
 # As per http://stackoverflow.com/questions/18627075/nokogiri-1-6-0-still-pulls-in-wrong-version-of-libxml-on-os-x
 gem 'nokogiri'
 
 # User rails 4
-gem 'rails', '4.0.1'
+gem 'rails', '4.2.11.1'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -13,7 +16,7 @@ gem 'mysql2'
 gem 'haml-rails'
 
 # Javascript environment
-gem 'therubyracer'
+gem 'mini_racer'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -37,15 +40,11 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'devise'      # authentication
 gem 'role_model'  # user roles
 
-# WYSWIG editor - ckeditor
-# gem 'ckeditor'
+# WYSWIG editor - tinymce
 gem 'tinymce-rails'
 
 # Sanitize HTML output
 gem 'sanitize'
-
-# User forum
-# gem 'forem'
 
 # Use paperclip for file uploads
 gem 'paperclip'
@@ -65,19 +64,22 @@ gem 'friendly_id'
 # Need to hand assets without digests for the API docs
 gem 'non-stupid-digest-assets', :git => "https://github.com/timmykat/non-stupid-digest-assets"
  
+# puma is the application server
+gem 'puma'
+
+
 # Development tools
 group :development do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'puma'
 
   # Use capistrano for deployment (not needed in production)
-  gem 'capistrano', "~> 3.1"
+  gem 'capistrano', "~> 3.11"
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-yarn'
   gem 'capistrano-db-tasks', require: false
 end
 
@@ -91,10 +93,7 @@ group :test do
   gem 'pry'
   gem 'shoulda'
   gem 'shoulda-callback-matchers'
-#  gem 'database_cleaner'
 end
 
 
-# Use this ruby version  
-ruby '2.1.5'
 
