@@ -10,6 +10,14 @@ set :ssh_options, {
   forward_agent: true
 }
 
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.6.2'
+
+set :rbenv_prefix, "env RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake erb gem bundle rails pry ruby}
+set :rbenv_roles, :all # default value
+
+
 # Default value for :linked_files is []
 set :linked_files, %w{ config/database.yml config/ofx_config.yml public/.htaccess }
 
