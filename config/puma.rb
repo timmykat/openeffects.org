@@ -1,10 +1,10 @@
 # Change to match your CPU core count
-workers 2 # ENV['CPU_CORES']
+workers 1 # ENV['CPU_CORES']
 
 # Min and Max threads per worker
-threads ENV['PUMA_MIN_THREADS'], ENV['PUMA_MAX_THREADS']
+threads 1, 6
 
-app_dir = ENV['PUMA_APP_DIR']
+app_dir = '/var/www/openeffects.org/current'
 tmp_dir = "#{app_dir}/tmp"
 
 # Default to production
