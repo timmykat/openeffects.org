@@ -12,6 +12,9 @@ require 'capistrano/bundler'
 # Includes tasks from other gems included in your Gemfile
 require 'capistrano/rails'
 require 'capistrano/rbenv'
+require 'capistrano/puma'
+install_plugin Capistrano::Puma  # Default puma tasks
+
 require 'capistrano/yarn'
 require 'capistrano-db-tasks'
 
