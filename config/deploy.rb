@@ -19,7 +19,7 @@ set :rbenv_roles, :all # default value
 
 
 # Default value for :linked_files is []
-set :linked_files, %w{ config/database.yml config/ofx_config.yml public/.htaccess }
+set :linked_files, %w{ puma.rb config/database.yml config/ofx_config.yml public/.htaccess }
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log node_modules tmp/pids tmp/cache tmp/sockets }
@@ -30,20 +30,23 @@ set :linked_dirs, fetch(:linked_dirs) << 'public/assets' << 'public/system' << '
 set :db_local_clean, true
 set :assets_dir, %w(public/assets public/system public/documentation)
 
-namespace :deploy do  
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
 
-  after :publishing, :restart
+set :puma_init_active_record, true
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      system "curl -I --silent #{fetch(:ping_url)}"
-    end
-  end
-
-end
+# namespace :deploy do  
+#   desc 'Restart application'
+#   task :restart do
+#     on roles(:app), in: :sequence, wait: 5 do
+#       execute :touch, release_path.join('tmp/restart.txt')
+#     end
+#   end
+# 
+#   after :publishing, :restart
+# 
+#   after :restart, :clear_cache do
+#     on roles(:web), in: :groups, limit: 3, wait: 10 do
+#       system "curl -I --silent #{fetch(:ping_url)}"
+#     end
+#   end
+# 
+# end
