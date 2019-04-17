@@ -62,9 +62,9 @@
                           %li
                             = link_to 'API Reference', '/documentation/api_doc', class: 'navbar-link', target: '_blank'
                           %li
-                            = link_to 'Programming Reference', 'http://openfx.readthedocs.io/en/doc/Reference/index.html', class: 'navbar-link', target: '_blank'
+                            = link_to 'Programming Reference', 'https://openfx.readthedocs.io/en/doc/Reference/index.html', class: 'navbar-link', target: '_blank'
                           %li
-                            = link_to 'Programming Guide', 'http://openfx.readthedocs.io/en/doc/Guide/index.html', class: 'navbar-link', target: '_blank'
+                            = link_to 'Programming Guide', 'https://openfx.readthedocs.io/en/doc/Guide/index.html', class: 'navbar-link', target: '_blank'
                       %li= link_to 'Standards Discussion', :standard_changes, class: 'navbar-link'
                       %li= link_to 'Contact', contact_form_path, class: 'navbar-link'
                       - if user_signed_in? and current_user.has_role? :admin
