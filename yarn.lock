@@ -18,8 +18,3 @@ jquery@>=1.8.0, jquery@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.0.tgz#8de513fa0fa4b2c7d2e48a530e26f0596936efdf"
   integrity sha512-ggRCXln9zEqv6OqAGXFEcshF5dSBvCkzj6Gm2gzuR5fWawaX8t7cxKVkkygKODrDAzKdoYw3l/e3pm3vlT4IbQ==
-
-tinymce@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.0.3.tgz#40fa8658b5bdf58e7f04c816b38e1b06f96f6cfe"
-  integrity sha512-x7D0ttqn176Z4CWQIITMjcEtMGUjiaK0Y2FN2vO8DiyUeIHCdr70jJDSoGhuXtXX70Sw4Bd5UFfqIn/bG3HXcg==

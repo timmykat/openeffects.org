@@ -4,7 +4,8 @@ workers 1 # ENV['CPU_CORES']
 # Min and Max threads per worker
 threads 1, 6
 
-app_dir = '/var/www/openeffects.org/current'
+#/var/www/openeffects.org/current
+app_dir = Rails.root
 tmp_dir = "#{app_dir}/tmp"
 
 # Default to production

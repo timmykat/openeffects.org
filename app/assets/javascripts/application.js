@@ -13,5 +13,5 @@
 //= require jquery/dist/jquery
 //= require jquery-ui/ui/effect
 //= require jquery-ujs/src/rails
-//= require tinymce
+//= require tinymce-jquery
 //= require_tree .
