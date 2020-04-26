@@ -1,0 +1,57 @@
+%script{src: "https://cdn.tiny.cloud/1/1t6id8etzjpu75w0m22vqrj5dh0vthcz2hhqh4hfuc0v0qj9/tinymce/5/tinymce.min.js", referrerpolicy: "origin"}
+:javascript
+  tinymce.init({
+      "selector": "textarea.tinymce",
+      "theme": "silver",
+      "menubar": false,
+      "cleanup_on_startup": false,
+      "cleanup": false,
+      "convert_urls": "false,",
+      "remove_linebreaks": false,
+      "theme_silver_toolbar_location": "top",
+      "theme_silver_toolbar_align": "left",
+      "theme_silver_statusbar_location": "bottom",
+      "theme_silver_buttons1_add": [
+        "link",
+        "tablecontrols",
+        "paste"
+      ],
+      "plugins": [
+        "link",
+        "table",
+        "paste"
+      ],
+      "style_formats": [
+        {
+          "title": "BS list group",
+          "selector": "ul,ol",
+          "classes": "list-group"
+        },
+        {
+          "title": "BS list group item",
+          "selector": "li",
+          "classes": "list-group-item"
+        },
+        {
+          "title": "BS borderless list group",
+          "selector": "ul,ol",
+          "classes": "list-group no-border"
+        },
+        {
+          "title": "BS borderless list group item",
+          "selector": "li",
+          "classes": "list-group-item no-border"
+        },
+        {
+          "title": "Code",
+          "block": "pre",
+          "styles": {
+            "font-family": "Courier, monospace",
+            "margin": "10px",
+            "background-color": "#f3f3d8",
+            "border": "1px solid #006600",
+            "padding": "20px"
+          }
+        }
+      ]
+    }) 

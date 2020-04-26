@@ -41,7 +41,7 @@ gem 'devise'      # authentication
 gem 'role_model'  # user roles
 
 # WYSWIG editor - tinymce
-gem 'tinymce-rails'
+# gem 'tinymce-rails'
 
 # Sanitize HTML output
 gem 'sanitize'
