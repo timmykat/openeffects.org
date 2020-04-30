@@ -7,7 +7,7 @@
   "author": "Tim Kinnel <tim@wordsareimages.com>",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "jquery-ujs": "^1.2.2"
   }
